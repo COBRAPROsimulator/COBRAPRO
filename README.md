@@ -9,14 +9,14 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-COBRAPRO is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation outcomes that can capture real-world battery dynamics.
+COBRAPRO is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation results that can capture real-world battery dynamics.
 
 ## Table of contents ##
 
   * [What is COBRAPRO?](#toc1)
   * [Why COBRAPRO?](#toc2)
-  * [Installation](#toc3)
-  * [4. System requirements](#s4)
+  * [System requirements](#toc3)
+  * [Installation](#toc4)
   * [5. How to set up the software](#s5)
   * [6. What's in each folder?](#s6)
   * [7. How to test that the software is working](#s7)
@@ -37,7 +37,18 @@ In response to this challenge, COBRAPRO allows users to identify parameters of a
 
 Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an integrated identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
 
-## Installation? <a name="toc3"></a> ##
+## Software dependencies <a name="toc3"></a> ##
+* MATLAB 2014b and later
+*	MATLAB Global Optimization Toolbox
+*	MATLAB Parallel Computing Toolbox
+*	SUNDIALS 2.6.2
+*	CasADi
+*	Xcode (for macOS users only)
+*	MinGW (for Window users only)
+
+Installation section shows how to install the required software.
+
+## Installation? <a name="toc4"></a> ##
 
 To run COBRAPRO, SUNDIALS 2.6.2 and CasADi package installations are required. The steps below will walk you through the entire process to successfully run COBRAPRO.
 
@@ -47,25 +58,49 @@ To run COBRAPRO, SUNDIALS 2.6.2 and CasADi package installations are required. T
    ```
 2. Download [SUNDIALS 2.6.2](https://computing.llnl.gov/sites/default/files/inline-files/sundials-2.6.1.tar.gz) and unzip the folder. Relocate the sundials-2.6.2 folder inside the COBRAPRO folder.
 
-3. Download the latest version of [CasADi](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. The COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
+3. Download the latest version of [CasADi](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. Your COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
 
 4. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
-   - __Mac users__: The [Xcode](https://developer.apple.com/xcode/) application is required, which can be downloaded from Apple’s App Store. Note that Xcode requires ~3.4 GB of storage space. Once Xcode is installed, accept the license agreements, which can be done by opening Xcode and clicking “Agree” in the license agreement gui that pops up or type
+   - __Mac users__: The [Xcode](https://developer.apple.com/xcode/) application is required, which can be downloaded from Apple’s App Store. Note that Xcode requires ~3.4 GB of storage space. Once Xcode is installed, proceed to accept the license agreement. This can be done by launching the Xcode application and clicking the “Agree” icon within the license agreement GUI that appears or type
      ```
      sudo xcodebuild -license accept
      ```
      in Terminal. If the license is not accepted, MATLAB may give an error such as “Xcode is installed, but its license has not been accepted”.
+   - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler)
+     
+5. Now you are ready to run `install_COBRAPRO.m` located inside the COBRAPRO folder[^1]. Run `install_COBRAPRO.m` in MATLAB and respond to the prompts displayed in the Command Window in the following manner:
 
-   - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler) 
+```
+MEX files will be compiled and built using the above options
+   Proceed? (y/n)
+```
+&rarr; Type `y` and hit enter
 
-### Software dependencies ###
-* MATLAB 2014b and later
-*	MATLAB Global Optimization Toolbox
-*	MATLAB Parallel Computing Toolbox
-*	SUNDIALS 2.6.2
-*	CasADi
-*	Xcode (for macOS users only)
-*	MinGW (for Window users only)
+```
+Compile CVODES interface? (y/n)
+```
+&rarr; Type `n` and hit enter
+```
+Compile IDAS  interface? (y/n)
+```
+&rarr; Type `y` and hit enter
+```
+Compile KINSOL  interface? (y/n)
+```
+&rarr; Type `n` and hit enter
+```
+Enter return to cancel the installation.
+Installation directory:
+```
+&rarr; Just hit enter
+```
+Type the name of your CasADi folder (case-sensitive):
+```
+&rarr; Type the name of the CasADi folder exactly as it appears and hit enter
+
+6. Now you are ready to use COBRAPRO!
+
+[^1]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
 
 
 <!-- PROJECT SHIELDS -->
