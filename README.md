@@ -97,11 +97,13 @@ Type the name of your CasADi folder (case-sensitive):
 [^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
 [^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
 
-### Testing ###
+## Testing <a name="toc5"></a> ##
 
-Test codes are provided in `test` folder:
+Automated test codes are provided in `test` folder:
 - `test_1_casadiCheck.m` checks that CasADi is working properly
-- `test_2_comsolValidation.m` will validate COBRAPRO using results generated from COMSOL Multiphysics[^3] as a benchmark 
+- `test_2_comsolValidation.m` validates COBRAPRO using results generated from COMSOL Multiphysics[^3] as a benchmark. This ensures that COBRAPRO is installed properly and that the SUNDIALS IDA solver is working as expected
+
+## Examples <a name="toc6"></a> ##
 
 <!-- PROJECT SHIELDS -->
 <!--
