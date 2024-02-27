@@ -17,15 +17,10 @@ COBRAPRO is a MATLAB software for physics-based modeling of lithium-ion batterie
   * [Why COBRAPRO?](#toc2)
   * [System requirements](#toc3)
   * [Installation](#toc4)
-  * [5. How to set up the software](#s5)
-  * [6. What's in each folder?](#s6)
-  * [7. How to test that the software is working](#s7)
-  * [8. How to run your first simulation](#s8)
-  * [9. Reading and plotting the output](#s9)
-  * [10. Changing the inputs](#s10)
-  * [11. Examples and comparisons with the literature](#s11)
-  * [12. Increasing the number of particle size ratios available](#s12)
-  * [13. Known issues](#s13)
+  * [Testing](#toc5)
+  * [Examples](#toc6)
+  * [Contributing](#toc7)
+  * [Known issues during installation](#toc8)
 
 ## What is COBRAPRO? <a name="toc1"></a> ##
 
@@ -46,13 +41,11 @@ Compared to currently available DFN open-source packages such as PyBaMM, DEARLIB
 *	Xcode (for macOS users only)
 *	MinGW (for Window users only)
 
-Installation section shows how to install the required software.
+Installation section below shows how to install the required software.
 
-## Installation? <a name="toc4"></a> ##
+## Installation <a name="toc4"></a> ##
 
-To run COBRAPRO, SUNDIALS 2.6.2 and CasADi package installations are required. The steps below will walk you through the entire process to successfully run COBRAPRO.
-
-1. Download COBRAPRO by downloading the zip file or cloning this repository:
+1. Download COBRAPRO by downloading the zip file or cloning this repository by typing in Terminal:
    ```
    git clone https://github.com/COBRAPROsimulator/COBRAPRO.git
    ```
@@ -61,14 +54,14 @@ To run COBRAPRO, SUNDIALS 2.6.2 and CasADi package installations are required. T
 3. Download the latest version of [CasADi](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. Your COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
 
 4. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
-   - __Mac users__: The [Xcode](https://developer.apple.com/xcode/) application is required, which can be downloaded from Apple’s App Store. Note that Xcode requires ~3.4 GB of storage space. Once Xcode is installed, proceed to accept the license agreement. This can be done by launching the Xcode application and clicking the “Agree” icon within the license agreement GUI that appears or type
+   - __Mac users__: Download [Xcode](https://developer.apple.com/xcode/) application (can be downloaded from Apple’s App Store). Once Xcode[^1] is installed, proceed to accept the license agreement. This can be done by opening the Xcode application, which will launch a license agreement window and click the “Agree” icon, or type
      ```
      sudo xcodebuild -license accept
      ```
      in Terminal. If the license is not accepted, MATLAB may give an error such as “Xcode is installed, but its license has not been accepted”.
    - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler)
      
-5. Now you are ready to run `install_COBRAPRO.m` located inside the COBRAPRO folder[^1]. Run `install_COBRAPRO.m` in MATLAB and respond to the prompts displayed in the Command Window in the following manner:
+5. Now you are ready to run `install_COBRAPRO.m`[^2] located inside the COBRAPRO folder. Run `install_COBRAPRO.m` in MATLAB and respond to the prompts displayed in the Command Window in the following manner:
 
 ```
 MEX files will be compiled and built using the above options
@@ -98,10 +91,17 @@ Type the name of your CasADi folder (case-sensitive):
 ```
 &rarr; Type the name of the CasADi folder exactly as it appears and hit enter
 
-6. Now you are ready to use COBRAPRO!
+6. You are ready to use COBRAPRO!
 
-[^1]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
+[^1]: Note that Xcode requires ~3.4 GB of storage space. 
+[^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
+[^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
 
+### Testing ###
+
+Test codes are provided in `test` folder:
+- `test_1_casadiCheck.m` checks that CasADi is working properly
+- `test_2_comsolValidation.m` will validate COBRAPRO using results generated from COMSOL Multiphysics[^3] as a benchmark 
 
 <!-- PROJECT SHIELDS -->
 <!--
