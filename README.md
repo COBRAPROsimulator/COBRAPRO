@@ -1,14 +1,60 @@
-# COBRAPRO
+# COBRAPRO: Co-simulation Battery Modeling for Accelerated Parameter Optimization
 
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+COBRAPRO is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation outcomes that can capture real-world battery dynamics.
+
+## Table of contents ##
+
+  * [What is COBRAPRO?](#toc1)
+  * [Why COBRAPRO?](#toc2)
+  * [Installation](#toc3)
+  * [4. System requirements](#s4)
+  * [5. How to set up the software](#s5)
+  * [6. What's in each folder?](#s6)
+  * [7. How to test that the software is working](#s7)
+  * [8. How to run your first simulation](#s8)
+  * [9. Reading and plotting the output](#s9)
+  * [10. Changing the inputs](#s10)
+  * [11. Examples and comparisons with the literature](#s11)
+  * [12. Increasing the number of particle size ratios available](#s12)
+  * [13. Known issues](#s13)
+
+## What is COBRAPRO? <a name="toc1"></a> ##
+
+COBRAPRO implements the Dolye-Fuller-Newman (DFN) model, also known as the pseudo-two-dimensional (P2D) model, which is a high-fidelity model considering the lithium-ion mass and charge conservation in the liquid electrolyte and solid electrodes, and Butler-Volmer kinetics. The Parameter calibration, or identification, is a primary challenge in implementing the DFN model since the parameters such as geometric, transport, kinetic, concentration, and stoichiometric are often not known _a prioi_. 
+
+In response to this challenge, COBRAPRO allows users to identify parameters of any battery cells based on their experimental current-voltage profiles. COBRAPRO solves an optimization problem that minimizes the error between the experimental and simulated voltage and state-of-charge curves to identify the parameters of interest. Although the software employs particle swarm optimization (PSO) by default, users have the flexibility modify the code to implement other MATLAB optimization algorithms such as `ga`, `fmincon`, `patternsearch`, and more. 
+
+## Why COBRAPRO? <a name="toc2"></a> ##
+
+Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
+
+## Installation? <a name="toc3"></a> ##
+
+To run COBRAPRO, it is necessary to have the SUNDIALS 2.6.2 and CasADi packages installed. The installation steps below will walk you through the entire process required to successfully run COBRAPRO.
+
+1. Download COBRAPRO by downloading the zip file or cloning this repository:
+   ```
+   git clone https://github.com/COBRAPROsimulator/COBRAPRO.git
+   ```
+2. 
+
+### Software dependencies ###
+* MATLAB 2014b and later
+*	MATLAB Global Optimization Toolbox
+*	MATLAB Parallel Computing Toolbox
+*	SUNDIALS 2.6.2. 
+*	CasADi
+*	Xcode (for macOS users only)
+*	MinGW or Windows 10 SDK (for Window users only)
 
 
 
@@ -20,12 +66,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
