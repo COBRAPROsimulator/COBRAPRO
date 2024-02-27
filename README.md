@@ -29,33 +29,43 @@ COBRAPRO is a MATLAB software for physics-based modeling of lithium-ion batterie
 
 ## What is COBRAPRO? <a name="toc1"></a> ##
 
-COBRAPRO implements the Dolye-Fuller-Newman (DFN) model, also known as the pseudo-two-dimensional (P2D) model, which is a high-fidelity model considering the lithium-ion mass and charge conservation in the liquid electrolyte and solid electrodes, and Butler-Volmer kinetics. The Parameter calibration, or identification, is a primary challenge in implementing the DFN model since the parameters such as geometric, transport, kinetic, concentration, and stoichiometric are often not known _a prioi_. 
+COBRAPRO implements the Dolye-Fuller-Newman (DFN) model, also known as the pseudo-two-dimensional (P2D) model, which is a high-fidelity LIB model considering the lithium-ion mass and charge conservation in the liquid electrolyte and solid electrodes, and Butler-Volmer kinetics. The Parameter calibration, or identification, is a primary challenge in implementing the DFN model since the parameters such as geometric, transport, kinetic, concentration, and stoichiometric are often not known _a prioi_. 
 
 In response to this challenge, COBRAPRO allows users to identify parameters of any battery cells based on their experimental current-voltage profiles. COBRAPRO solves an optimization problem that minimizes the error between the experimental and simulated voltage and state-of-charge curves to identify the parameters of interest. Although the software employs particle swarm optimization (PSO) by default, users have the flexibility modify the code to implement other MATLAB optimization algorithms such as `ga`, `fmincon`, `patternsearch`, and more. 
 
 ## Why COBRAPRO? <a name="toc2"></a> ##
 
-Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
+Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an integrated identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
 
 ## Installation? <a name="toc3"></a> ##
 
-To run COBRAPRO, it is necessary to have the SUNDIALS 2.6.2 and CasADi packages installed. The installation steps below will walk you through the entire process required to successfully run COBRAPRO.
+To run COBRAPRO, SUNDIALS 2.6.2 and CasADi package installations are required. The steps below will walk you through the entire process to successfully run COBRAPRO.
 
 1. Download COBRAPRO by downloading the zip file or cloning this repository:
    ```
    git clone https://github.com/COBRAPROsimulator/COBRAPRO.git
    ```
-2. 
+2. Download [SUNDIALS 2.6.2](https://computing.llnl.gov/sites/default/files/inline-files/sundials-2.6.1.tar.gz) and unzip the folder. Relocate the sundials-2.6.2 folder inside the COBRAPRO folder.
+
+3. Download the latest version of [CasADi](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. The COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
+
+4. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
+   - __Mac users__: The [Xcode](https://developer.apple.com/xcode/) application is required, which can be downloaded from Apple’s App Store. Note that Xcode requires ~3.4 GB of storage space. Once Xcode is installed, accept the license agreements, which can be done by opening Xcode and clicking “Agree” in the license agreement gui that pops up or type
+     ```
+     sudo xcodebuild -license accept
+     ```
+     in Terminal. If the license is not accepted, MATLAB may give an error such as “Xcode is installed, but its license has not been accepted”.
+
+   - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler) 
 
 ### Software dependencies ###
 * MATLAB 2014b and later
 *	MATLAB Global Optimization Toolbox
 *	MATLAB Parallel Computing Toolbox
-*	SUNDIALS 2.6.2. 
+*	SUNDIALS 2.6.2
 *	CasADi
 *	Xcode (for macOS users only)
-*	MinGW or Windows 10 SDK (for Window users only)
-
+*	MinGW (for Window users only)
 
 
 <!-- PROJECT SHIELDS -->
