@@ -100,8 +100,14 @@ Type the name of your CasADi folder (case-sensitive):
 ## Testing <a name="toc5"></a> ##
 
 Automated test codes are provided in `test` folder:
-- `test_1_casadiCheck.m` checks that CasADi is working properly
-- `test_2_comsolValidation.m` validates COBRAPRO using results generated from COMSOL Multiphysics[^3] as a benchmark. This ensures that COBRAPRO is installed properly and that the SUNDIALS IDA solver is working as expected
+- `test_1_casadiCheck.m` checks that CasADi is installed and working properly. Successful run will output to Command Window:
+```
+test_1 successful: CasADi is working properly!
+```
+- `test_2_comsolValidation.m` validates COBRAPRO against results generated from COMSOL Multiphysics[^3] as a benchmark. This ensures that COBRAPRO is installed properly and that the SUNDIALS IDA solver is working as expected. Successful validation will output to Command Window:
+```
+test_2 successful: COBRAPRO is working as expected! Results validated against COMSOL.
+```
 
 ## Examples <a name="toc6"></a> ##
 
