@@ -33,7 +33,7 @@ In response to this challenge, COBRAPRO allows users to identify parameters of a
 Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an integrated identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
 
 ## Software dependencies <a name="toc3"></a> ##
-* MATLAB 2014b and later
+* MATLAB 2018b and later
 *	MATLAB Global Optimization Toolbox
 *	MATLAB Parallel Computing Toolbox
 *	SUNDIALS 2.6.2
