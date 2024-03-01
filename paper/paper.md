@@ -45,19 +45,19 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Solution:** A co-simulation parameter optimization framework is developed that determines the parameters by minimizing the cost function, defined in terms of the error between the experimental and simulated voltage and state-of-charge curves. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. COBRAPRO employs MATLAB’s Parallel Computing Toolbox, accelerating PSO through multicore processing.
 
 # Core Capabilities
-- Parameter identification routine using PSO to optimize parameters using experimental current-voltage data 
-- DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
-- Radial solid particle discretization options:
+- Parameter identification routine: Utilizes PSO to optimize parameters using experimental current-voltage data
+- DFN model implementation: Implements finite volume method (FVM) discretization and SUNDIALS IDA solver
+- Solid particle radial discretization options:
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface [@xu_comparative_2023])
   - Finite difference method (FDM)
 - DAE initialization options:
   - Single-step approach [@lawder_extending_2015]
   - SUNDIALS IDACalcIC
-- Simulating battery cycling
-  - Constant current cycling
-  - Hybrid pulse power characterization (HPPC) test simulation
-  - Dynamic current simulation 
-- Local sensitivity analysis 
+- Simulating battery cycling:
+  - Constant current profiles
+  - Hybrid pulse power characterization (HPPC) profiles
+  - Dynamic current profiles 
+- Local sensitivity analysis: Perturbs parameters around specific reference values to determine sensitive parameters for a given current profile
 
 Visit COBRAPRO’s Github page for comprehensive example codes showcasing the features mentioned above.
 
