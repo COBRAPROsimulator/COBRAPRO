@@ -44,4 +44,21 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Issue:** As highlighted earlier, battery parameters are frequently unknown, and even if obtained through experimental characterization, parameter calibration is essential to accurately model the battery.
 - **Solution:** A co-simulation parameter optimization framework is developed that determines the parameters by minimizing the cost function, defined in terms of the error between the experimental and simulated voltage and state-of-charge curves. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. COBRAPRO employs MATLAB’s Parallel Computing Toolbox, accelerating PSO through multicore processing.
 
+# Core Capabilities
+-	DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
+-	Radial solid particle discretization options:
+  - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface)
+  -	Finite difference method (FDM) 
+- DAE initialization options:
+  -	Single-step approach [16]
+  -	SUNDIALS IDACalcIC
+-	Parameter identification routine using experimental current-voltage data (Examples/Parameter_Identification_Routines)
+-	Simulating battery cycling 
+  - Constant current cycling 
+  - Hybrid pulse power characterization (HPPC) test simulation 
+  - Dynamic current simulation 
+-	Local sensitivity analysis 
+
+Visit COBRAPRO’s Github page for example codes that demonstrate each of the features listed above.
+
 # References
