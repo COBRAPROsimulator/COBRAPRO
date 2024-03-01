@@ -24,7 +24,7 @@ bibliography: paper.bib
 ---
 
 # Summary
-COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model encompasses several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic parameters, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurement through cell tear-down experiments is a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may not be suitable for the DFN model [@chen_development_2020], as the model is a simplified representation of a real battery, assuming perfectly spherical particles, neglecting electrode heterogeneity, and only considering internal dynamics in one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
+COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model encompasses several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic parameters, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurement through cell tear-down experiments is a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may not be suitable for the DFN model [@chen_development_2020], which simplifies the representation of a real battery by assuming perfectly spherical particles, neglecting electrode heterogeneity, and considering internal dynamics in only one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
 
 # Statement of need
 
@@ -45,20 +45,20 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Solution:** A co-simulation parameter optimization framework is developed that determines the parameters by minimizing the cost function, defined in terms of the error between the experimental and simulated voltage and state-of-charge curves. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. COBRAPRO employs MATLAB’s Parallel Computing Toolbox, accelerating PSO through multicore processing.
 
 # Core Capabilities
-- Parameter identification routine: Utilizes PSO to optimize parameters using experimental current-voltage data
-- DFN model implementation: Implements finite volume method (FVM) discretization and SUNDIALS IDA solver
-- Solid particle radial discretization options:
+- **Parameter identification routine:** Utilizes PSO to optimize parameters using experimental current-voltage data
+- **DFN model implementation:** Implements finite volume method (FVM) discretization and SUNDIALS IDA solver
+- **Solid particle radial discretization options:**
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface [@xu_comparative_2023])
   - Finite difference method (FDM)
-- DAE initialization options:
+- **DAE initialization options:**
   - Single-step approach [@lawder_extending_2015]
   - SUNDIALS IDACalcIC
-- Simulating battery cycling:
+- **Simulating battery cycling:**
   - Constant current profiles
   - Hybrid pulse power characterization (HPPC) profiles
   - Dynamic current profiles 
-- Local sensitivity analysis: Perturbs parameters around specific reference values to determine sensitive parameters for a given current profile
+- **Local sensitivity analysis:** Perturbs parameters around specific reference values to determine sensitive parameters for a given current profile
 
-Visit COBRAPRO’s Github page for comprehensive example codes showcasing the features mentioned above.
+Visit COBRAPRO’s Github page to view example codes showcasing the features mentioned above.
 
 # References
