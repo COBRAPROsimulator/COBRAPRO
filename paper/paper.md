@@ -51,7 +51,7 @@ In contrast, several open-source DFN model simulation tools have been released s
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface [@xu_comparative_2023])
   - Finite difference method (FDM)
 - DAE initialization options:
-  - Single-step approach [16]
+  - Single-step approach [@lawder_extending_2015]
   - SUNDIALS IDACalcIC
 - Simulating battery cycling
   - Constant current cycling
