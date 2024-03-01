@@ -46,7 +46,7 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Core Capabilities
 - Parameter identification routine using PSO to optimize parameters using experimental current-voltage data 
-- DFN model implementation using finite volume method (FVM) discretization, SUNDIALS IDA solver
+- DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
 - Radial solid particle discretization options:
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface [@xu_comparative_2023])
   - Finite difference method (FDM)
