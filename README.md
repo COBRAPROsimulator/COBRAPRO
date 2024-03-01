@@ -91,7 +91,10 @@ Type the name of your CasADi folder (case-sensitive):
 ```
 &rarr; Type the name of the CasADi folder exactly as it appears and hit enter
 
-6. You are ready to use COBRAPRO!
+6. Successful installation will output to the Command Window:
+```
+COBRAPRO installed successfully! To get started, try running scripts in the Examples folder.
+```
 
 [^1]: Note that Xcode requires ~3.4 GB of storage space. 
 [^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
