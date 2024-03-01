@@ -48,16 +48,16 @@ In contrast, several open-source DFN model simulation tools have been released s
 - DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
 - Radial solid particle discretization options:
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface)
-  -	Finite difference method (FDM) 
+  - Finite difference method (FDM)
 - DAE initialization options:
-  -	Single-step approach [16]
-  -	SUNDIALS IDACalcIC
--	Parameter identification routine using experimental current-voltage data (Examples/Parameter_Identification_Routines)
--	Simulating battery cycling 
-  - Constant current cycling 
-  - Hybrid pulse power characterization (HPPC) test simulation 
+  - Single-step approach [16]
+  - SUNDIALS IDACalcIC
+- Parameter identification routine using experimental current-voltage data (Examples/Parameter_Identification_Routines)
+- Simulating battery cycling
+  - Constant current cycling
+  - Hybrid pulse power characterization (HPPC) test simulation
   - Dynamic current simulation 
--	Local sensitivity analysis 
+- Local sensitivity analysis 
 
 Visit COBRAPRO’s Github page for example codes that demonstrate each of the features listed above.
 
