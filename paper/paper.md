@@ -45,8 +45,8 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Solution:** A co-simulation parameter optimization framework is developed that determines the parameters by minimizing the cost function, defined in terms of the error between the experimental and simulated voltage and state-of-charge curves. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. COBRAPRO employs MATLAB’s Parallel Computing Toolbox, accelerating PSO through multicore processing.
 
 # Core Capabilities
--	DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
--	Radial solid particle discretization options:
+- DFN model implementation using finite volume method (FVM) discretization and SUNDIALS IDA solver
+- Radial solid particle discretization options:
   - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface)
   -	Finite difference method (FDM) 
 - DAE initialization options:
