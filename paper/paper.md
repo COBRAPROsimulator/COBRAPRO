@@ -37,7 +37,7 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Solution:** COBRAPRO uses a fast solver that significantly improves the model computation speed compared to DEARLIBS. For 10 discretized points in each domain of the cell (cathode, separator, anode, and positive and negative active material particles) at 1C discharge, COBRAPRO solves the DFN model in 0.708 seconds, while DEARLIBS takes 2.54 minutes, which is a two orders of magnitude improvement (~257 times). Under the same simulation conditions, LIONSIMBA and PyBaMM computed the model in 1.13 seconds and 0.237 seconds, respectively, which are comparable to the COBRAPRO’s computation time. For larger discretization points, we observed up to three orders of magnitude improvement in computation speed from COBRAPRO to DEARLIBS.
 
 ## Challenge 2. Consistent initial conditions
-- **Issue:** The partial differential equations (PDEs) governing the DFN model are discretized in the x and r directions to form a system of ordinary differential equations (ODEs) and algebraic equations (AEs), also called differential-algebraic equations (DAEs). To solve the DAE system, the correct AEs are required, which are typically not known a priori for the DFN model. Inconsistent initial conditions result in either a failure to start the simulation or the model diverging towards an incorrect solution [@methekar_perturbation_2011].
+- **Issue:** The partial differential equations (PDEs) governing the DFN model are discretized in the x and r directions to form a system of ordinary differential equations (ODEs) and algebraic equations (AEs), also called differential-algebraic equations (DAEs). To solve the DAE system, the correct AEs are required, which are typically not known *a priori* for the DFN model. Inconsistent initial conditions result in either a failure to start the simulation or the model diverging towards an incorrect solution [@methekar_perturbation_2011].
 - **Solution:** The single step approach [@lawder_extending_2015], a robust initialization method, is implemented in COBRAPRO that automatically determines the initial conditions and seamlessly simulates the DFN model.
 
 ## Challenge 3. Unknown model parameters
@@ -59,6 +59,6 @@ In contrast, several open-source DFN model simulation tools have been released s
   - Dynamic current simulation 
 - Local sensitivity analysis 
 
-Visit COBRAPRO’s Github page for comprehensive example codes showcasing each of the features above.
+Visit COBRAPRO’s Github page for comprehensive example codes showcasing the features mentioned above.
 
 # References
