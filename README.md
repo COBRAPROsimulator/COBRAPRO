@@ -20,7 +20,7 @@ COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization)
   * [Testing](#toc5)
   * [Examples](#toc6)
   * [Contributing](#toc7)
-  * [Known issues during installation](#toc8)
+  * [Known issues](#toc8)
 
 ## What is COBRAPRO? <a name="toc1"></a> ##
 
@@ -109,10 +109,15 @@ test_2 successful: COBRAPRO is working as expected! Results validated against CO
 
 ## Examples <a name="toc6"></a> ##
 
-## Contributing <a name="toc7"></a> ##
 
-## Known issues during Installation <a name="toc8"></a> ##
-* In step 4 of the Installation directions, only the SUNDIALS IDAS interface is necessary to run COBRAPRO. Installing the KINSOL interface may lead to the following issue:
+## Contributing <a name="toc7"></a> ##
+We welcome contributions from the community to improve COBRAPRO!
+* To report bugs, ask questions, and get help, please open a new issue through the Github issues page. Be as specific as possible (including screenshots, sample codes) for efficient communication. 
+* To make changes to the code or add new functions, 1) fork the repo and create your branch from main, 2) make your changes to the code, and 3) open a Pull request. Once approached, your contribution will be merged into the master branch.
+* For general discussions and project ideas, open a new Discussions. You can also contact Sara Ha (<sungyeon.sara.ha@stanford.edu>).
+
+## Known issues <a name="toc8"></a> ##
+1. To run COBRAPRO, only the SUNDIALS IDAS interface is required. In Installation step 4, if you install the KINSOL interface, you may run into the following issue:
 ```
 Error using mex
 COBRAPRO/sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c:687:24: error: non-void function 'KIM_Stats' should return a value [-Wreturn-type]
@@ -129,7 +134,7 @@ and modify line 815 to
 ```
 return NULL;
 ```
-* If you happen to run into the following error when running COBRAPRO:
+2. If you happen to run into the following error when running COBRAPRO:
 ```
 Error using mex
 'idm.mexmaca64' locked by mexLock API.
