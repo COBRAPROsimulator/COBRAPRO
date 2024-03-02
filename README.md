@@ -95,11 +95,6 @@ Type the name of your CasADi folder (case-sensitive):
 ```
 COBRAPRO installed successfully! To get started, try running scripts in the Examples folder.
 ```
-
-[^1]: Note that Xcode requires ~3.4 GB of storage space. 
-[^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
-[^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
-
 ## Testing <a name="toc5"></a> ##
 
 Automated test codes are provided in `test` folder:
@@ -113,3 +108,34 @@ test_2 successful: COBRAPRO is working as expected! Results validated against CO
 ```
 
 ## Examples <a name="toc6"></a> ##
+
+## Contributing <a name="toc7"></a> ##
+
+## Known issues during Installation <a name="toc8"></a> ##
+* In step 4 of the Installation directions, only the SUNDIALS IDAS interface is required to run COBRAPRO. If you install the KINSOL interface, you may run into the following issue:
+```
+Error using mex
+COBRAPRO/sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c:687:24: error: non-void function 'KIM_Stats' should return a value [-Wreturn-type]
+if (kimData == NULL) return;
+COBRAPRO/sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c:687:24: error: non-void function 'KIM_Free' should return a value [-Wreturn-type]
+return;
+2 errors generated.
+```
+If you run into this issue, please go to `sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c` and modify line 687 to
+```
+if (kimData == NULL) return NULL;
+```
+and modify line 815 to
+```
+return NULL;
+```
+* If you happen to run into the following error when running COBRAPRO:
+```
+Error using mex
+'idm.mexmaca64' locked by mexLock API.
+``` 
+This seems to occur when MATLAB is trying to compile the mex files and mexLock is triggered. To resolve the issue, please restart MATLAB. 
+
+[^1]: Note that Xcode requires ~3.4 GB of storage space. 
+[^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
+[^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
