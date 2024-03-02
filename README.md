@@ -15,11 +15,11 @@ COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization)
 
   * [What is COBRAPRO?](#toc1)
   * [Why COBRAPRO?](#toc2)
-  * [Contributing](#toc7)
   * [System requirements](#toc3)
   * [Installation](#toc4)
   * [Testing](#toc5)
   * [Examples](#toc6)
+  * [Contributing](#toc7)
   * [Known issues](#toc8)
 
 ## What is COBRAPRO? <a name="toc1"></a> ##
@@ -31,12 +31,6 @@ In response to this challenge, COBRAPRO allows users to identify parameters of a
 ## Why COBRAPRO? <a name="toc2"></a> ##
 
 Compared to currently available DFN open-source packages such as PyBaMM, DEARLIBS, LIONSIMBA, PETION, fastDFN, and MPET, DEARLIBS and COBRAPRO are the only codes with an integrated identification routine. Given the need for numerous model simulations during parameter optimization, achieving efficient computation time is critical. COBRAPRO addresses this need with a fast solver and PSO parallel computing, resulting in model simulations up to three orders of magnitude faster than DEARLIBS and accelerated PSO through multicore processing.
-
-## Contributing <a name="toc7"></a> ##
-We welcome contributions from the community to improve COBRAPRO!
-* To report bugs, ask questions, and get help, please open a new issue through the Github issues page. Be as specific as possible (including screenshots, sample codes) for efficient communication. 
-* To make changes to the code or add new functions, 1) fork the repo and create your branch from main, 2) make your changes to the code, and 3) open a Pull request. Once approved, your contribution will be merged into the master branch.
-* For general discussions and project ideas, open a new Discussions through the Github issues page. You can also contact Sara Ha (<sungyeon.sara.ha@stanford.edu>).
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
@@ -130,6 +124,12 @@ In the ```Examples``` folder, you will find example codes that will help you get
   * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_CC.m```: LSA on CC profile
   * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_HPPC.m```: LSA on HPPC profile
 
+## Contributing <a name="toc7"></a> ##
+We welcome contributions from the community to improve COBRAPRO!
+* To report bugs, ask questions, and get help, please open a new issue through the Github issues page. Be as specific as possible (including screenshots, sample codes) for efficient communication. 
+* To make changes to the code or add new functions, 1) fork the repo and create your branch from main, 2) make your changes to the code, and 3) open a Pull request. Once approved, your contribution will be merged into the master branch.
+* For general discussions and project ideas, open a new Discussions through the Github issues page. You can also contact Sara Ha (<sungyeon.sara.ha@stanford.edu>).
+  
 ## Known issues <a name="toc8"></a> ##
 1. To run COBRAPRO, only the SUNDIALS IDAS interface is required. In Installation step 4, if you install the KINSOL interface, you may run into the following issue:
 ```
