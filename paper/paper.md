@@ -1,5 +1,5 @@
 ---
-title: 'COBRAPRO: A MATLAB toolbox for Physics-based Battery Modelling and Co-simulation Parameter Optimization'
+title: 'COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization'
 tags:
   - lithium-ion batteries
   - physics-based modeling
