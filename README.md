@@ -112,7 +112,7 @@ test_2 successful: COBRAPRO is working as expected! Results validated against CO
 ## Contributing <a name="toc7"></a> ##
 
 ## Known issues during Installation <a name="toc8"></a> ##
-* In step 4 of the Installation directions, only the SUNDIALS IDAS interface is required to run COBRAPRO. If you install the KINSOL interface, you may run into the following issue:
+* In step 4 of the Installation directions, only the SUNDIALS IDAS interface is necessary to run COBRAPRO. Installing the KINSOL interface may lead to the following issue:
 ```
 Error using mex
 COBRAPRO/sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c:687:24: error: non-void function 'KIM_Stats' should return a value [-Wreturn-type]
@@ -121,7 +121,7 @@ COBRAPRO/sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c:687:24: error: non-void 
 return;
 2 errors generated.
 ```
-If you run into this issue, please go to `sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c` and modify line 687 to
+To fix this issue, please go to `sundials-2.6.2/sundialsTB/kinsol/kim/src/kim.c` and modify line 687 to
 ```
 if (kimData == NULL) return NULL;
 ```
