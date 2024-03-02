@@ -109,12 +109,13 @@ test_2 successful: COBRAPRO is working as expected! Results validated against CO
 
 ## Examples <a name="toc6"></a> ##
 
+* 
 
 ## Contributing <a name="toc7"></a> ##
 We welcome contributions from the community to improve COBRAPRO!
 * To report bugs, ask questions, and get help, please open a new issue through the Github issues page. Be as specific as possible (including screenshots, sample codes) for efficient communication. 
-* To make changes to the code or add new functions, 1) fork the repo and create your branch from main, 2) make your changes to the code, and 3) open a Pull request. Once approached, your contribution will be merged into the master branch.
-* For general discussions and project ideas, open a new Discussions. You can also contact Sara Ha (<sungyeon.sara.ha@stanford.edu>).
+* To make changes to the code or add new functions, 1) fork the repo and create your branch from main, 2) make your changes to the code, and 3) open a Pull request. Once approved, your contribution will be merged into the master branch.
+* For general discussions and project ideas, open a new Discussions through the Github issues page. You can also contact Sara Ha (<sungyeon.sara.ha@stanford.edu>).
 
 ## Known issues <a name="toc8"></a> ##
 1. To run COBRAPRO, only the SUNDIALS IDAS interface is required. In Installation step 4, if you install the KINSOL interface, you may run into the following issue:
