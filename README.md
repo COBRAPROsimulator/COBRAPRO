@@ -1,4 +1,4 @@
-# COBRAPRO: A MATLAB toolbox for Physics-based Battery Modelling and Co-simulation Parameter Optimization
+# COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization
 
 <a name="readme-top"></a>
 
