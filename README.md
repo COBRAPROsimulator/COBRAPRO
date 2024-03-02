@@ -109,16 +109,20 @@ test_2 successful: COBRAPRO is working as expected! Results validated against CO
 
 ## Examples <a name="toc6"></a> ##
 In the ```Examples``` folder, you will find example codes that will help you get started.
-* ```Examples/Cycling```: examples showing how to perform battery cycling simulations
+* ```Examples/Cycling```: examples showing how to perform battery cycling simulations using experimentally identified parameters 
   * ```Examples/Cycling/cycle_CC.m```: simulating constant current (CC) cycling experiments and output visualization (voltage, state-of-charge, internal variable curves)
   * ```Examples/Cycling/cycle_HPPC.m```: simulating hybrid pulse power characterization (HPPC) profile and output visualization (voltage, state-of-charge, internal variable curves)
   * ```Examples/Cycling/cycle_UDDS.m```: simulating driving cycle profile and output visualization (voltage, state-of-charge, internal variable curves)
 * ```Examples/Parameter_Identification_Routines```: examples showing how to perform parameter identification using PSO
   * ```Examples/Parameter_Identification_Routines/DFN_pso_CC.m```: parameter identification using CC profile
   * ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC profile
-* ```Examples/Parameter_Identification_Results```: examples showing how to perform parameter identification using PSO
-  * ```Examples/Parameter_Identification_Results/DFN_pso_CC.m```: parameter identification using CC profile
-  * ```Examples/Parameter_Identification_Results/DFN_pso_HPPC.m```: parameter identification using HPPC profile
+* ```Examples/Parameter_Identification_Results```: examples showing parameter identification results
+  * ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data
+  * ```Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m```: parameter identification results using HPPC data
+  * ```Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m```: parameter identification validation using UDDS data
+* ```Examples/Local_Sensitivity_Analysis```: examples showing how to perform local sensitivity analysis (LSA)
+  * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_CC.m```: LSA on CC profile
+  * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_HPPC.m```: LSA on HPPC profile
 
 ## Contributing <a name="toc7"></a> ##
 We welcome contributions from the community to improve COBRAPRO!
