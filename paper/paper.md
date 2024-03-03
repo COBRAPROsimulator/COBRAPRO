@@ -61,4 +61,7 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 Visit COBRAPRO’s Github page to view example codes showcasing the features mentioned above.
 
+# Acknowledgements
+The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback to improve COBRAPRO's installation process. 
+
 # References
