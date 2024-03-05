@@ -1,5 +1,5 @@
 function states_cc = electrodeBC_hermite_interp(states,curr_dens,param,domain)
-%   electrodeBC_hermite_interp computes the value at the
+%   electrodeBC_hermite_interp computes the phis value at the
 %   CC|positive or negative|CC using 3rd order hermite interpolation.
 %
 %   Inputs:
