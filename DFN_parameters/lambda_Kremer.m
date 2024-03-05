@@ -28,4 +28,13 @@ function lambda = lambda_Kremer(ce, param)
 % Convert to [mol.m-3]
 ce = ce.*param.c0;
 
+% Function valid for ce = 500 to 2000 [mol.m-3] 
+if isnumeric(ce)
+    if any(ce < 500)
+        ce(ce < 500) = 500;
+    elseif any(ce > 2000)
+        ce(ce > 2000) = 2000;
+    end
+end
+
 lambda = 4.4825e10*(ce/1e6).^4-4.6529e8*(ce/1e6).^3+1.3801e6*(ce/1e6).^2+89.0407*(ce/1e6)+0.9378;
