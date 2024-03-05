@@ -122,15 +122,9 @@ cj      = SX.sym('cj');                          % required for Jacobian calcula
 % Store init_Method in ida_user_data for IDA solver
 ida_user_data.init_Method = param.init_Method;
 
-%% Get number of algebraic and differential variables
+%% Get number of algebraic and differential variables for IDACalcIC
 
-if strcmp(param.init_Method,'SS')
-    % Define algebraic and differential variables.
-    % id:1-> differential variables,
-    % id:0-> algebraic variables.
-    id = zeros(param.total_variables,1);
-    id(1:(param.ce_length+param.csp_length+param.csn_length)) = 1;
-elseif strcmp(param.init_Method,'IDACalcIC')
+if strcmp(param.init_Method,'IDACalcIC')
     % Define algebraic and differential variables 
     %   id:1-> differential variables (according to SUNDIALS TB manual)
     %   id:0-> algebraic variables (according to SUNDIALS TB manual)
@@ -221,13 +215,22 @@ xp0 = zeros(param.total_variables,1);
 
 %% Setup IDA Solver
 
-options_IDA = IDASetOptions('RelTol', param.rtol,...
+if strcmp(param.init_Method,'SS')
+    options_IDA = IDASetOptions('RelTol', param.rtol,...
+                            'AbsTol', param.atol,...
+                            'MaxNumSteps', 1500,...
+                            'InitialStep', 1e-3,...
+                            'UserData', ida_user_data,...
+                            'JacobianFn',@jacobianFn);
+elseif strcmp(param.init_Method,'IDACalcIC')
+    options_IDA = IDASetOptions('RelTol', param.rtol,...
                             'AbsTol', param.atol,...
                             'MaxNumSteps', 1500,...
                             'InitialStep', 1e-3,...
                             'VariableTypes', id,...
                             'UserData', ida_user_data,...
                             'JacobianFn',@jacobianFn);
+end
 
 % Initialize IDA solver
 % NOTE: Numeric values of t,x,xp will be input to diff_res(t,x,xp,ida_user_data) during IDA simulation. 
