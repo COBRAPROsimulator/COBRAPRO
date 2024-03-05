@@ -103,13 +103,6 @@ end
 % Boundary equation (negative|CC) 
 i = Nn;
 % Third order Hermite interpolation to write equation for phisn_cc
-% x_Nn = param.hn*(Nn-0.5); % x distance from i = 0.5 to i = Nn
-% x_Nn_1 = param.hn*(Nn-1.5); % x distance from i = 0.5 to i = Nn-1
-% x1 = (1+2*(param.ln-x_Nn_1)/(x_Nn-x_Nn_1))*phisn(i-1)+(param.ln-x_Nn_1)*((phisn(i)-phisn(i-2))/(2*param.hn));
-% x2 = ((param.ln-x_Nn)/(x_Nn_1-x_Nn))^2;
-% x3 = (1+2*(x_Nn-param.ln)/(x_Nn-x_Nn_1))*phisn(i)+(param.ln-x_Nn)*(-I_density/param.sigma_effn);
-% x4 = ((param.ln-x_Nn_1)/(x_Nn-x_Nn_1))^2;
-% phisn_end = x1*x2 + x3*x4;
 phisn_end = electrodeBC_hermite_interp(phisn',I_density,param,'n');
 res_phisn(i) = phisn_end;
 
