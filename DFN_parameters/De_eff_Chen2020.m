@@ -32,6 +32,15 @@ function Deff = De_eff_Chen2020(ce, param, domain)
 % Convert to [mol.m-3]
 ce = ce.*param.c0;
 
+% Function valid for ce = 500 to 2000 [mol.m-3] 
+if isnumeric(ce)
+    if any(ce < 500)
+        ce(ce < 500) = 500;
+    elseif any(ce > 2000)
+        ce(ce > 2000) = 2000;
+    end
+end
+
 switch(domain)
     case 'p'
         Deff = param.ep^param.brugp.*(8.794e-11.*(ce/1000).^2-3.972e-10.*(ce/1000)+4.862e-10);
