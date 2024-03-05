@@ -32,6 +32,15 @@ function Kappa_eff = Kappa_eff_Chen2020(ce,param,domain)
 % Convert to [mol.m-3]
 ce = ce.*param.c0;
 
+% Function valid for ce = 500 to 2000 [mol.m-3] 
+if isnumeric(ce)
+    if any(ce < 500)
+        ce(ce < 500) = 500;
+    elseif any(ce > 2000)
+        ce(ce > 2000) = 2000;
+    end
+end
+
 switch(domain)
     case'p'
     Kappa_eff = param.ep^param.brugp *(0.1297*(ce/1000).^3-2.51*(ce/1000).^1.5+3.329*(ce/1000));
