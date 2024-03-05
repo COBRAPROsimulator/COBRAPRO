@@ -28,6 +28,15 @@ function t1 = t1_Kremer(ce, param)
 % Convert to [mol.m-3]
 ce = ce.*param.c0;
 
+% Function valid for ce = 500 to 2000 [mol.m-3] 
+if isnumeric(ce)
+    if any(ce < 500)
+        ce(ce < 500) = 500;
+    elseif any(ce > 2000)
+        ce(ce > 2000) = 2000;
+    end
+end
+
 numerator = 3.2093e-4*(ce/1e6).^2-1.2798e-6*(ce/1e6)+1.374e-9;
 denominator = (ce/1e6).^3-0.0026*(ce/1e6).^2+6.7273e-8*(ce/1e6)+3.17779e-9;
 
