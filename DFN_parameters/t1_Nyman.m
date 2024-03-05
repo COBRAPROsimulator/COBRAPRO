@@ -28,4 +28,13 @@ function t1 = t1_Nyman(ce, param)
 % Convert to [mol.m-3]
 ce = ce.*param.c0;
 
+% Function valid for ce = 500 to 2000 [mol.m-3] 
+if isnumeric(ce)
+    if any(ce < 500)
+        ce(ce < 500) = 500;
+    elseif any(ce > 2000)
+        ce(ce > 2000) = 2000;
+    end
+end
+
 t1 = -0.1287*(ce/1000).^3+0.4106*(ce/1000).^2-0.4717*(ce/1000)+0.4492;
