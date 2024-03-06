@@ -1,4 +1,4 @@
-function J_tot = DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,currentDensity_vec,curr_segments,t_exp,curr_vec,V_exp,SOCp_exp,SOCn_exp,Q_dis_exp_HPPC)
+function J_tot = DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,curr_segments,t_exp,curr_vec,V_exp,SOCp_exp,SOCn_exp,Q_dis_exp_HPPC)
 %   DFN_obj_HPPC is the objective function that outputs the RMSE between
 %   experimental and simulated voltage and SOC
 %
@@ -7,17 +7,20 @@ function J_tot = DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,currentDensi
 %           -> size nxm, where n is the number of particles, m is the number of parameters to identify
 %       param: nominal parameter structure
 %       param_HPPC: array containing names of parameters to be identified
-%       HPPC_len: length of HPPC simulation
-%       t_exp: experimental time vector    (Mx1)
-%       curr_vec: vector containing current value for each CC segment in HPPC
-%       V_exp: experimental current vector (Mx1)
-%       SOCp_exp: experimental SOCp vector (Mx1)
-%       SOCn_exp: experimental SOCn vector (Mx1)
+%       SOC_init: initial SOC [-]
+%       t0: initial time [s]
+%       tf_vec: final time vector for each CC segment [s]
+%       curr_segments: number of CC segments (let's say is equal to Q)
+%       t_exp: experimental time vector    [s] (Mx1)
+%       curr_vec: vector containing current value for each CC segment in HPPC [A] (1xQ)
+%       V_exp: experimental current vector [V] (Mx1)
+%       SOCp_exp: experimental SOCp vector [-] (Mx1)
+%       SOCn_exp: experimental SOCn vector [-] (Mx1)
 %           -> where M is the total number of data points in your experiment
 %       Q_dis_exp_HPPC: Experimental discharge capacity [Ah]
 %
 %   Output:
-%       J_tot: objective function value
+%       J_tot: objective function value [-]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COBRAPRO: Co-simulation Battery Modeling for Accelerated Parameter Optimization
@@ -43,13 +46,13 @@ parfor (i = 1:size(x,1), param.pso_workers)
     for j = 1:length(param_HPPC)
         param_copies(i).(param_HPPC{j}) = x(i,j);
     end
-    param_copies(i).curr_dens_vec = curr_vec./param_copies(i).Acell;
     % Do not change code here (updating constrained parameters)
     %----------------------------------------------------------------------
     param_copies(i).ep_s=1-param_copies(i).ep;
     param_copies(i).en_s=1-param_copies(i).en;
     param_copies(i).ap=(3/param_copies(i).Rpp)*param_copies(i).ep_s;
     param_copies(i).an=(3/param_copies(i).Rpn)*param_copies(i).en_s;
+    param_copies(i).curr_dens_vec = curr_vec./param_copies(i).Acell;
     %----------------------------------------------------------------------
 end
 
@@ -63,7 +66,7 @@ parfor (i = 1:size(x,1),param.pso_workers)
         %----------------------------------------------------------------------
         % 1. Start HPPC simulation
         %----------------------------------------------------------------------
-        [t_sim,V_sim,SOCp_sim,SOCn_sim,curr_dens_sim,~,~,~,init_fail]=HPPC_sim(temp_params,SOC_init,t0,tf_vec,currentDensity_vec,curr_segments);
+        [t_sim,V_sim,SOCp_sim,SOCn_sim,curr_dens_sim,~,~,~,init_fail]=HPPC_sim(temp_params,SOC_init,t0,tf_vec,temp_params.curr_dens_vec,curr_segments);
 
         %----------------------------------------------------------------------
         % 2. Define objective function
