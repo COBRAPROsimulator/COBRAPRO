@@ -156,6 +156,7 @@ SOCn_exp = SOC_exp;
 %% HPPC simulation
 
 % Define current density vector for each CC segment
+currentDensity_vec = curr_vec/param.Acell;
 param.curr_dens_vec = curr_vec/param.Acell;
 
 % Number of CC segments (equal to P)
