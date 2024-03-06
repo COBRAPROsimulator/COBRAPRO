@@ -101,7 +101,7 @@ parfor (i = 1:size(x,1), param.pso_workers)
                 len1=length(SOCn_sim_obj);len2=length(SOCn_exp);
                 len_SOCn=min(len1,len2);
                 % Objective function
-                J1 = rms((V_exp(1:len_V)-V_sim_obj(1:len_V))./V_sim_obj(1:len_V));
+                J1 = rms((V_exp(1:len_V)-V_sim_obj(1:len_V))./V_exp(1:len_V));
                 J2 = rms(SOCp_exp(1:len_SOCp)-SOCp_sim_obj(1:len_SOCp));
                 J3 = rms(SOCn_exp(1:len_SOCn)-SOCn_sim_obj(1:len_SOCn));
                 J_tot(i)=J1+J2+J3;
