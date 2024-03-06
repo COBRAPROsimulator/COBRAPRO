@@ -156,7 +156,7 @@ SOCn_exp = SOC_exp;
 %% HPPC simulation
 
 % Define current density vector for each CC segment
-currentDensity_vec = curr_vec/param.Acell;
+param.curr_dens_vec = curr_vec/param.Acell;
 
 % Number of CC segments (equal to P)
 curr_segments = length(curr_vec); 
@@ -207,7 +207,7 @@ options = optimoptions('particleswarm',...
 fprintf('\nStart running PSO!...\n')
 
 % To pass additional parameters to PSO objective function, use anonymous function method
-fcn = @(x)DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,currentDensity_vec,curr_segments,t_exp,curr_vec,V_exp,SOCp_exp,SOCn_exp,Q_dis_exp_HPPC);
+fcn = @(x)DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,curr_segments,t_exp,curr_vec,V_exp,SOCp_exp,SOCn_exp,Q_dis_exp_HPPC);
 
 % fval: objective function value
 % exitflag: exit condition stopping condition
