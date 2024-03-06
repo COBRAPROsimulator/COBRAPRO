@@ -182,7 +182,7 @@ len2=length(V_exp);
 len=min(len1,len2);
 
 % Objective function
-J1 = rms((V_exp(1:len)-V_sim_obj(1:len))./V_sim_obj(1:len));
+J1 = rms((V_exp(1:len)-V_sim_obj(1:len))./V_exp(1:len));
 J1_mV = rms(V_exp(1:len)-V_sim_obj(1:len));
 J2 = rms(SOC_exp(1:len)-SOCp_obj(1:len));
 J3 = rms(SOC_exp(1:len)-SOCn_obj(1:len));
