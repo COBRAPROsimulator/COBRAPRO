@@ -92,7 +92,7 @@ param.tf_vec = time_vec;
 
 % Add simulation settings to param for PSO
 param.curr_vec = curr_vec;
-param.currentDensity_vec = curr_vec/param.Acell;
+param.curr_dens_vec = curr_vec/param.Acell;
 param.curr_segments = curr_segments;
 
 %% Simulate model for each perturbed parameter 
