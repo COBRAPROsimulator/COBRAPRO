@@ -47,7 +47,7 @@ function [t_nom,V_nom,SOCp_nom,SOCn_nom,...
 % Simulate using nominal parameters
 %----------------------------------------------------------------------
 fprintf('Simulating with nominal parameters...\n')
-[t_nom,V_nom,SOCp_nom,SOCn_nom,~,~,~,~]=HPPC_sim(param,param.SOC_init,param.t0,param.tf_vec,param.currentDensity_vec,param.curr_segments);
+[t_nom,V_nom,SOCp_nom,SOCn_nom,~,~,~,~]=HPPC_sim(param,param.SOC_init,param.t0,param.tf_vec,param.curr_dens_vec,param.curr_segments);
 fprintf('Done.\n')
 
 %----------------------------------------------------------------------
@@ -111,7 +111,7 @@ parfor (i = 1:length(param_LSA_HPPC), param.pso_workers)
     % Simulate using lower bound perturbed parameter
     %----------------------------------------------------------------------
     temp_params_l = param_copies_l(i);
-    [t_l,V_l,SOCp_l,SOCn_l,~,~,~,~]=HPPC_sim(temp_params_l,temp_params_l.SOC_init,temp_params_l.t0,temp_params_l.tf_vec,temp_params_l.currentDensity_vec,temp_params_l.curr_segments);
+    [t_l,V_l,SOCp_l,SOCn_l,~,~,~,~]=HPPC_sim(temp_params_l,temp_params_l.SOC_init,temp_params_l.t0,temp_params_l.tf_vec,temp_params_l.curr_dens_vec,temp_params_l.curr_segments);
 
     t_l_all{i} = t_l;
     V_l_all{i} = V_l;
@@ -121,7 +121,7 @@ parfor (i = 1:length(param_LSA_HPPC), param.pso_workers)
     % Simulate using upper bound perturbed parameter
     %----------------------------------------------------------------------
     temp_params_u = param_copies_u(i);
-    [t_u,V_u,SOCp_u,SOCn_u,~,~,~,~]=HPPC_sim(temp_params_u,temp_params_u.SOC_init,temp_params_u.t0,temp_params_u.tf_vec,temp_params_u.currentDensity_vec,temp_params_u.curr_segments);
+    [t_u,V_u,SOCp_u,SOCn_u,~,~,~,~]=HPPC_sim(temp_params_u,temp_params_u.SOC_init,temp_params_u.t0,temp_params_u.tf_vec,temp_params_u.curr_dens_vec,temp_params_u.curr_segments);
 
     t_u_all{i} = t_u;
     V_u_all{i} = V_u;
