@@ -436,6 +436,11 @@ if strcmp(param.init_Method,'SS')
         output_sim.Un = output_sim.Un(pos_ind,:);
         output_sim.etap = output_sim.etap(pos_ind,:);
         output_sim.etan = output_sim.etan(pos_ind,:);
+    % If the initialization could not start at all, then set output to NaN
+    elseif length(output_sim.t) == 1
+        fprintf('Unsuccessful initialization: initialized algebraic states are NaN.\n')
+        output.t = NaN;
+        return
     % If the initialization did not finish (exit conditions triggered during initialization)
     % -> then make the solution that triggered the exit condition be the solution at t=0
     else
