@@ -60,7 +60,7 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
 
 # Examples 
-Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view comprehensive example codes:
 
 - `Examples/Cycling`: battery cycling example codes
 - `Examples/Parameter_Identification_Routines`: parameter identification example codes
@@ -119,7 +119,7 @@ SOC_init = 1;
 ```
 Note that `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
 
-Once the user input has been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
+Once the user input has been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter and objective function values to the command window:
 ```
 Displaying identified values...
 ------------------------
@@ -149,14 +149,14 @@ J_tot =0.003833 [-]
 ```
 Model is simulated using the identified parameters and plotted with the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
 
-Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification` to view the C/20 identification results shown here.
+Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=60% }
 
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=60% }
 
 ## HPPC Identification
-Modify the `User Input` section in `DFN_pso_HPPC.m` to define the parameter names, parameter upper and lower bounds, and experimental data:
+To identify parameters using the HPPC profile, modify the `User Input` section in `DFN_pso_HPPC.m` (define the parameter names, parameter upper and lower bounds, and experimental data):
 ```MATLAB
 %% User Input
 % Load nominal parameters and stoichiometric parameter identified
@@ -221,7 +221,7 @@ V = V_data;
 % Enter initial SOC of your HPPC data
 SOC_init = 1;   % [-]      
 ```
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter values and objective function values are printed to the command window (Appendix A). The model is simulated using the identified parameters and plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (Appendix A). The model is simulated using the identified parameters and plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
 
@@ -230,9 +230,9 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to v
 ![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
 
 ## Driving cycle validation
-To validate the identified parameters, the model is simulated under the urban dynamometer driving schedule (UDDS) driving cycle profile and compared against the experimental UDDS data. 
+In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
-This is demonstrated in the `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m` code
+In `DFN_pso_UDDS_validation.m`, load the identified parameter values and experimental UDDS data:
 ```MATLAB
 %% User Input  
 % Load identification results 
