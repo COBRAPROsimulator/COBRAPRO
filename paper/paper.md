@@ -68,7 +68,7 @@ Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to vi
 - `Examples/Parameter_Identification_Results`: load parameter identification results
   - `DFN_pso_0_05C_identification.m`: parameter identification results using C/20 discharge data
   - `DFN_pso_HPPC_identification.m`: parameter identification results using HPPC data
-  - `DFN_pso_UDDS_validation.m`: parameter identification validation using UDDS data
+  - `DFN_pso_UDDS_validation.m`: parameter identification validation using driving cycle data
 - `Examples/Cycling`: examples showing how to perform battery cycling simulations using identified parameters
   - `cycle_CC.m`: simulating CC cycling experiments and model output visualization (voltage, state-of-charge, internal variables)
   - `cycle_HPPC.m`: simulating HPPC profile and model output visualization (voltage, state-of-charge, internal variables)
