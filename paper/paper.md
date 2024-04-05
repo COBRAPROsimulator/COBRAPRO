@@ -54,7 +54,7 @@ In contrast, several open-source DFN model simulation tools have been released s
   - Single-step approach [@lawder_extending_2015]
   - SUNDIALS IDACalcIC
 - **Simulating battery cycling:**
-  - Constant current profiles
+  - Constant current (CC) profiles
   - Hybrid pulse power characterization (HPPC) profiles
   - Dynamic current profiles 
 - **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
@@ -62,10 +62,20 @@ In contrast, several open-source DFN model simulation tools have been released s
 # Examples 
 Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view comprehensive example codes:
 
-- `Examples/Cycling`: battery cycling example codes
 - `Examples/Parameter_Identification_Routines`: parameter identification example codes
+  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge profile
+  - `DFN_pso_HPPC.m`: parameter identification using HPPC profile
 - `Examples/Parameter_Identification_Results`: load parameter identification results
+  - `DFN_pso_0_05C_identification.m`: parameter identification results using C/20 discharge data
+  - `DFN_pso_HPPC_identification.m`: parameter identification results using HPPC data
+  - `DFN_pso_UDDS_validation.m`: parameter identification validation using UDDS data
+- `Examples/Cycling`: examples showing how to perform battery cycling simulations using identified parameters
+  - `cycle_CC.m`: simulating CC cycling experiments and model output visualization (voltage, state-of-charge, internal variables)
+  - `cycle_HPPC.m`: simulating HPPC profile and model output visualization (voltage, state-of-charge, internal variables)
+  - `cycle_UDDS.m`: simulating driving cycle profile and model output visualization (voltage, state-of-charge, internal variables)
 - `Examples/Local_Sensitivity_Analysis`: LSA example codes
+  - `DFN_LSA_CC.m`: LSA on CC profile
+  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
 Here, we provide an overview of the parameter identification example codes in the `Examples/Parameter_Identification_Routines` directory.
 Two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
