@@ -154,7 +154,7 @@ J_tot =0.003833 [-]
 ```
 to the Command Window and plots the identified results as shown in \autoref{fig:0_05C}. 
 
-\label{fig:0_05C}](figures/voltage_0_05C_identification.png){ width=40% }
+\label{fig:0_05C}](voltage_0_05C_identification.png){ width=40% }
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
 
