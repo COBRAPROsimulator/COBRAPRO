@@ -60,8 +60,14 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
 
 # Examples 
-Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes. Here, we provide an overview of the parameter identification example codes.
-In the `Examples/Parameter_Identification_Routines` folder, two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
+Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+- `Examples/Cycling`: contains battery cycling example codes
+- `Examples/Parameter_Identification_Routines`: contains parameter identification example codes
+- `Examples/Parameter_Identification_Results`: contains example codes showing how to load parameter identification results
+- `Examples/Local_Sensitivity_Analysis`: contains LSA example codes
+  
+Here, we provide an overview of the parameter identification example codes in the `Examples/Parameter_Identification_Routines` directory.
+Two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
 ## C/20 Discharge Identification
 `DFN_pso_0_05C.m`, located in the `Examples/Parameter_Identification_Routines` directory, is structured to require user input modifications only in the `User Input` section. This section includes definitions for parameter names, their respective upper and lower bounds, and experimental data:
