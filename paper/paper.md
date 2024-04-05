@@ -62,8 +62,8 @@ In contrast, several open-source DFN model simulation tools have been released s
 # Examples 
 In the `Examples/Parameter_Identification_Routines` folder, two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
-## C/20 Discharge Identification (`DFN_pso_0_05C.m`)
-The code is written such that users only need to modify the `User Input` section in the code. In the `User Input` section, the parameters to be identified, the upper and lower bounds for each parameter, and the experimental data are defined:
+## C/20 Discharge Identification
+`Examples/Parameter_Identification_Routines/DFN_pso_0_05C.m` is written such that users only need to modify the `User Input`. The names of the parameters to be identified, upper and lower bounds for each parameter, and the experimental data are defined:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -108,19 +108,8 @@ V = V_data;
 
 % Enter experimental data initial SOC [-] 
 SOC_init = 1;  
-
-% Simulation time 
-%--------------------------------------------------------------------------
-% NOTE: Simulation will exit automatically when the lower or upper cut-off
-% voltages are reached. To simulate till the cut-off voltage condition,
-% keep tf large enough, e.g., for C/20 the tf should be greater than 7200.
-%--------------------------------------------------------------------------
-% Initial simulation time [s]
-t0 = 0;
-% Final simulation time [s] 
-tf = 1e6;
 ```
-Note that the `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc.
+Note that `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
 
 Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
 ```
@@ -155,6 +144,121 @@ to the Command Window and plots the identified results as shown in \autoref{fig:
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png)
 
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png)
+
+## HPPC Identification
+Modfiy the `User Input` section in `Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m`:
+```MATLAB
+%% User Input
+% Load parameters, including the stoichiometric parameter identified from C/20 discharge data
+% load('identified_parameters_0_05C.mat','param')
+
+% Enter mat file name where your PSO results will be stored
+file_name = 'pso_HPPC';
+ 
+% Enter names of parameters to identify (make sure names match the
+% parameter names in "param" structure containing nominal parameters)
+param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
+ 
+% Enter lower and upper bounds of parameters to identify 
+% kp
+pct = 0.3; % perturbation coeff
+lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
+upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
+% kn
+pct = 0.3; % perturbation coeff
+lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
+upper_bounds.kn = 10^(log10(param.kn)*(1-pct));
+% Dsp
+pct = 0.2; % perturbation coeff
+lower_bounds.Dsp = 10^(log10(param.Dsp)*(1+pct));
+upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
+% Dsn
+pct = 0.2; % perturbation coeff
+lower_bounds.Dsn = 10^(log10(param.Dsn)*(1+pct));
+upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
+% Kappa
+lower_bounds.Kappa = 0.1;
+upper_bounds.Kappa = 2;
+% De 
+pct = 0.2; % perturbation coeff
+lower_bounds.De = 10^(log10(param.De)*(1+pct));
+upper_bounds.De = 10^(log10(param.De)*(1-pct));
+% t1
+lower_bounds.t1_constant = 0.1;
+upper_bounds.t1_constant = 0.4;
+% c0
+lower_bounds.c0 = 500;
+upper_bounds.c0 = 1500;
+
+% Enter number of particles for PSO
+particle_num = 300;
+
+% Load Experimental Data 
+%--------------------------------------------------------------------------
+%   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
+%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) (negative current: discharging)
+%   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
+%   -> where M is the total number of data points in your experiment
+%--------------------------------------------------------------------------
+% HPPC test conducted on LG INR21700 M50T cells
+load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')
+
+t = t_data;
+I = I_data;
+V = V_data;
+
+% Enter initial SOC of your HPPC data
+SOC_init = 1;   % [-]      
+```
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
+```
+Displaying identified values...
+------------------------
+kn:
+Identified value: 1.4394e-08
+2.987e-15(lower) | 6.7159e-12(initial) | 1.51e-08(upper)
+------------------------
+Dsp:
+Identified value: 7.1026e-15
+5.278e-18(lower) | 4e-15(initial) | 3.0314e-12(upper)
+------------------------
+c0:
+Identified value: 599.3499
+500(lower) | 1000(initial) | 2000(upper)
+------------------------
+kp:
+Identified value: 3.9537e-08
+2.5967e-14(lower) | 3.5445e-11(initial) | 4.8383e-08(upper)
+------------------------
+Dsn:
+Identified value: 2.24e-14
+6.6407e-17(lower) | 3.3e-14(initial) | 1.6399e-11(upper)
+------------------------
+Kappa:
+Identified value: 0.75539
+0.1(lower) | 0.95(initial) | 2(upper)
+------------------------
+De:
+Identified value: 1.9115e-10
+4.9036e-12(lower) | 3.7621e-10(initial) | 2.8863e-08(upper)
+------------------------
+t1_constant:
+Identified value: 0.37071
+0.1(lower) | 0.2523(initial) | 0.4(upper)
+
+Displaying objective function values...
+------------------------
+J_V =0.0037065 [-]
+J_V =13.0701 [mV]
+J_SOCp =0.13292 [%]
+J_SOCn =0.17272 [%]
+J_tot =0.0067629 [-]
+```
+to the Command Window and plots the identified results as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
+
+![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png)
+
+![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png)
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
 
