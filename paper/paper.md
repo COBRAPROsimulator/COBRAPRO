@@ -122,7 +122,7 @@ tf = 1e6;
 ```
 Note that the `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc.
 
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values 
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
 ```
 Displaying identified values...
 ------------------------
@@ -141,9 +141,7 @@ Identified value: 0.89385
 theta0_n:
 Identified value: 0.029818
 0.015(lower) | 0.0279(initial) | 0.04(upper)
-```
-and the objective function values
-```
+
 Displaying objective function values...
 ------------------------
 J_V =0.0033403 [-]
@@ -152,9 +150,8 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-to the Command Window and plots the identified results as shown in \autoref{fig:0_05C}. 
-
-![Caption for example figure.\label{fig:0_05C}](voltage_0_05C_identification.png)
+to the Command Window and plots the identified results as shown in \autoref{fig:0_05C}. To view the results generated above, run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
+![C/20 Discharge identification results.\label{fig:0_05C}](voltage_0_05C_identification.png){ width=40% }
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
 
