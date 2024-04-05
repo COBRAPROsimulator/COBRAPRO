@@ -1,9 +1,13 @@
 % -------------------------------------------------------------------------
-% DFN_pso_CC.m
+% DFN_pso_0_05C.m
 % -------------------------------------------------------------------------
-% DFN_pso_CC identifies parameters using experimentally obtained voltage profile
-% from CC cycling. In this example, we use the capacity test conducted at
-% C/20 as our experimental data.
+% DFN_pso_0_05C identifies stoichiometric parameters using C/20 discharge
+% data. Stoichiometric identification is commonly implemented as the first 
+% step in parameter identfication to achieve accurate OCP windows for each
+% electrode, which as a result determine the OCV window.
+%
+% NOTE: This code can be modified to identify parameters using any CC
+% profile, e.g., C/5, 1C, 2C, etc. 
 %
 % Reference:
 % [1] G. Pozzato, A. Allam, and S. Onori, “Lithium-ion battery aging dataset based on electric vehicle real-driving profiles,” Data in Brief, vol. 41, p. 107995, Apr. 2022, doi: 10.1016/j.dib.2022.107995.
