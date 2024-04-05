@@ -235,7 +235,7 @@ run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
 To validate the identified parameters, the model is simulated under the urban dynamometer driving schedule (UDDS) driving cycle profile and compared against the experimental UDDS data. 
 
 This is demonstrated in the `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m` code
-```
+```MATLAB
 %% User Input  
 % Load identification results 
 load('identified_parameters_HPPC.mat')
@@ -272,7 +272,7 @@ J_tot =0.0041297 [-]
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
 
-## Appendix A \label
+## Appendix A 
 HPPC identification results printed to Command Window:
 ```
 Displaying identified values...
