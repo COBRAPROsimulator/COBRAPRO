@@ -3,7 +3,7 @@
 % -------------------------------------------------------------------------
 % DFN_pso_HPPC identifies parameters using experimentally obtained 
 % HPPC voltage profile. The C/20 identification results from "DFN_pos_0_05C.m"
-% are utilized. The geometric parameters are obtained from [Chen 2020].
+% are utilized. All other parameters are obtained from [Chen 2020].
 %
 % Reference:
 % [1] G. Pozzato, A. Allam, and S. Onori, “Lithium-ion battery aging dataset based on electric vehicle real-driving profiles,” Data in Brief, vol. 41, p. 107995, Apr. 2022, doi: 10.1016/j.dib.2022.107995.
@@ -43,7 +43,7 @@ file_name = 'pso_HPPC';
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 %--------------------------------------------------------------------------
-param_HPPC = {'kn', 'Dsp', 'Dsn'};
+param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
 
 %--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
@@ -52,6 +52,10 @@ param_HPPC = {'kn', 'Dsp', 'Dsn'};
 %   lower_bounds.xxx = ...
 %   upper_bounds.xxx = ...
 %--------------------------------------------------------------------------
+% kp
+pct = 0.3; % perturbation coeff
+lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
+upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
 % kn
 pct = 0.3; % perturbation coeff
 lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
@@ -64,6 +68,19 @@ upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
 pct = 0.2; % perturbation coeff
 lower_bounds.Dsn = 10^(log10(param.Dsn)*(1+pct));
 upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
+% Kappa
+lower_bounds.Kappa = 0.1;
+upper_bounds.Kappa = 2;
+% De 
+pct = 0.2; % perturbation coeff
+lower_bounds.De = 10^(log10(param.De)*(1+pct));
+upper_bounds.De = 10^(log10(param.De)*(1-pct));
+% t1
+lower_bounds.t1_constant = 0.1;
+upper_bounds.t1_constant = 0.4;
+% c0
+lower_bounds.c0 = 500;
+upper_bounds.c0 = 1500;
 
 %--------------------------------------------------------------------------
 % Enter number of particles for PSO
