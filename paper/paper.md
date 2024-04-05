@@ -254,7 +254,16 @@ t = t_data';
 I = I_data';
 V = V_data';
 ```
-and the output is shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
+The objective function is printed to the Command Window and the simulated and experimental data are plotted as shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
+```
+Displaying objective function values...
+------------------------
+J_V =0.0036564 [-]
+J_V =13.4433 [mV]
+J_SOCp =0.03125 [%]
+J_SOCn =0.016081 [%]
+J_tot =0.0041297 [-]
+```
 
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=60% }
 
