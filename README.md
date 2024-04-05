@@ -114,8 +114,8 @@ In the ```Examples``` folder, you will find example codes that will help you get
   * ```Examples/Cycling/cycle_HPPC.m```: simulating hybrid pulse power characterization (HPPC) profile and result visualization (voltage, state-of-charge, internal variable curves)
   * ```Examples/Cycling/cycle_UDDS.m```: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
 * ```Examples/Parameter_Identification_Routines```: examples showing how to perform parameter identification using PSO
-  * ```Examples/Parameter_Identification_Routines/DFN_pso_CC.m```: parameter identification using CC profile
-  * ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC profile
+  * ```Examples/Parameter_Identification_Routines/DFN_pso_0_05C.m```: parameter identification using C/20 discharge data
+  * ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC data
 * ```Examples/Parameter_Identification_Results```: examples showing parameter identification results
   * ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data
   * ```Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m```: parameter identification results using HPPC data
