@@ -61,9 +61,6 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Examples 
 Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
-- **Parameter identification routine:** Utilizes PSO to optimize parameters using experimental current-voltage data
-- **DFN model implementation:** Finite volume method (FVM) discretization of the PDEs to form a DAE and SUNDIALS IDA solver to solve the DAE system
-
 
 - `Examples/Cycling`: contains battery cycling example codes
 - `Examples/Parameter_Identification_Routines`: contains parameter identification example codes
@@ -74,7 +71,7 @@ Here, we provide an overview of the parameter identification example codes in th
 Two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
 ## C/20 Discharge Identification
-`DFN_pso_0_05C.m`, located in the `Examples/Parameter_Identification_Routines` directory, is structured to require user input modifications only in the `User Input` section. This section includes definitions for parameter names, their respective upper and lower bounds, and experimental data:
+In `DFN_pso_0_05C.m`, only the `User Input` section needs to be modified. This section includes definitions for parameter names, their respective upper and lower bounds, and experimental data:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -122,7 +119,7 @@ SOC_init = 1;
 ```
 Note that `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
 
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
+Once the user input has been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
 ```
 Displaying identified values...
 ------------------------
@@ -150,7 +147,8 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+Model is simulated using the identified parameters and plotted with the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+
 To view the C/20 identification results shown here, run 
 `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
 
@@ -159,7 +157,7 @@ To view the C/20 identification results shown here, run
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=60% }
 
 ## HPPC Identification
-Similar to `DFN_pso_HPPC.m`, modify the `User Input` section in `DFN_pso_HPPC.m`, located in the `Examples/Parameter_Identification_Routines` directory.
+Modify the `User Input` section in `DFN_pso_HPPC.m` to define the parameter names, parameter upper and lower bounds, and experimental data:
 ```MATLAB
 %% User Input
 % Load nominal parameters and stoichiometric parameter identified
@@ -224,7 +222,49 @@ V = V_data;
 % Enter initial SOC of your HPPC data
 SOC_init = 1;   % [-]      
 ```
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter values and objective function values are printed to the command window:
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter values and objective function values are printed to the command window (Appendix A). The model is simulated using the identified parameters and plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+
+To view the HPPC identification results shown here, 
+run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
+
+![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
+
+![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
+
+## Driving cycle validation
+To validate the identified parameters, the model is simulated under the urban dynamometer driving schedule (UDDS) driving cycle profile and compared against the experimental UDDS data. 
+
+This is demonstrated in the `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m` code
+```
+%% User Input  
+% Load identification results 
+load('identified_parameters_HPPC.mat')
+
+% Load Experimental Data 
+%--------------------------------------------------------------------------
+%   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
+%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
+%   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
+%   -> where M is the total number of data points in your experiment
+%--------------------------------------------------------------------------
+% HPPC test conducted on LG INR21700 M50T cells
+load('UDDS_W8_cyc1.mat')
+
+t = t_data';
+I = I_data';
+V = V_data';
+```
+and the output is shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
+
+![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=60% }
+
+![UDDS positive and negative electrode state-of-charge identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=60% }
+
+# Acknowledgements
+The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
+
+## Appendix A \label
+HPPC identification results printed to Command Window:
 ```
 Displaying identified values...
 ------------------------
@@ -268,15 +308,5 @@ J_SOCp =0.13292 [%]
 J_SOCn =0.17272 [%]
 J_tot =0.0067629 [-]
 ```
-and the identified results are plotted, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
-To view the HPPC identification results shown here, 
-run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
-
-![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
-
-![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
-
-# Acknowledgements
-The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
 
 # References
