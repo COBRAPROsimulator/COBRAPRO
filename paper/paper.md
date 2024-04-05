@@ -62,33 +62,22 @@ In contrast, several open-source DFN model simulation tools have been released s
 # Examples 
 In the `Examples/Parameter_Identification_Routines` folder, two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
-In `DFN_pso_0_05C.m`, the user inputs are given as:
-```
+# C/20 Discharge Identification (`DFN_pso_0_05C.m`)
+The code is written such that users only need to modify the `User Input` section in the code. 
+Users define the parameters to be identified, the upper and lower bounds for each parameter, and the experimental data:
+```MATLAB
 %% User Input  
-
-%--------------------------------------------------------------------------
-% Load nominal parameters
-%--------------------------------------------------------------------------
+% Load nominal parameters 
 param = Parameters_LG_INR21700_M50;
 
-%--------------------------------------------------------------------------
 % Enter mat file name where your PSO results will be stored
-%--------------------------------------------------------------------------
 file_name = 'pso_0_05C';
 
-%--------------------------------------------------------------------------
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
-%--------------------------------------------------------------------------
 param_CC = {'theta100_p', 'theta100_n', 'theta0_p', 'theta0_n'};
 
-%--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
-%--------------------------------------------------------------------------
-%   Example for parameter name "xxx":
-%   lower_bounds.xxx = ...
-%   upper_bounds.xxx = ...
-%--------------------------------------------------------------------------
 % theta100_p
 lower_bounds.theta100_p = 0.22; 
 upper_bounds.theta100_p = 0.34;
@@ -100,14 +89,11 @@ lower_bounds.theta0_p = 0.7;
 upper_bounds.theta0_p = 1; 
 % theta0_n
 lower_bounds.theta0_n = 0.015; 
-upper_bounds.theta0_n = 0.04; 
+upper_bounds.theta0_n = 0.04;
 
-%--------------------------------------------------------------------------
 % Enter number of particles for PSO
-%--------------------------------------------------------------------------
 particle_num = 100;
 
-%--------------------------------------------------------------------------
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
@@ -122,18 +108,13 @@ t = t_data;
 I = I_data;
 V = V_data;
 
-%--------------------------------------------------------------------------
 % Choose the desired sampling time [s] to resample your experiment data 
 % (the interpolated experimental data will be used in the PSO to compute the objective function)
-%--------------------------------------------------------------------------
 deltaT_exp = 1; 
 
-%--------------------------------------------------------------------------
 % Enter experimental data initial SOC [-] 
-%--------------------------------------------------------------------------
 SOC_init = 1;  
 
-%--------------------------------------------------------------------------
 % Simulation time 
 %--------------------------------------------------------------------------
 % NOTE: Simulation will exit automatically when the lower or upper cut-off
@@ -142,11 +123,12 @@ SOC_init = 1;
 %--------------------------------------------------------------------------
 % Initial simulation time [s]
 t0 = 0;
-% Final simulation time [s]
+% Final simulation time [s] 
 tf = 1e6;
 ```
+Note that the `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc.
 
-Note that `Parameters_LG_INR21700_M50.m` function contains the nominal parameters of your cell and the simulation settings. Refer to Appendix A to view the simulation settin
+Once the user input has been defined, run the code to start the PSO. 
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
 
