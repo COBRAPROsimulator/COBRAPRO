@@ -150,8 +150,10 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. To view the results generated above, run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
+to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
+
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png)
+
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png)
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
