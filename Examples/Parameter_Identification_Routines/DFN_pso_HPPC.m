@@ -2,10 +2,12 @@
 % DFN_pso_HPPC.m
 % -------------------------------------------------------------------------
 % DFN_pso_HPPC identifies parameters using experimentally obtained 
-% HPPC voltage profile
+% HPPC voltage profile. The C/20 identification results from "DFN_pos_0_05C.m"
+% are utilized. The geometric parameters are obtained from [Chen 2020].
 %
 % Reference:
 % [1] G. Pozzato, A. Allam, and S. Onori, “Lithium-ion battery aging dataset based on electric vehicle real-driving profiles,” Data in Brief, vol. 41, p. 107995, Apr. 2022, doi: 10.1016/j.dib.2022.107995.
+% [2] C.-H. Chen, F. Brosa Planella, K. O’Regan, D. Gastol, W. D. Widanage, and E. Kendrick, “Development of Experimental Techniques for Parameterization of Multi-scale Lithium-ion Battery Models,” J. Electrochem. Soc., vol. 167, no. 8, p. 080534, Jan. 2020, doi: 10.1149/1945-7111/ab9050.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COBRAPRO: Co-simulation Battery Modeling for Accelerated Parameter Optimization
