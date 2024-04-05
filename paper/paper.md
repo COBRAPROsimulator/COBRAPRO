@@ -61,20 +61,20 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Examples 
 To get started, view example codes included in COBRAPRO's ```Examples``` folder.
-- ```Examples/Cycling```: examples showing how to perform battery cycling simulations using experimentally identified parameters 
-  - ```Examples/Cycling/cycle_CC.m```: simulating constant current (CC) cycling experiments and result visualization (voltage, state-of-charge, internal variable curves)
-  - ```Examples/Cycling/cycle_HPPC.m```: simulating HPPC profile and result visualization (voltage, state-of-charge, internal variable curves)
-  - ```Examples/Cycling/cycle_UDDS.m```: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
-- ```Examples/Parameter_Identification_Routines```: examples showing how to perform parameter identification using PSO
-  - ```Examples/Parameter_Identification_Routines/DFN_pso_CC.m```: parameter identification using CC profile
-  - ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC profile
-- ```Examples/Parameter_Identification_Results```: examples showing parameter identification results
-  - ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data
-  - ```Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m```: parameter identification results using HPPC data
-  - ```Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m```: parameter identification validation using UDDS data
-- ```Examples/Local_Sensitivity_Analysis```: examples showing how to perform LSA
-  - ```Examples/Local_Sensitivity_Analysis/DFN_LSA_CC.m```: LSA on CC profile
-  - ```Examples/Local_Sensitivity_Analysis/DFN_LSA_HPPC.m```: LSA on HPPC profile
+- ``Examples/Cycling``: examples showing how to perform battery cycling simulations using experimentally identified parameters 
+  - ``Examples/Cycling/cycle_CC.m``: simulating constant current (CC) cycling experiments and result visualization (voltage, state-of-charge, internal variable curves)
+  - ``Examples/Cycling/cycle_HPPC.m``: simulating HPPC profile and result visualization (voltage, state-of-charge, internal variable curves)
+  - ``Examples/Cycling/cycle_UDDS.m``: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
+- ``Examples/Parameter_Identification_Routines``: examples showing how to perform parameter identification using PSO
+  - ``Examples/Parameter_Identification_Routines/DFN_pso_CC.m``: parameter identification using CC profile
+  - ``Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m``: parameter identification using HPPC profile
+- ``Examples/Parameter_Identification_Results``: examples showing parameter identification results
+  - ``Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m``: parameter identification results using C/20 discharge data
+  - ``Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m``: parameter identification results using HPPC data
+  - ``Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m``: parameter identification validation using UDDS data
+- ``Examples/Local_Sensitivity_Analysis``: examples showing how to perform LSA
+  - ``Examples/Local_Sensitivity_Analysis/DFN_LSA_CC.m``: LSA on CC profile
+  - ``Examples/Local_Sensitivity_Analysis/DFN_LSA_HPPC.m``: LSA on HPPC profile
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
