@@ -60,10 +60,11 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
 
 # Examples 
+Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes. Here, we provide an overview of the parameter identification example codes.
 In the `Examples/Parameter_Identification_Routines` folder, two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
 ## C/20 Discharge Identification
-`Examples/Parameter_Identification_Routines/DFN_pso_0_05C.m` is written such that users only need to modify the `User Input`. The names of the parameters to be identified, upper and lower bounds for each parameter, and the experimental data are defined:
+`DFN_pso_0_05C.m`, located in the `Examples/Parameter_Identification_Routines` directory, is structured to require user input modifications only in the `User Input` section. This section includes definitions for parameter names, their respective upper and lower bounds, and experimental data:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -139,17 +140,20 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
+to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+To view the C/20 identification results shown here, run 
+`Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=60% }
 
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=60% }
 
 ## HPPC Identification
-Modfiy the `User Input` section in `Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m`:
+Similar to `DFN_pso_HPPC.m`, modify the `User Input` section in `DFN_pso_HPPC.m`, located in the `Examples/Parameter_Identification_Routines` directory.
 ```MATLAB
 %% User Input
-% Load parameters, including the stoichiometric parameter identified from C/20 discharge data
+% Load nominal parameters and stoichiometric parameter identified
+% from C/20 discharge data
 % load('identified_parameters_0_05C.mat','param')
 
 % Enter mat file name where your PSO results will be stored
@@ -196,7 +200,7 @@ particle_num = 300;
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
-%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) (negative current: discharging)
+%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
 %   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
@@ -210,7 +214,7 @@ V = V_data;
 % Enter initial SOC of your HPPC data
 SOC_init = 1;   % [-]      
 ```
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code prints the identified parameter values and objective function values to the command window:
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter values and objective function values are printed to the command window:
 ```
 Displaying identified values...
 ------------------------
@@ -254,14 +258,13 @@ J_SOCp =0.13292 [%]
 J_SOCn =0.17272 [%]
 J_tot =0.0067629 [-]
 ```
-to the Command Window and plots the identified results as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
+and the identified results are plotted, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+To view the HPPC identification results shown here, 
+run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
 
 ![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
 
 ![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
-
-Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
-- `Examples/Cycling`: examples showing how to perform battery cycling simulations using experimentally identified parameters
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
