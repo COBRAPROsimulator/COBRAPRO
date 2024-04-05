@@ -141,9 +141,9 @@ J_tot =0.003833 [-]
 ```
 to the Command Window and plots the identified results as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
 
-![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png)
+![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=60% }
 
-![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png)
+![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=60% }
 
 ## HPPC Identification
 Modfiy the `User Input` section in `Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m`:
@@ -256,11 +256,12 @@ J_tot =0.0067629 [-]
 ```
 to the Command Window and plots the identified results as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. To view the results shown here, run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
 
-![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png)
+![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
 
-![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png)
+![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
 
-Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
+Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+- `Examples/Cycling`: examples showing how to perform battery cycling simulations using experimentally identified parameters
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
