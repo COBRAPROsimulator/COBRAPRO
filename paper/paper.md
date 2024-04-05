@@ -61,10 +61,11 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Examples 
 To get started, view example codes included in COBRAPRO's ``Examples`` folder.
-- ``Examples/Cycling``: examples showing how to perform battery cycling simulations using experimentally identified parameters
-  - ``Examples/Cycling/cycle_CC.m``: simulating constant current (CC) cycling experiments and result visualization (voltage, state-of-charge, internal variable curves)
-  - ``Examples/Cycling/cycle_HPPC.m``: simulating HPPC profile and result visualization (voltage, state-of-charge, internal variable curves)
-  - ``Examples/Cycling/cycle_UDDS.m``: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
+- Examples/Cycling: examples showing how to perform battery cycling simulations using experimentally identified parameters
+  - Examples/Cycling/cycle_CC.m: simulating constant current (CC) cycling experiments and result visualization (voltage, state-of-charge, internal variable curves)
+  - Examples/Cycling/cycle_HPPC.m: simulating HPPC profile and result visualization (voltage, state-of-charge, internal variable curves)
+  - Examples/Cycling/cycle_UDDS.m: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
+  - 
 - ``Examples/Parameter_Identification_Routines``: examples showing how to perform parameter identification using PSO
   - ``Examples/Parameter_Identification_Routines/DFN_pso_CC.m``: parameter identification using CC profile
   - ``Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m``: parameter identification using HPPC profile
