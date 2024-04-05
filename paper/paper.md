@@ -63,8 +63,8 @@ In contrast, several open-source DFN model simulation tools have been released s
 Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view comprehensive example codes:
 
 - `Examples/Parameter_Identification_Routines`: parameter identification example codes
-  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge profile
-  - `DFN_pso_HPPC.m`: parameter identification using HPPC profile
+  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
+  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
 - `Examples/Parameter_Identification_Results`: load parameter identification results
   - `DFN_pso_0_05C_identification.m`: parameter identification results using C/20 discharge data
   - `DFN_pso_HPPC_identification.m`: parameter identification results using HPPC data
