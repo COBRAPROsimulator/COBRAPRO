@@ -161,9 +161,9 @@ Model is simulated using the identified parameters and plotted with the experime
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
-![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=60% }
+![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
-![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=60% }
+![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
 ## HPPC Identification
 To identify parameters using the HPPC profile, modify the `User Input` section in `DFN_pso_HPPC.m` (define the parameter names, parameter upper and lower bounds, and experimental data):
@@ -235,9 +235,9 @@ Once the user input has been defined, run the code to start the PSO. Once the PS
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
 
-![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
+![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=65% }
 
-![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=60% }
+![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## Driving cycle validation
 In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
@@ -262,7 +262,7 @@ t = t_data';
 I = I_data';
 V = V_data';
 ```
-The objective function is printed to the Command Window and the simulated and experimental data are plotted as shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
+The objective function is printed to the Command Window:
 ```
 Displaying objective function values...
 ------------------------
@@ -272,10 +272,11 @@ J_SOCp =0.03125 [%]
 J_SOCn =0.016081 [%]
 J_tot =0.0041297 [-]
 ```
+The simulation results and experimental data are plotted as shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
 
-![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=60% }
+![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
-![UDDS positive and negative electrode state-of-charge identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=60% }
+![UDDS positive and negative electrode state-of-charge identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
