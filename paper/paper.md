@@ -62,9 +62,8 @@ In contrast, several open-source DFN model simulation tools have been released s
 # Examples 
 In the `Examples/Parameter_Identification_Routines` folder, two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
 
-# C/20 Discharge Identification (`DFN_pso_0_05C.m`)
-The code is written such that users only need to modify the `User Input` section in the code. 
-Users define the parameters to be identified, the upper and lower bounds for each parameter, and the experimental data:
+## C/20 Discharge Identification (`DFN_pso_0_05C.m`)
+The code is written such that users only need to modify the `User Input` section in the code. In the `User Input` section, the parameters to be identified, the upper and lower bounds for each parameter, and the experimental data are defined:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -97,20 +96,15 @@ particle_num = 100;
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
-%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) (negative current: discharging)
+%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
 %   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat')
-
 t = t_data;
 I = I_data;
 V = V_data;
-
-% Choose the desired sampling time [s] to resample your experiment data 
-% (the interpolated experimental data will be used in the PSO to compute the objective function)
-deltaT_exp = 1; 
 
 % Enter experimental data initial SOC [-] 
 SOC_init = 1;  
@@ -128,7 +122,27 @@ tf = 1e6;
 ```
 Note that the `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc.
 
-Once the user input has been defined, run the code to start the PSO. 
+Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the code will print the identified parameter values to the Command Window as such
+```
+Displaying identified values...
+------------------------
+theta100_p:
+Identified value: 0.26475
+0.22(lower) | 0.27(initial) | 0.34(upper)
+------------------------
+theta100_n:
+Identified value: 0.77842
+0.7(lower) | 0.9014(initial) | 1(upper)
+------------------------
+theta0_p:
+Identified value: 0.89385
+0.7(lower) | 0.9084(initial) | 1(upper)
+------------------------
+theta0_n:
+Identified value: 0.029818
+0.015(lower) | 0.0279(initial) | 0.04(upper)
+```
+and plot the identified results as shown in Figure 1. 
 
 Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes.
 
