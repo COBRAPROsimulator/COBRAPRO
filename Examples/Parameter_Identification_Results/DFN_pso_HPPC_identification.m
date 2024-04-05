@@ -6,7 +6,7 @@
 % data was used to identify the stoichiometric parameters.
 %
 % Parameters identified during C/20 discharge: {theta100_p,theta0_p,theta100_n,theta0_n}
-% Parameters identified during HPPC: {kn, Dsp, c0, kp, Dsn, Kappa, De, t1_constant}
+% Parameters identified during HPPC: {kp, kn, Dsp, Dsn, Kappa, De, t1_constant, c0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COBRAPRO: Co-simulation Battery Modeling for Accelerated Parameter Optimization
