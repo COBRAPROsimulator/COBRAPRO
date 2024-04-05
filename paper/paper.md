@@ -60,7 +60,11 @@ In contrast, several open-source DFN model simulation tools have been released s
 - **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
 
 # Examples 
-Visit COBRAPRO’s Github page [website](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+- **Parameter identification routine:** Utilizes PSO to optimize parameters using experimental current-voltage data
+- **DFN model implementation:** Finite volume method (FVM) discretization of the PDEs to form a DAE and SUNDIALS IDA solver to solve the DAE system
+
+
 - `Examples/Cycling`: contains battery cycling example codes
 - `Examples/Parameter_Identification_Routines`: contains parameter identification example codes
 - `Examples/Parameter_Identification_Results`: contains example codes showing how to load parameter identification results
