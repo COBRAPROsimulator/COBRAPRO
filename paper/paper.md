@@ -62,10 +62,10 @@ In contrast, several open-source DFN model simulation tools have been released s
 # Examples 
 Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
 
-- `Examples/Cycling`: contains battery cycling example codes
-- `Examples/Parameter_Identification_Routines`: contains parameter identification example codes
-- `Examples/Parameter_Identification_Results`: contains example codes showing how to load parameter identification results
-- `Examples/Local_Sensitivity_Analysis`: contains LSA example codes
+- `Examples/Cycling`: battery cycling example codes
+- `Examples/Parameter_Identification_Routines`: parameter identification example codes
+- `Examples/Parameter_Identification_Results`: load parameter identification results
+- `Examples/Local_Sensitivity_Analysis`: LSA example codes
   
 Here, we provide an overview of the parameter identification example codes in the `Examples/Parameter_Identification_Routines` directory.
 Two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
@@ -149,8 +149,7 @@ J_tot =0.003833 [-]
 ```
 Model is simulated using the identified parameters and plotted with the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
 
-To view the C/20 identification results shown here, run 
-`Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification`.
+Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification` to view the C/20 identification results shown here.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=60% }
 
@@ -224,8 +223,7 @@ SOC_init = 1;   % [-]
 ```
 Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter values and objective function values are printed to the command window (Appendix A). The model is simulated using the identified parameters and plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
-To view the HPPC identification results shown here, 
-run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification`.
+Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
 
 ![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=60% }
 
