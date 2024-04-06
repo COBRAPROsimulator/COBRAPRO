@@ -123,6 +123,9 @@ particle_num = 100;
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat','t_data','I_data','V_data')
+t = t_data;
+I = I_data;
+V = V_data;
 ...
 ```
 Note that `Parameters_LG_INR21700_M50.m` outputs `param`, a structure containing the nominal DFN parameters for a LG INR21700-M50 cell as well as the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
@@ -164,7 +167,7 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` t
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
 ## Example 2: HPPC Identification
-The `DFN_pso_HPPC.m` file shares a similar `User Input` section with `DFN_pso_0_05C.m`. Hence, a brief summary of the inputs is provided here.
+The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one in `DFN_pso_0_05C.m`. Hence, a brief summary of the inputs is provided here.
 Load the nominal DFN parameters and the stoichiometric parameters identified in **Example 1**:
 ```MATLAB
 %% User Input
@@ -172,7 +175,7 @@ Load the nominal DFN parameters and the stoichiometric parameters identified in 
 % from C/20 discharge data
 % load('identified_parameters_0_05C.mat','param')
 ```
-In this example, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes ($$k_p$$,$$k_n$$) and electrolyte conductivity ($$\kappa$$), diffusitivity ($$D_e$$), transference number ($$t_+$$), concentration ($$c_0$$) and solid phase diffusitivities (($$D_{s,p}$$,$$D_{s,n}$$):
+In this example, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes ($k_p$,$k_n$) and electrolyte conductivity ($\kappa$), diffusitivity ($D_e$), transference number ($t_+$), concentration ($c_0$) and solid phase diffusitivities (($D_{s,p}$,$D_{s,n}$):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
@@ -184,6 +187,7 @@ The upper and lower bounds for each parameter are defined as shown in `DFN_pso_0
 % kp
 lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
 upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
+% kn
 ...
 ```
 Load the HPPC data as shown in `DFN_pso_0_05C.m`:
@@ -210,12 +214,6 @@ In `DFN_pso_UDDS_validation.m`, the `User Input` section defines the identified 
 load('identified_parameters_HPPC.mat')
 
 % Load Experimental Data 
-%--------------------------------------------------------------------------
-%   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
-%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
-%   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
-%   -> where M is the total number of data points in your experiment
-%--------------------------------------------------------------------------
 % HPPC test conducted on LG INR21700 M50T cells
 load('UDDS_W8_cyc1.mat','t_data','I_data','V_data')
 ```
