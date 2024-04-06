@@ -77,7 +77,7 @@ Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to vi
   - `DFN_LSA_CC.m`: LSA on CC profile
   - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
-Here, we provide an overview of the parameter identification example codes in the `Examples/Parameter_Identification_Routines` directory.
+Here, we provide an overview of the parameter identification example codes located in the `Examples/Parameter_Identification_Routines` directory.
 Two example codes are provided to demonstrate a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using C/20 discharge data. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using HPPC data. The remaining parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
 
 ## C/20 Discharge Identification
