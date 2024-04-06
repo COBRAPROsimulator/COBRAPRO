@@ -78,10 +78,10 @@ Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to vi
   - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
 Here, we provide an overview of the parameter identification example codes in the `Examples/Parameter_Identification_Routines` directory.
-Two example codes are provided that demonstrate a two-step parameter identification process. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using the experimentally obtained C/20 discharge profile. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using the experimentally obtained HPPC profile. 
+Two example codes are provided to demonstrate a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using C/20 discharge data. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using HPPC data. The remaining parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
 
 ## C/20 Discharge Identification
-In `DFN_pso_0_05C.m`, only the `User Input` section needs to be modified. This section includes definitions for parameter names, their respective upper and lower bounds, and experimental data:
+In `DFN_pso_0_05C.m`, modify the `User Input` section to define the parameter names, their respective upper and lower bounds, and experimental data:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -127,7 +127,7 @@ V = V_data;
 % Enter experimental data initial SOC [-] 
 SOC_init = 1;  
 ```
-Note that `Parameters_LG_INR21700_M50.m` function defines the nominal parameters of your cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
+Note that `Parameters_LG_INR21700_M50.m` outputs `param`, a structure containing the nominal DFN parameters for an LG INR21700-M50 cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
 
 Once the user input has been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter and objective function values to the command window:
 ```
