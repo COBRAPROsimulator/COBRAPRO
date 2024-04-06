@@ -24,31 +24,34 @@ bibliography: paper.bib
 ---
 
 # Summary
-COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model encompasses several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic parameters, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurement through cell tear-down experiments is a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may not be suitable for the DFN model [@chen_development_2020]. The DFN model simplifies the representation of a real battery by assuming perfectly spherical particles, neglecting electrode heterogeneity, and considering internal dynamics in only one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
+COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is the most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model is characterized by several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurements through cell tear-down experiments is a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may necessitate further calibration [@chen_development_2020] to ensure suitability for use in the DFN model, since the model is a simplified representation of a real battery, assuming perfectly spherical particles, neglecting electrode heterogeneity, and considering internal dynamics in only one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
 
 # Statement of need
 
-Currently, battery DFN modeling tools lack integrated identification routines and primarily rely on parameter values obtained from literature [@sulzer_python_2021] [@torchio_lionsimba_2016] [@smith_multiphase_2017] [@berliner_methods_2021]. COMSOL Multiphysics&copy; [@comsol], a commercially available finite element modeling software utilized for DFN simulations, features a Battery Design Module [@comsol_battery] with a parameter library for various chemistries. However, inherent material inconsistencies and manufacturing cell-to-cell variability [@harris_failure_2017] may render parameters provided by COMSOL unsuitable for modeling a battery even with the same chemistry and electrolyte material. Additionally, COMSOL lacks a built-in parameter identification feature. To address this, one can use COMSOL’s *LiveLink&trade; for MATLAB&copy;* to establish communication between the two software platforms such that results from COMSOL can be transferred to MATLAB to leverage the versatile suite of optimizers in MATLAB [@pozzato_general_2023]. Nonetheless, the expensive licensing fee and proprietary nature of COMSOL create barriers to public access, limiting collaboration and reproducibility.
+Currently, DFN modeling tools lack integrated parameter identification routines, despite their need to accurately predict the dynamical behavior of batteries [@sulzer_python_2021] [@torchio_lionsimba_2016] [@smith_multiphase_2017] [@berliner_methods_2021]. 
 
-In contrast, several open-source DFN model simulation tools have been released such as PyBaMM [@sulzer_python_2021], LIONSIMBA [@torchio_lionsimba_2016], PETLION [@berliner_methods_2021], DEARLIBS [@lee_robust_2021], fastDFN[@fastDFN], and MPET [@smith_multiphase_2017]. Among these packages, DEARLIBS is the only software with the capability to perform closed-loop parameter identification using experimental data. Other packages rely on literature-derived parameter values to generate simulation results. Taking inspiration from DEARLIBS, COBRAPRO aims to address three primary challenges in the DFN model.
+COMSOL Multiphysics&copy; [@comsol] is a commercially available finite element modeling software commonly used for DFN simulations. Although COMSOL does not include a built-in parameter identification feature, the *LiveLink&trade; for MATLAB&copy;* enables the creation of a co-simulation parameter optimization routine. *LiveLink&trade; for MATLAB&copy;*
+establishes communication between the two software platforms, allowing users to leverage the versatile suite of optimizers in MATLAB while running COMSOL to generate the model output [@pozzato_general_2023]. However, the expensive licensing fee and proprietary nature of COMSOL create barriers to public access, limiting collaboration and code reproducibility.
+
+In contrast, several open-source DFN model simulation tools have been released such as PyBaMM [@sulzer_python_2021], LIONSIMBA [@torchio_lionsimba_2016], PETLION [@berliner_methods_2021], DEARLIBS [@lee_robust_2021], fastDFN[@fastDFN], and MPET [@smith_multiphase_2017]. Among these packages, DEARLIBS is the only software with the capability to perform closed-loop parameter identification using experimental data. Other packages rely on literature-derived parameter values to generate simulation results. Taking inspiration from DEARLIBS, COBRAPRO aims to address three primary challenges in the DFN model:
 
 ## Challenge 1. Computational complexity 
-- **Issue:** The DFN model is also called the pseudo-two-dimensional (P2D) due to the coupling of the cell thickness (x-direction) and radial particle (r-direction) dimensions, contributing to the computational complexity of the system.
-- **Solution:** COBRAPRO uses a fast solver that significantly improves the model computation speed compared to DEARLIBS. For 10 discretized points in each domain of the cell (positive and negative electrodes, separator, and positive and negative active material particles) at 1C discharge, COBRAPRO solves the DFN model in 0.708 seconds, while DEARLIBS takes 2.54 minutes, which is a two orders of magnitude improvement (~257 times). Under the same simulation conditions, LIONSIMBA and PyBaMM computed the model in 1.13 seconds and 0.237 seconds, respectively, which are comparable to the COBRAPRO’s computation time. For larger discretization points, we observed up to three orders of magnitude improvement in computation speed from COBRAPRO to DEARLIBS.
+- **Issue:** The DFN model is also known as the pseudo-two-dimensional (P2D) due to the coupling of the cell thickness (x-direction) and radial particle (r-direction) dimensions. This coupling of dimensions signficantly contributes to the computational complexity of the system.
+- **Solution:** COBRAPRO uses a fast solver that significantly improves the model computation speed compared to DEARLIBS. For 10 discretized points in each domain of the cell (positive and negative electrodes, separator, and positive and negative active material particles) at 1C discharge, COBRAPRO solves the DFN model in 0.708 seconds, while DEARLIBS takes 2.54 minutes, which is a two orders of magnitude improvement (~257 times). Under the same simulation conditions, LIONSIMBA and PyBaMM computed the model in 1.13 seconds and 0.237 seconds, respectively, which are comparable to COBRAPRO’s computation time. For larger discretization points, we observed up to three orders of magnitude improvement in computation speed from COBRAPRO to DEARLIBS.
 
 ## Challenge 2. Consistent initial conditions
-- **Issue:** The partial differential equations (PDEs) governing the DFN model are discretized in the x- and r-directions to form a system of ordinary differential equations (ODEs) and algebraic equations (AEs), also called differential-algebraic equations (DAEs). To solve the DAE system, the correct AEs are required, which are typically not known *a priori* for the DFN model. Inconsistent initial conditions result in either a failure to start the simulation or the model diverging towards an incorrect solution [@methekar_perturbation_2011].
+- **Issue:** The partial differential equations (PDEs) governing the DFN model are discretized in the x- and r-directions to form a system of ordinary differential equations (ODEs) and algebraic equations (AEs), also called differential-algebraic equations (DAEs). To solve the DAE system, the correct initial conditions of the AEs are required, which are typically not known *a priori* for the DFN model. Inconsistent initial conditions result in either a failure to start the simulation or the model diverging towards an incorrect solution [@methekar_perturbation_2011].
 - **Solution:** The single step approach [@lawder_extending_2015], a robust initialization method, is implemented in COBRAPRO that automatically determines the initial conditions and seamlessly simulates the DFN model.
 
 ## Challenge 3. Unknown model parameters
 - **Issue:** As highlighted earlier, battery parameters are frequently unknown, and even if obtained through experimental characterization, parameter calibration is essential to accurately model the battery.
-- **Solution:** A co-simulation parameter optimization framework is developed that determines the parameters by minimizing the cost function, defined in terms of the error between the experimental and simulated voltage and state-of-charge curves. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. COBRAPRO employs MATLAB’s Parallel Computing Toolbox, accelerating PSO through multicore processing.
+- **Solution:** A co-simulation parameter optimization framework is implemented in COBRAPRO. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. The PSO aims to optimize parameters by minimizing the cost function defined as the error between the experimental and simulated voltage and state-of-charge curves. COBRAPRO employs PSO using MATLAB’s Parallel Computing Toolbox to accelerate PSO convergence through multicore processing.
 
 # Core Capabilities
-- **Parameter identification routine:** Utilizes PSO to optimize parameters using experimental current-voltage data
-- **DFN model implementation:** Finite volume method (FVM) discretization of the PDEs to form a DAE and SUNDIALS IDA solver to solve the DAE system
+- **Parameter identification routine:** PSO optimizes parameters using experimental current-voltage data
+- **DFN model implementation:** PDEs discretized with finite volume method (FVM) and DAE system solved with SUNDIALS IDA 
 - **Solid particle radial discretization options:**
-  - FVM (3rd order Hermite interpolation is utilized to accurately estimate the particle surface concentration to account for the sharp concentration gradients near the particle surface [@xu_comparative_2023])
+  - FVM (3rd order Hermite interpolation utilized to account for sharp concentration gradients near the particle surface when calculating surface concentration [@xu_comparative_2023])
   - Finite difference method (FDM)
 - **DAE initialization options:**
   - Single-step approach [@lawder_extending_2015]
@@ -57,38 +60,38 @@ In contrast, several open-source DFN model simulation tools have been released s
   - Constant current (CC) profiles
   - Hybrid pulse power characterization (HPPC) profiles
   - Dynamic current profiles 
-- **Local sensitivity analysis:** Perturbs parameters around nominal values to determine sensitive parameters for a given current profile
+- **Local sensitivity analysis:** Perturbs parameters around their nominal values and evaluates their sensitivity indices for a given current profile
 
 # Examples 
 Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view comprehensive example codes:
 
-- `Examples/Parameter_Identification_Routines`: parameter identification example codes
+- `Examples/Parameter_Identification_Routines`: parameter identification examples
   - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
   - `DFN_pso_HPPC.m`: parameter identification using HPPC data
 - `Examples/Parameter_Identification_Results`: load parameter identification results
-  - `DFN_pso_0_05C_identification.m`: parameter identification results using C/20 discharge data
-  - `DFN_pso_HPPC_identification.m`: parameter identification results using HPPC data
-  - `DFN_pso_UDDS_validation.m`: parameter identification validation using driving cycle data
-- `Examples/Cycling`: examples showing how to perform battery cycling simulations using identified parameters
-  - `cycle_CC.m`: simulating CC cycling experiments and model output visualization (voltage, state-of-charge, internal variables)
-  - `cycle_HPPC.m`: simulating HPPC profile and model output visualization (voltage, state-of-charge, internal variables)
-  - `cycle_UDDS.m`: simulating driving cycle profile and model output visualization (voltage, state-of-charge, internal variables)
+  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
+  - `DFN_pso_HPPC_identification.m`: HPPC identification results
+  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
+- `Examples/Cycling`: simulating battery cycling examples
+  - `cycle_CC.m`: CC cycling experiments and model output visualization 
+  - `cycle_HPPC.m`: HPPC profile and model output visualization 
+  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
 - `Examples/Local_Sensitivity_Analysis`: LSA example codes
   - `DFN_LSA_CC.m`: LSA on CC profile
   - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
-Here, we provide an overview of the parameter identification example codes located in the `Examples/Parameter_Identification_Routines` directory.
-Two example codes are provided to demonstrate a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, the stoichiometric parameters are identified in `DFN_pso_0_05C.m` using C/20 discharge data. In step 2, the electrolyte transport and kinetic parameters are identified in `DFN_pso_HPPC.m` using HPPC data. The remaining parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
+Here, we provide an overview of parameter identification examples located in the `Examples/Parameter_Identification_Routines` directory.
+Two example codes are provided to demonstrate a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
 
-## C/20 Discharge Identification
-In `DFN_pso_0_05C.m`, modify the `User Input` section to define the parameter names, their respective upper and lower bounds, and experimental data:
+## Example 1: C/20 Discharge Identification
+In `DFN_pso_0_05C.m`, modify the `User Input` section to define the parameter names, their respective upper and lower bounds, experimental data, etc. A preview of the `User Input` section is provided here: 
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
 param = Parameters_LG_INR21700_M50;
 
 % Enter mat file name where your PSO results will be stored
-file_name = 'pso_0_05C';
+file_name = 'identified_parameters_0_05C';
 
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
@@ -119,17 +122,12 @@ particle_num = 100;
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat')
-t = t_data;
-I = I_data;
-V = V_data;
-
-% Enter experimental data initial SOC [-] 
-SOC_init = 1;  
+load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat','t_data','I_data','V_data')
+...
 ```
-Note that `Parameters_LG_INR21700_M50.m` outputs `param`, a structure containing the nominal DFN parameters for an LG INR21700-M50 cell and the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
+Note that `Parameters_LG_INR21700_M50.m` outputs `param`, a structure containing the nominal DFN parameters for a LG INR21700-M50 cell as well as the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
 
-Once the user input has been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter and objective function values to the command window:
+Once the all user inputs have been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameters and objective function values to the Command Window:
 ```
 Displaying identified values...
 ------------------------
@@ -157,7 +155,7 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-Model is simulated using the identified parameters and plotted with the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+The code also plots the simulation results (using the identified parameters) and the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
@@ -165,73 +163,36 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` t
 
 ![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
-## HPPC Identification
-To identify parameters using the HPPC profile, modify the `User Input` section in `DFN_pso_HPPC.m` (define the parameter names, parameter upper and lower bounds, and experimental data):
+## Example 2: HPPC Identification
+The `DFN_pso_HPPC.m` file shares a similar `User Input` section with `DFN_pso_0_05C.m`. Hence, a brief summary of the inputs is provided here.
+Load the nominal DFN parameters and the stoichiometric parameters identified in **Example 1**:
 ```MATLAB
 %% User Input
 % Load nominal parameters and stoichiometric parameter identified
 % from C/20 discharge data
 % load('identified_parameters_0_05C.mat','param')
-
-% Enter mat file name where your PSO results will be stored
-file_name = 'pso_HPPC';
- 
+```
+In this example, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes ($$k_p$$,$$k_n$$) and electrolyte conductivity ($$\kappa$$), diffusitivity ($$D_e$$), transference number ($$t_+$$), concentration ($$c_0$$) and solid phase diffusitivities (($$D_{s,p}$$,$$D_{s,n}$$):
+```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
- 
+```
+The upper and lower bounds for each parameter are defined as shown in `DFN_pso_0_05C.m`:
+```MATLAB
 % Enter lower and upper bounds of parameters to identify 
 % kp
-pct = 0.3; % perturbation coeff
 lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
 upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
-% kn
-pct = 0.3; % perturbation coeff
-lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
-upper_bounds.kn = 10^(log10(param.kn)*(1-pct));
-% Dsp
-pct = 0.2; % perturbation coeff
-lower_bounds.Dsp = 10^(log10(param.Dsp)*(1+pct));
-upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
-% Dsn
-pct = 0.2; % perturbation coeff
-lower_bounds.Dsn = 10^(log10(param.Dsn)*(1+pct));
-upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
-% Kappa
-lower_bounds.Kappa = 0.1;
-upper_bounds.Kappa = 2;
-% De 
-pct = 0.2; % perturbation coeff
-lower_bounds.De = 10^(log10(param.De)*(1+pct));
-upper_bounds.De = 10^(log10(param.De)*(1-pct));
-% t1
-lower_bounds.t1_constant = 0.1;
-upper_bounds.t1_constant = 0.4;
-% c0
-lower_bounds.c0 = 500;
-upper_bounds.c0 = 1500;
-
-% Enter number of particles for PSO
-particle_num = 300;
-
-% Load Experimental Data 
-%--------------------------------------------------------------------------
-%   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
-%   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
-%   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
-%   -> where M is the total number of data points in your experiment
-%--------------------------------------------------------------------------
-% HPPC test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')
-
-t = t_data;
-I = I_data;
-V = V_data;
-
-% Enter initial SOC of your HPPC data
-SOC_init = 1;   % [-]      
+...
 ```
-Once the user input has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (Appendix A). The model is simulated using the identified parameters and plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+Load the HPPC data as shown in `DFN_pso_0_05C.m`:
+```MATLAB
+% Load Experimental Data 
+% HPPC test conducted on LG INR21700 M50T cells
+load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat','t_data','I_data','V_data')    
+```
+Once the user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (Appendix A). Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
 
@@ -239,10 +200,10 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to v
 
 ![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
-## Driving cycle validation
+## Example 3: Driving cycle validation
 In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
-In `DFN_pso_UDDS_validation.m`, load the identified parameter values and experimental UDDS data:
+In `DFN_pso_UDDS_validation.m`, the `User Input` section defines the identified parameter values and experimental UDDS data:
 ```MATLAB
 %% User Input  
 % Load identification results 
@@ -256,11 +217,7 @@ load('identified_parameters_HPPC.mat')
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % HPPC test conducted on LG INR21700 M50T cells
-load('UDDS_W8_cyc1.mat')
-
-t = t_data';
-I = I_data';
-V = V_data';
+load('UDDS_W8_cyc1.mat','t_data','I_data','V_data')
 ```
 The objective function is printed to the Command Window:
 ```
