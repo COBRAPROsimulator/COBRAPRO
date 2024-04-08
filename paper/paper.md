@@ -177,7 +177,7 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 %% User Input
 % Load nominal parameters and stoichiometric parameter identified
 % from C/20 discharge data
-% load('identified_parameters_0_05C.mat','param')
+load('identified_parameters_0_05C.mat','param')
 ```
 Enter the your mat file name, which will save an updated `param` structure with the HPPC identified parameters:
 % Enter mat file name where your PSO results will be stored
