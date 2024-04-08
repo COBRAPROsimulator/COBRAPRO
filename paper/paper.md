@@ -45,13 +45,13 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 ## Challenge 3. Unknown model parameters
 - **Issue:** As highlighted earlier, battery parameters are frequently unknown, and even if obtained through experimental characterization, parameter calibration is essential to accurately model the battery.
-- **Solution:** A co-simulation parameter optimization framework is implemented in COBRAPRO. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. The PSO aims to optimize parameters by minimizing the cost function defined as the error between the experimental and simulated voltage and state-of-charge curves. COBRAPRO employs PSO using MATLAB’s Parallel Computing Toolbox to accelerate PSO convergence through multicore processing.
+- **Solution:** A co-simulation parameter optimization framework is implemented in COBRAPRO. The particle swarm optimization (PSO), a gradient-free population-based algorithm, is employed due to its suitability for nonlinear models like the DFN model. The PSO aims to optimize parameters by minimizing the objective function defined as the error between the experimental and simulated voltage and state of charge (SOC) curves. COBRAPRO employs PSO using MATLAB’s Parallel Computing Toolbox to accelerate PSO convergence through multicore processing.
 
 # Core Capabilities
 - **Parameter identification routine:** PSO optimizes parameters using experimental current-voltage data
 - **DFN model implementation:** PDEs discretized with finite volume method (FVM) and DAE system solved with SUNDIALS IDA 
 - **Solid particle radial discretization options:**
-  - FVM (3rd order Hermite interpolation utilized to account for sharp concentration gradients near the particle surface when calculating surface concentration [@xu_comparative_2023])
+  - FVM and 3rd order Hermite interpolation utilized to calculate particle surface concentration to account for sharp concentration gradients near the particle surface [@xu_comparative_2023] 
   - Finite difference method (FDM)
 - **DAE initialization options:**
   - Single-step approach [@lawder_extending_2015]
@@ -80,23 +80,31 @@ Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to vi
   - `DFN_LSA_CC.m`: LSA on CC profile
   - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
-Here, we provide an overview of parameter identification examples located in the `Examples/Parameter_Identification_Routines` directory.
-Two example codes are provided to demonstrate a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
+Here, we provide a brief summary of the parameter identification examples located in the `Examples/Parameter_Identification_Routines` directory.
+Two example codes are provided, demonstrating a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining DFN parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
 
 ## Example 1: C/20 Discharge Identification
-In `DFN_pso_0_05C.m`, modify the `User Input` section to define the parameter names, their respective upper and lower bounds, experimental data, etc. A preview of the `User Input` section is provided here: 
+In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
+
+First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc. 
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
 param = Parameters_LG_INR21700_M50;
-
+```
+Enter the your mat file name, which will save an updated `param` structure with the identified parameters from the PSO:
 % Enter mat file name where your PSO results will be stored
+```MATLAB
 file_name = 'identified_parameters_0_05C';
-
+```
+Define the names of the parameters you want to identify in `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^100$ (`theta100_p`), $\theta_n^100$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`).
+```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
 param_CC = {'theta100_p', 'theta100_n', 'theta0_p', 'theta0_n'};
-
+```
+Define the lower and upper bounds of the parameters defined in `param_CC`:
+```MATLAB
 % Enter lower and upper bounds of parameters to identify 
 % theta100_p
 lower_bounds.theta100_p = 0.22; 
@@ -110,10 +118,9 @@ upper_bounds.theta0_p = 1;
 % theta0_n
 lower_bounds.theta0_n = 0.015; 
 upper_bounds.theta0_n = 0.04;
-
-% Enter number of particles for PSO
-particle_num = 100;
-
+```
+Load your time, current, and voltage experimental data. In this example, load the C/20 discharge data:
+```MATLAB
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
@@ -122,15 +129,13 @@ particle_num = 100;
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat','t_data','I_data','V_data')
+load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat')
+% Assign your data variables to t, I, and V 
 t = t_data;
 I = I_data;
 V = V_data;
-...
 ```
-Note that `Parameters_LG_INR21700_M50.m` outputs `param`, a structure containing the nominal DFN parameters for a LG INR21700-M50 cell as well as the simulation settings, e.g., discretization method, DAE initialization method, current type, etc. 
-
-Once the all user inputs have been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameters and objective function values to the Command Window:
+Once the all user inputs have been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameters, and the voltage and SOC objective function values to the Command Window:
 ```
 Displaying identified values...
 ------------------------
@@ -158,30 +163,35 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-The code also plots the simulation results (using the identified parameters) and the experimental data as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+The code also outputs the plots of the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
-![C/20 discharge positive and negative electrode state-of-charge identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
+![C/20 discharge positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
 ## Example 2: HPPC Identification
-The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one in `DFN_pso_0_05C.m`. Hence, a brief summary of the inputs is provided here.
-Load the nominal DFN parameters and the stoichiometric parameters identified in **Example 1**:
+The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
+First, load your `param` structure, which contains the nominal DFN parameters and any previously identified parameter values. In this example, we load the `identified_parameters_0_05C.mat` file generated from **Example 1**, which contains the identified stoichiometric parameters:
 ```MATLAB
 %% User Input
 % Load nominal parameters and stoichiometric parameter identified
 % from C/20 discharge data
 % load('identified_parameters_0_05C.mat','param')
 ```
-In this example, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes ($k_p$,$k_n$) and electrolyte conductivity ($\kappa$), diffusitivity ($D_e$), transference number ($t_+$), concentration ($c_0$) and solid phase diffusitivities (($D_{s,p}$,$D_{s,n}$):
+Enter the your mat file name, which will save an updated `param` structure with the HPPC identified parameters:
+% Enter mat file name where your PSO results will be stored
+```MATLAB
+file_name = 'identified_parameters_HPPC';
+```
+In this demonstration, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`) and electrolyte conductivity $\kappa$ (`Kappa`), diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), initial concentration $c_0$ (`c0`) and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
 ```
-The upper and lower bounds for each parameter are defined as shown in `DFN_pso_0_05C.m`:
+Define the upper and lower bounds for each parameter in `param_HPPC`:
 ```MATLAB
 % Enter lower and upper bounds of parameters to identify 
 % kp
@@ -190,32 +200,35 @@ upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
 % kn
 ...
 ```
-Load the HPPC data as shown in `DFN_pso_0_05C.m`:
+Load the time, current, and voltage vectors generated from the HPPC data:
 ```MATLAB
 % Load Experimental Data 
 % HPPC test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat','t_data','I_data','V_data')    
+load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')    
 ```
-Once the user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (Appendix A). Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+Once all user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (**Appendix A**). Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
 
 ![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=65% }
 
-![HPPC positive and negative electrode state-of-charge identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
+![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## Example 3: Driving cycle validation
 In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
-In `DFN_pso_UDDS_validation.m`, the `User Input` section defines the identified parameter values and experimental UDDS data:
+In the `User Input` section, load the identified parameter values from C/20 and HPPC data:
 ```MATLAB
 %% User Input  
 % Load identification results 
-load('identified_parameters_HPPC.mat')
-
+load('identified_parameters_HPPC.mat','param')
+```
+and load the experimental UDDS data:
+```
 % Load Experimental Data 
 % HPPC test conducted on LG INR21700 M50T cells
-load('UDDS_W8_cyc1.mat','t_data','I_data','V_data')
+load('data_INR21700_M50T/UDDS_W8_cyc1.mat')
+...
 ```
 The objective function is printed to the Command Window:
 ```
@@ -231,7 +244,7 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
-![UDDS positive and negative electrode state-of-charge identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
+![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
@@ -281,5 +294,4 @@ J_SOCp =0.13292 [%]
 J_SOCn =0.17272 [%]
 J_tot =0.0067629 [-]
 ```
-
 # References
