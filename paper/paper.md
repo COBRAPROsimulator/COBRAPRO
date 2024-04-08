@@ -80,7 +80,7 @@ Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to vi
   - `DFN_LSA_HPPC.m`: LSA on HPPC profile
   
 Here, we provide a brief summary of the parameter identification examples located in the `Examples/Parameter_Identification_Routines` directory.
-In this folder, two example codes are provided, demonstrating a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining DFN parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. 
+In this folder, two example codes are provided, demonstrating a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining DFN parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. The last example shows validation of the identified parameters using urban dynamometer driving schedule (UDDS) experimental data.
 
 ## Example 1: C/20 Discharge Identification
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
@@ -214,7 +214,7 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to
 ![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## Example 3: Driving cycle validation
-In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
 In the `User Input` section, load the parameter values identified from C/20 discharge and HPPC data:
 ```MATLAB
