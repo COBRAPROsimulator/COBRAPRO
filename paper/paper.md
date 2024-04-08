@@ -85,18 +85,18 @@ In this folder, two example codes are provided, demonstrating a two-step paramet
 ## Example 1: C/20 Discharge Identification
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
 
-First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc. 
+First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
 param = Parameters_LG_INR21700_M50;
 ```
 Enter the your mat file name, which will save an updated `param` structure with the identified parameters from the PSO:
-% Enter mat file name where your PSO results will be stored
 ```MATLAB
+% Enter mat file name where your PSO results will be stored
 file_name = 'identified_parameters_0_05C';
 ```
-Define the names of the parameters you want to identify in `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`):
+Define the names of the parameters you want to identify in variable `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
@@ -179,9 +179,9 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 % from C/20 discharge data
 load('identified_parameters_0_05C.mat','param')
 ```
-Enter the your mat file name, which will save an updated `param` structure with the HPPC identified parameters:
-% Enter mat file name where your PSO results will be stored
+Enter the your mat file name, which will save an updated `param` structure containing the HPPC identified parameters:
 ```MATLAB
+% Enter mat file name where your PSO results will be stored
 file_name = 'identified_parameters_HPPC';
 ```
 In this demonstration, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`) and electrolyte conductivity $\kappa$ (`Kappa`), diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), initial concentration $c_0$ (`c0`) and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
@@ -207,7 +207,7 @@ load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')
 ```
 Once all user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (**Appendix A**). Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
-Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to view the HPPC identification results shown here.
+Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to view the HPPC identification results shown here.
 
 ![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=65% }
 
@@ -216,14 +216,14 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification` to v
 ## Example 3: Driving cycle validation
 In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the urban dynamometer driving schedule (UDDS) driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
-In the `User Input` section, load the identified parameter values from C/20 and HPPC data:
+In the `User Input` section, load the parameter values identified from C/20 discharge and HPPC data:
 ```MATLAB
 %% User Input  
 % Load identification results 
 load('identified_parameters_HPPC.mat','param')
 ```
 and load the experimental UDDS data:
-```
+```MATLAB
 % Load Experimental Data 
 % HPPC test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/UDDS_W8_cyc1.mat')
