@@ -96,7 +96,7 @@ Enter the your mat file name, which will save an updated `param` structure with 
 ```MATLAB
 file_name = 'identified_parameters_0_05C';
 ```
-Define the names of the parameters you want to identify in `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`).
+Define the names of the parameters you want to identify in `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
