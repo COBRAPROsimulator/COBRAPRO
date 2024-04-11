@@ -63,7 +63,24 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Example: Case Study on LG 21700-M50T Cells
 
-To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on data obtained from LG 21700-M50T cells. In this example, we break down the identification problem into several procedures, as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in `DFN_pso_0_05C.m`. The remaining electrolyte transport and kinetic parameters are identified using HPPC data in `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data. 
+COBRAPRO provides example codes to get started (visit [Github](https://github.com/COBRAPROsimulator/COBRAPRO):
+
+- `Examples/Parameter_Identification_Routines`: parameter identification examples
+  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
+  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
+- `Examples/Parameter_Identification_Results`: load parameter identification results
+  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
+  - `DFN_pso_HPPC_identification.m`: HPPC identification results
+  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
+- `Examples/Cycling`: simulating battery cycling examples
+  - `cycle_CC.m`: CC cycling experiments and model output visualization 
+  - `cycle_HPPC.m`: HPPC profile and model output visualization 
+  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
+- `Examples/Local_Sensitivity_Analysis`: LSA example codes
+  - `DFN_LSA_CC.m`: LSA on CC profile
+  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
+
+To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on data obtained from LG 21700-M50T cells. In this example, we break down the identification problem into a systematic step-by-step process as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. The remaining electrolyte transport and kinetic parameters are identified using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data in the code `DFN_UDDS_validation.m`. 
 
 ![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
 
@@ -229,23 +246,6 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
 ![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
-
-Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
-
-- `Examples/Parameter_Identification_Routines`: parameter identification examples
-  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
-  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
-- `Examples/Parameter_Identification_Results`: load parameter identification results
-  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
-  - `DFN_pso_HPPC_identification.m`: HPPC identification results
-  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
-- `Examples/Cycling`: simulating battery cycling examples
-  - `cycle_CC.m`: CC cycling experiments and model output visualization 
-  - `cycle_HPPC.m`: HPPC profile and model output visualization 
-  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
-- `Examples/Local_Sensitivity_Analysis`: LSA example codes
-  - `DFN_LSA_CC.m`: LSA on CC profile
-  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
