@@ -61,28 +61,13 @@ In contrast, several open-source DFN model simulation tools have been released s
   - Dynamic current profiles 
 - **Local sensitivity analysis:** Perturbs parameters around their nominal values and evaluates their sensitivity indices for a given current profile
 
-# Examples 
-Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view comprehensive example codes:
+# Example: Case Study on LG 21700-M50T Cells
 
-- `Examples/Parameter_Identification_Routines`: parameter identification examples
-  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
-  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
-- `Examples/Parameter_Identification_Results`: load parameter identification results
-  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
-  - `DFN_pso_HPPC_identification.m`: HPPC identification results
-  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
-- `Examples/Cycling`: simulating battery cycling examples
-  - `cycle_CC.m`: CC cycling experiments and model output visualization 
-  - `cycle_HPPC.m`: HPPC profile and model output visualization 
-  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
-- `Examples/Local_Sensitivity_Analysis`: LSA example codes
-  - `DFN_LSA_CC.m`: LSA on CC profile
-  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
-  
-Here, we provide a brief summary of the parameter identification examples located in the `Examples/Parameter_Identification_Routines` directory.
-In this folder, two example codes are provided, demonstrating a two-step parameter identification process using experimental data obtained from LG INR21700-M50T cells [@pozzato_data_2022]. In step 1, `DFN_pso_0_05C.m` identifies the stoichiometric parameters using C/20 discharge data. In step 2, `DFN_pso_HPPC.m` identifies the electrolyte transport and kinetic parameters using HPPC data. The remaining DFN parameters are assumed to be known and obtained from LG INR21700-M50 cells [@chen_development_2020]. The last example shows validation of the identified parameters using urban dynamometer driving schedule (UDDS) experimental data.
+To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on data obtained from LG 21700-M50T cells. In this example, we break down the identification problem into several procedures, as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in `DFN_pso_0_05C.m`. The remaining electrolyte transport and kinetic parameters are identified using HPPC data in `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data. 
 
-## Example 1: C/20 Discharge Identification
+![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
+
+## C/20 Capacity Test Identification
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
 
 First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
@@ -170,7 +155,7 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` t
 
 ![C/20 discharge positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
-## Example 2: HPPC Identification
+## HPPC Identification
 The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
 First, load your `param` structure, which contains the nominal DFN parameters and any previously identified parameter values. In this example, we load the `identified_parameters_0_05C.mat` file generated from **Example 1**, which contains the identified stoichiometric parameters:
 ```MATLAB
@@ -244,6 +229,23 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
 ![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
+
+Visit COBRAPRO’s [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
+
+- `Examples/Parameter_Identification_Routines`: parameter identification examples
+  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
+  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
+- `Examples/Parameter_Identification_Results`: load parameter identification results
+  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
+  - `DFN_pso_HPPC_identification.m`: HPPC identification results
+  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
+- `Examples/Cycling`: simulating battery cycling examples
+  - `cycle_CC.m`: CC cycling experiments and model output visualization 
+  - `cycle_HPPC.m`: HPPC profile and model output visualization 
+  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
+- `Examples/Local_Sensitivity_Analysis`: LSA example codes
+  - `DFN_LSA_CC.m`: LSA on CC profile
+  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
