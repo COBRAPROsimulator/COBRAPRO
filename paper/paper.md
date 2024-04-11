@@ -235,6 +235,7 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 
 ![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
 --> 
+
 Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
 
 - `Examples/Parameter_Identification_Routines`: parameter identification examples
@@ -254,6 +255,7 @@ Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
+
 <!--
 ## Appendix A 
 HPPC identification results printed to Command Window:
@@ -301,4 +303,5 @@ J_SOCn =0.17272 [%]
 J_tot =0.0067629 [-]
 ```
 --> 
+
 # References
