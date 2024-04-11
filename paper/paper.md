@@ -64,7 +64,7 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 
 # Example: Case Study on LG 21700-M50T Cells
 
-As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing a fresh LG 21700-M50T cell using C/20 capacity test, HPPC, and driving cycle data [@pozzato_lithium_2022]. In this example, we break down the identification problem by systematically grouping parameters for each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach aims to improve the identifiability of parameters instead of identifying all the unknown parameters simulataneously [@arunachalam_full_2019]. 
+As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing a fresh LG 21700-M50T cell using C/20 capacity test, HPPC, and driving cycle data [@pozzato_data_2022]. In this example, we break down the identification problem by systematically grouping parameters for each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach aims to improve the identifiability of parameters instead of identifying all the unknown parameters simulataneously [@arunachalam_full_2019]. 
 
 ![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart_v2.pdf){ width=100% }
 
