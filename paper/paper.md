@@ -64,12 +64,11 @@ In contrast, several open-source DFN model simulation tools have been released s
 
 # Example: Case Study on LG 21700-M50T Cells
 
-To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on C/20 capacity test, HPPC, and driving cycle data obtained from LG 21700-M50T cells [@pozzato_lithium_2022]. In this example, we break down the identification problem into a systematic step-by-step process as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. Then, a parameter identifiability study consisting of LSA and correlation analysis to determine parameters with high sensitivity to voltage and SOC while having low correlation with other parameters. Refer to [@ha_cobrapro_2024] for more information on parameter identifiability. The identifiable parameters electrolyte transport and kinetic parameters are identified using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data in the code `DFN_UDDS_validation.m`. 
+To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on C/20 capacity test, HPPC, and driving cycle data obtained from LG 21700-M50T cells [@pozzato_lithium_2022]. In this example, we break down the identification problem into a systematic step-by-step process as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. Then, a parameter identifiability study consisting of LSA and correlation analysis to determine parameters with high sensitivity to voltage and SOC while having low correlation with other parameters. Refer to [@ha_cobrapro_2024] for more information on parameter identifiability. The identifiable parameters electrolyte transport and kinetic parameters are identified using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data in the code `DFN_UDDS_validation.m`. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` located in `Examples/Parameter_Identification_Results`.
 
-![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
+![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart_v2.pdf){ width=100% }
 
-## C/20 Capacity Test Identification
-In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
+Here, we provide a quick overview of `DFN_pso_0_05C.m`. In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. Note that `DFN_pso_HPPC.m` and `DFN_UDDS_validation.m` also consist of `User Input` at the beginning of the code, which is the only part that needs to be modified by the user. A preview of the `User Input` section is provided here.
 
 First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
 ```MATLAB
@@ -148,13 +147,16 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-The code also outputs the plots of the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
-
+The code also outputs the plots of the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:flowchart}. <!--T \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. -->
+<!--T
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
+
+
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
 ![C/20 discharge positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
+
 
 ## HPPC Identification
 The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
@@ -230,7 +232,7 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
 ![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
-
+--> 
 Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
 
 - `Examples/Parameter_Identification_Routines`: parameter identification examples
@@ -250,7 +252,7 @@ Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
-
+<!--
 ## Appendix A 
 HPPC identification results printed to Command Window:
 ```
@@ -296,4 +298,5 @@ J_SOCp =0.13292 [%]
 J_SOCn =0.17272 [%]
 J_tot =0.0067629 [-]
 ```
+--> 
 # References
