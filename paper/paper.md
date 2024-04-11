@@ -59,13 +59,14 @@ In contrast, several open-source DFN model simulation tools have been released s
   - Constant current (CC) profiles
   - Hybrid pulse power characterization (HPPC) profiles
   - Dynamic current profiles 
-- **Local sensitivity analysis:** Perturbs parameters around their nominal values and evaluates their sensitivity indices for a given current profile
+- **Local sensitivity analysis (LSA):** Perturbs parameters around their nominal values and evaluates their sensitivity
+- **Correlation analysis:** Determines linear correlation calculation between two parameters 
 
 # Example: Case Study on LG 21700-M50T Cells
 
-To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on data obtained from LG 21700-M50T cells. In this example, we break down the identification problem into a systematic step-by-step process as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. The remaining electrolyte transport and kinetic parameters are identified using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data in the code `DFN_UDDS_validation.m`. 
+To demonstrate COBRAPRO's parameter identification routine, a case study is conducted on C/20 capacity test, HPPC, and driving cycle data obtained from LG 21700-M50T cells [@pozzato_lithium_2022]. In this example, we break down the identification problem into a systematic step-by-step process as shown in \autoref{fig:flowchart}. First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. Then, a parameter identifiability study consisting of LSA and correlation analysis to determine parameters with high sensitivity to voltage and SOC while having low correlation with other parameters. Refer to [@ha_cobrapro_2024] for more information on parameter identifiability. The identifiable parameters electrolyte transport and kinetic parameters are identified using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) driving cycle data in the code `DFN_UDDS_validation.m`. 
 
-![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart_v2.pdf){ width=100% }
+![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
 
 ## C/20 Capacity Test Identification
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. A preview of the `User Input` section is provided here.
@@ -169,11 +170,11 @@ Enter the your mat file name, which will save an updated `param` structure conta
 % Enter mat file name where your PSO results will be stored
 file_name = 'identified_parameters_HPPC';
 ```
-In this demonstration, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`) and electrolyte conductivity $\kappa$ (`Kappa`), diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), initial concentration $c_0$ (`c0`) and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
+In this demonstration, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
-param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
+param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'De', 't1_constant'};
 ```
 Define the upper and lower bounds for each parameter in `param_HPPC`:
 ```MATLAB
