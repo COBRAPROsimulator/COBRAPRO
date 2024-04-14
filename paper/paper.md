@@ -62,7 +62,7 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 - **Parameter identifiability analysis:**
   - Local sensitivity analysis (LSA): Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
   - Correlation analysis: Calculates linear correlation between two parameters
-  - Given sensitivity and correlation index threshold, outputs names of identifiable parameters
+  - Given sensitivity and correlation index threshold, determines the set of identifiable parameters
 
 # Example: Case Study on LG 21700-M50T Cells
 
@@ -253,9 +253,9 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to
 ![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## UDDS Driving Cycle Validation
-In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
-In the `User Input` section, load the parameter values identified from C/20 discharge and HPPC data:
+In the `User Input` section, load the parameter values identified from C/20 and HPPC data:
 ```MATLAB
 %% User Input  
 % Load identification results 
