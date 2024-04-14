@@ -76,7 +76,7 @@ First, the geometric parameters and open-circuit potential functions are extract
 
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, the upper and lower parameter bounds for the PSO, experimental data, etc. A preview of the `User Input` section is provided here.
 
-First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell [@chen_development_2020] and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
+First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell [@chen_development_2020] and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, and so forth:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -153,7 +153,9 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-The code also plots the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
+The code also plots the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
+
+Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
@@ -168,7 +170,9 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 % from C/20 discharge data
 load('identified_parameters_0_05C.mat','param')
 ```
-When defining the names of the parameters to identify, users can manually write the parameters (Option 1) or load the parameter identifiability results from `DFN_LSA_Corr_HPPC.m` (Option 2). In Option 1, all the remaining unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
+When defining the names of the parameters to identify, users can manually write the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
+
+In Option 1, all the unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in the electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 1: Enter names of parameters to identify (make sure names match the
@@ -176,18 +180,19 @@ When defining the names of the parameters to identify, users can manually write 
 %--------------------------------------------------------------------------
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
-In Option 2, the names of the parameters are loaded from the identifiability analysis results. Refer to `DFN_LSA_Corr_HPPC.m` code for more information. Users can choose parameters from the LSA results (`LSA_identifiable`) or the correlation results (`corr_identifiable`). In this demonstration, the identification results for parameters from `LSA_identifiable` are shown, consisting of identifibale parameters `Dsp`, `kn`, `c0`, and `Dsn`:
+Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that exceed a user-defined sensitivity threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain a low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, pso results for the `LSA_identifiable` parameter set is shown:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
 % conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
 %--------------------------------------------------------------------------
+% 'LSA_identifiable' -> parameters with sensitivity higher than beta_LSA
+% 'corr_identifiable' -> parameters defined with corr. analysis and
+%                        corr. threshold of beta_corr
+%--------------------------------------------------------------------------
 load('DFN_identification_results/HPPC_identifiable_params.mat',...
     'LSA_identifiable','corr_identifiable')
-% 1. Load results from LSA analysis 
 param_HPPC = LSA_identifiable;
-% 2. Load results from LSA + correlation analysis 
-% param_HPPC = corr_identifiable;
 ```
 
 Enter the mat file name to save an updated `param` structure, containing the PSO results:
@@ -248,7 +253,7 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to
 ![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## UDDS Driving Cycle Validation
-In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
 In the `User Input` section, load the parameter values identified from C/20 discharge and HPPC data:
 ```MATLAB
