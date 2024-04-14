@@ -58,9 +58,11 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 - **Simulating battery cycling:**
   - Constant current (CC) profiles
   - Hybrid pulse power characterization (HPPC) profiles
-  - Dynamic current profiles 
-- **Local sensitivity analysis (LSA):** Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
-- **Correlation analysis:** Calculates linear correlation between two parameters 
+  - Dynamic current profiles
+- **Parameter identifiability analysis:**
+  - Local sensitivity analysis (LSA): Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
+  - Correlation analysis: Calculates linear correlation between two parameters
+  - Given sensitivity and correlation index threshold, outputs names of identifiable parameters
 
 # Example: Case Study on LG 21700-M50T Cells
 
@@ -167,7 +169,7 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 load('identified_parameters_0_05C.mat','param')
 ```
 When defining the names of the parameters to identify, users can manually write the parameters (Option 1) or load the parameter identifiability results from `DFN_LSA_Corr_HPPC.m` (Option 2). In Option 1, all the remaining unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
-```
+```MATLAB
 %--------------------------------------------------------------------------
 % Option 1: Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
@@ -175,12 +177,13 @@ When defining the names of the parameters to identify, users can manually write 
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
 In Option 2, the names of the parameters are loaded from the identifiability analysis results. Refer to `DFN_LSA_Corr_HPPC.m` code for more information. Users can choose parameters from the LSA results (`LSA_identifiable`) or the correlation results (`corr_identifiable`). In this demonstration, the identification results for parameters from `LSA_identifiable` are shown, consisting of identifibale parameters `Dsp`, `kn`, `c0`, and `Dsn`:
-```
+```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
 % conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
 %--------------------------------------------------------------------------
-load('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable')
+load('DFN_identification_results/HPPC_identifiable_params.mat',...
+    'LSA_identifiable','corr_identifiable')
 % 1. Load results from LSA analysis 
 param_HPPC = LSA_identifiable;
 % 2. Load results from LSA + correlation analysis 
