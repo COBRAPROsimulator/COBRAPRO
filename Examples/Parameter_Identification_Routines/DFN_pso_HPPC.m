@@ -48,11 +48,12 @@ file_name = 'pso_HPPC';
 % Option 2: Load identifiable parameters from identifiability analysis
 % conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
 %--------------------------------------------------------------------------
+% 'LSA_identifiable' -> parameters with sensitivity higher than beta_LSA
+% 'corr_identifiable' -> parameters determined through corr. analysis with
+%                        a corr. threshold of beta_corr
+%--------------------------------------------------------------------------
 load('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable')
-% 1. Load results from LSA analysis 
 param_HPPC = LSA_identifiable;
-% 2. Load results from LSA + correlation analysis 
-% param_HPPC = corr_identifiable;
 
 %--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
