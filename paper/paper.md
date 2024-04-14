@@ -68,24 +68,24 @@ As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing 
 
 ![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
 
-First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters, as shown in the example code `DFN_pso_0_05C.m`. Then, we conduct a parameter identifiability study comprising of LSA and correlation analysis to pinpoint parameters with high sensitivity to voltage and SOC while maintaining low correlation with other parameters. Further details on parameter identifiability can be found in [@ha_cobrapro_2024]. Next, we identify the electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on UDDS data using the code `DFN_UDDS_validation.m`. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in `Examples/Parameter_Identification_Results`.
+First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. Then, a parameter identifiability study is conducted comprising of LSA and correlation analysis to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on UDDS data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in the `Examples/Parameter_Identification_Results` directory.
 
 ## C/20 Capacity Test Identification
 
-Here, we provide a quick overview of `DFN_pso_0_05C.m`. In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, their respective upper and lower bounds, experimental data, PSO settings, etc. Note that `DFN_pso_HPPC.m` and `DFN_UDDS_validation.m` also consist of `User Input` at the beginning of the code, which is the only part that needs to be modified by the user. A preview of the `User Input` section is provided here.
+In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, the upper and lower parameter bounds for the PSO, experimental data, etc. A preview of the `User Input` section is provided here.
 
-First, load the `Parameters_LG_INR21700_M50.m` function, which outputs the `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
+First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell [@chen_development_2020] and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, etc:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
 param = Parameters_LG_INR21700_M50;
 ```
-Enter the your mat file name, which will save an updated `param` structure with the identified parameters from the PSO:
+Enter a mat file name to save PSO results. The mat file will contain an updated `param` structure with the identified parameters from the PSO:
 ```MATLAB
 % Enter mat file name where your PSO results will be stored
 file_name = 'identified_parameters_0_05C';
 ```
-Define the names of the parameters you want to identify in variable `param_CC`. In this example, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`):
+Define the names of the parameters you want to identify. Here, we identify the stoichiometric parameters $\theta_p^{100}$ (`theta100_p`), $\theta_n^{100}$ (`theta100_n`), $\theta_p^0$ (`theta0_p`), and $\theta_n^0$ (`theta0_n`):
 ```MATLAB
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing the nominal parameters)
@@ -123,7 +123,7 @@ t = t_data;
 I = I_data;
 V = V_data;
 ```
-Once the all user inputs have been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameters, and the voltage and SOC objective function values to the Command Window:
+Once the all user inputs have been defined, run the `DFN_pso_0_05C.m` code to start the PSO. Once the PSO is finished, the code prints the identified parameter values, and the HPPC voltage and SOC objective function values to the Command Window:
 ```
 Displaying identified values...
 ------------------------
@@ -151,9 +151,7 @@ J_SOCp =0.030231 [%]
 J_SOCn =0.019037 [%]
 J_tot =0.003833 [-]
 ```
-The code also outputs the plots of the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
-
-Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
+The code also plots the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
 ![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
@@ -161,31 +159,47 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` t
 
 ## HPPC Identification
 The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
-First, load your `param` structure, which contains the nominal DFN parameters and any previously identified parameter values. In this example, we load the `identified_parameters_0_05C.mat` file generated from **Example 1**, which contains the identified stoichiometric parameters:
+First, load your `param` structure, which contains the nominal DFN parameters and any previously identified parameter values. In this example, we load the `identified_parameters_0_05C.mat` file, which contains stoichiometric parameter identification results:
 ```MATLAB
 %% User Input
-% Load nominal parameters and stoichiometric parameter identified
+% Load nominal parameters and identified stoichiometric parameters
 % from C/20 discharge data
 load('identified_parameters_0_05C.mat','param')
 ```
-Enter the your mat file name, which will save an updated `param` structure containing the HPPC identified parameters:
+When defining the names of the parameters to identify, users can manually write the parameters (Option 1) or load the parameter identifiability results from `DFN_LSA_Corr_HPPC.m` (Option 2). In Option 1, all the remaining unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
+```
+%--------------------------------------------------------------------------
+% Option 1: Enter names of parameters to identify (make sure names match the
+% parameter names in "param" structure containing nominal parameters)
+%--------------------------------------------------------------------------
+param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
+```
+In Option 2, the names of the parameters are loaded from the identifiability analysis results. Refer to `DFN_LSA_Corr_HPPC.m` code for more information. Users can choose parameters from the LSA results (`LSA_identifiable`) or the correlation results (`corr_identifiable`). In this demonstration, the identification results for parameters from `LSA_identifiable` are shown, consisting of identifibale parameters `Dsp`, `kn`, `c0`, and `Dsn`:
+```
+%--------------------------------------------------------------------------
+% Option 2: Load identifiable parameters from identifiability analysis
+% conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
+%--------------------------------------------------------------------------
+load('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable')
+% 1. Load results from LSA analysis 
+param_HPPC = LSA_identifiable;
+% 2. Load results from LSA + correlation analysis 
+% param_HPPC = corr_identifiable;
+```
+
+Enter the mat file name to save an updated `param` structure, containing the PSO results:
 ```MATLAB
 % Enter mat file name where your PSO results will be stored
-file_name = 'identified_parameters_HPPC';
+file_name = 'identified_parameters_HPPC_noCorr';
 ```
-In this demonstration, the HPPC profile is used to identify the unknown kinetic and transport parameters: reaction rate constants in electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
-```MATLAB
-% Enter names of parameters to identify (make sure names match the
-% parameter names in "param" structure containing nominal parameters)
-param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'De', 't1_constant'};
-```
+
 Define the upper and lower bounds for each parameter in `param_HPPC`:
 ```MATLAB
 % Enter lower and upper bounds of parameters to identify 
-% kp
-lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
-upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
-% kn
+% Dsp
+pct = 0.2; % perturbation coeff
+lower_bounds.Dsp = 10^(log10(param.Dsp)*(1+pct));
+upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
 ...
 ```
 Load the time, current, and voltage vectors generated from the HPPC data:
@@ -194,7 +208,35 @@ Load the time, current, and voltage vectors generated from the HPPC data:
 % HPPC test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')    
 ```
-Once all user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window (**Appendix A**). Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
+Once all user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window:
+```
+Displaying identified values...
+------------------------
+Dsp:
+Identified value: 5.5423e-15
+5.278e-18(lower) | 4e-15(initial) | 3.0314e-12(upper)
+------------------------
+kn:
+Identified value: 8.6471e-09
+2.987e-15(lower) | 6.7159e-12(initial) | 1.51e-08(upper)
+------------------------
+c0:
+Identified value: 1166.3688
+500(lower) | 1000(initial) | 1500(upper)
+------------------------
+Dsn:
+Identified value: 2.1618e-14
+6.6407e-17(lower) | 3.3e-14(initial) | 1.6399e-11(upper)
+
+Displaying objective function values...
+------------------------
+J_V =0.0038222 [-]
+J_V =13.4785 [mV]
+J_SOCp =0.13299 [%]
+J_SOCn =0.17276 [%]
+J_tot =0.0068797 [-]
+```
+Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to view the HPPC identification results shown here.
 
@@ -202,14 +244,14 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to
 
 ![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
-## Example 3: Driving cycle validation
-In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+## UDDS Driving Cycle Validation
+In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
 In the `User Input` section, load the parameter values identified from C/20 discharge and HPPC data:
 ```MATLAB
 %% User Input  
 % Load identification results 
-load('identified_parameters_HPPC.mat','param')
+load('identified_parameters_HPPC_noCorr.mat','param')
 ```
 and load the experimental UDDS data:
 ```MATLAB
@@ -222,11 +264,11 @@ The objective function is printed to the Command Window:
 ```
 Displaying objective function values...
 ------------------------
-J_V =0.0036564 [-]
-J_V =13.4433 [mV]
-J_SOCp =0.03125 [%]
-J_SOCn =0.016081 [%]
-J_tot =0.0041297 [-]
+J_V =0.0039168 [-]
+J_V =14.3911 [mV]
+J_SOCp =0.032573 [%]
+J_SOCn =0.015161 [%]
+J_tot =0.0043941 [-]
 ```
 The simulation results and experimental data are plotted as shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
 
@@ -248,57 +290,10 @@ Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view
   - `cycle_HPPC.m`: HPPC profile and model output visualization 
   - `cycle_UDDS.m`: driving cycle profile and model output visualization 
 - `Examples/Local_Sensitivity_Analysis`: LSA example codes
-  - `DFN_LSA_CC.m`: LSA on CC profile
-  - `DFN_LSA_HPPC.m`: LSA on HPPC profile
+  - `DFN_LSA_Corr_CC.m`: LSA and correlation analysis on CC profile
+  - `DFN_LSA_Corr_HPPC.m`: LSA and correlation analysis on HPPC profile
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
-
-
-## Appendix A 
-HPPC identification results printed to Command Window:
-```
-Displaying identified values...
-------------------------
-kn:
-Identified value: 1.4394e-08
-2.987e-15(lower) | 6.7159e-12(initial) | 1.51e-08(upper)
-------------------------
-Dsp:
-Identified value: 7.1026e-15
-5.278e-18(lower) | 4e-15(initial) | 3.0314e-12(upper)
-------------------------
-c0:
-Identified value: 599.3499
-500(lower) | 1000(initial) | 2000(upper)
-------------------------
-kp:
-Identified value: 3.9537e-08
-2.5967e-14(lower) | 3.5445e-11(initial) | 4.8383e-08(upper)
-------------------------
-Dsn:
-Identified value: 2.24e-14
-6.6407e-17(lower) | 3.3e-14(initial) | 1.6399e-11(upper)
-------------------------
-Kappa:
-Identified value: 0.75539
-0.1(lower) | 0.95(initial) | 2(upper)
-------------------------
-De:
-Identified value: 1.9115e-10
-4.9036e-12(lower) | 3.7621e-10(initial) | 2.8863e-08(upper)
-------------------------
-t1_constant:
-Identified value: 0.37071
-0.1(lower) | 0.2523(initial) | 0.4(upper)
-
-Displaying objective function values...
-------------------------
-J_V =0.0037065 [-]
-J_V =13.0701 [mV]
-J_SOCp =0.13292 [%]
-J_SOCn =0.17272 [%]
-J_tot =0.0067629 [-]
-```
 
 # References
