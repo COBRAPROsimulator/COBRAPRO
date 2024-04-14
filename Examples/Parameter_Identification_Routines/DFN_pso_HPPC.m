@@ -40,13 +40,19 @@ load('identified_parameters_0_05C.mat','param')
 file_name = 'pso_HPPC';
 
 %--------------------------------------------------------------------------
-% Enter names of parameters to identify (make sure names match the
+% Option 1: Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 %--------------------------------------------------------------------------
-% You can also load identifiable parameter results from previous 
-% identifiability analysis conducted using "Examples/DFN_LSA_Corr_HPPC.m"
+% param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 %--------------------------------------------------------------------------
-param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
+% Option 2: Load identifiable parameters from identifiability analysis
+% conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
+%--------------------------------------------------------------------------
+load('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable')
+% 1. Load results from LSA analysis 
+param_HPPC = LSA_identifiable;
+% 2. Load results from LSA + correlation analysis 
+% param_HPPC = corr_identifiable;
 
 %--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
@@ -55,35 +61,21 @@ param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
 %   lower_bounds.xxx = ...
 %   upper_bounds.xxx = ...
 %--------------------------------------------------------------------------
-% kp
-pct = 0.3; % perturbation coeff
-lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
-upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
-% kn
-pct = 0.3; % perturbation coeff
-lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
-upper_bounds.kn = 10^(log10(param.kn)*(1-pct));
 % Dsp
 pct = 0.2; % perturbation coeff
 lower_bounds.Dsp = 10^(log10(param.Dsp)*(1+pct));
 upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
+% kn
+pct = 0.3; % perturbation coeff
+lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
+upper_bounds.kn = 10^(log10(param.kn)*(1-pct));
+% c0
+lower_bounds.c0 = 500;
+upper_bounds.c0 = 1500;
 % Dsn
 pct = 0.2; % perturbation coeff
 lower_bounds.Dsn = 10^(log10(param.Dsn)*(1+pct));
 upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
-% Kappa
-lower_bounds.Kappa = 0.1;
-upper_bounds.Kappa = 2;
-% De 
-pct = 0.2; % perturbation coeff
-lower_bounds.De = 10^(log10(param.De)*(1+pct));
-upper_bounds.De = 10^(log10(param.De)*(1-pct));
-% t1
-lower_bounds.t1_constant = 0.1;
-upper_bounds.t1_constant = 0.4;
-% c0
-lower_bounds.c0 = 500;
-upper_bounds.c0 = 1500;
 
 %--------------------------------------------------------------------------
 % Enter number of particles for PSO
