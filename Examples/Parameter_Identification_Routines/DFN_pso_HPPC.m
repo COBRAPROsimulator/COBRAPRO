@@ -43,6 +43,9 @@ file_name = 'pso_HPPC';
 % Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 %--------------------------------------------------------------------------
+% You can also load identifiable parameter results from previous 
+% identifiability analysis conducted using "Examples\DFN_LSA_Corr_HPPC.m"
+%--------------------------------------------------------------------------
 param_HPPC = {'kp', 'kn', 'Dsp', 'Dsn', 'Kappa', 'De', 't1_constant', 'c0'};
 
 %--------------------------------------------------------------------------
