@@ -24,11 +24,11 @@ bibliography: paper.bib
 ---
 
 # Summary
-COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is the most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model is characterized by several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurements through cell tear-down experiments is a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may necessitate further calibration to ensure suitability for use in the DFN model [@chen_development_2020], since the model is a simplified representation of a real battery, assuming perfectly spherical particles, neglecting electrode heterogeneity, and considering internal dynamics in only one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
+COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a**r**ameter **O**ptimization) is a physics-based battery modeling software with the capability to perform closed-loop parameter optimization using experimental data. COBRAPRO is based on the Doyle-Fuller-Newman (DFN) model [@doyle_modeling_1993], which is the most widely-accepted high-fidelity model that considers the lithium-ion transport and charge conservation in the liquid electrolyte and solid electrodes, and kinetics at the solid and liquid interface during lithium intercalation and deintercalation. Such physics-based models have found applications in battery design [@dai_graded_2016], [@couto_lithiumion_2023] and advanced battery management systems to ensure reliable and safe operation of electric vehicles [@kolluri_realtime_2020]. The DFN model is characterized by several physical parameters, such as geometric, stoichiometric, concentration, transport, and kinetic parameters, which are often unknown and need to be determined to accurately predict battery response under various usage scenarios. Direct measurements through cell tear-down experiments are a viable but labor-intensive process [@ecker_parameterization_2015a], [@schmalstieg_full_2018a], [@chen_development_2020]. Furthermore, parameters obtained through experimental characterization may necessitate further calibration to ensure suitability for use in the DFN model [@chen_development_2020], since the model is a simplified representation of a real battery, assuming perfectly spherical particles, neglecting electrode heterogeneity, and considering internal dynamics in only one dimension. With COBRAPRO, users can noninvasively identify parameters for any given battery using readily available current-voltage data from a battery cycler. COBRAPRO optimizes the DFN parameters by minimizing the error between the simulated and experimentally observed data through an embedded parameter optimization routine.
 
 # Statement of need
 
-Even though parameter calibration/optimization is required to accurately predict the dynamical behavior of actual batteries, current DFN modeling tools lack the capability to perform parameter identification [@sulzer_python_2021] [@torchio_lionsimba_2016] [@smith_multiphase_2017] [@berliner_methods_2021]. 
+Even though parameter calibration is required to accurately predict the dynamical behavior of actual batteries, current DFN modeling tools lack the capability to perform parameter identification [@sulzer_python_2021] [@torchio_lionsimba_2016] [@smith_multiphase_2017] [@berliner_methods_2021]. 
 
 COMSOL Multiphysics&copy; [@comsol] is a commercially available finite element modeling software commonly used to simulate the DFN model. Although COMSOL lacks a built-in parameter identification feature, it was demonstrated that COMSOL's *LiveLink&trade; for MATLAB&copy;* can be used to establish communication between COMSOL and MATLAB for parameter optimization  [@pozzato_general_2023]. This framework allows users to leverage the versatile suite of optimizers in MATLAB while running COMSOL to generate the model output. However, the expensive licensing fee and proprietary nature of COMSOL create barriers to public access, limiting collaboration and code reproducibility.
 
@@ -48,9 +48,9 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 
 # Core Capabilities
 - **Parameter identification routine:** PSO optimizes parameters using experimental current-voltage data
-- **DFN model implementation:** PDEs discretized with finite volume method (FVM) and DAE system solved with SUNDIALS IDA 
+- **DFN model implementation:** PDEs are discretized with finite volume method (FVM), and the DAE system is solved with SUNDIALS IDA 
 - **Solid particle radial discretization options:**
-  - FVM and 3rd order Hermite interpolation used to calculate particle surface concentration to account for sharp concentration gradients near the particle surface [@xu_comparative_2023] 
+  - FVM and 3rd order Hermite interpolation used to calculate particle surface concentration, accounting for sharp concentration gradients near the particle surface [@xu_comparative_2023] 
   - Finite difference method (FDM)
 - **DAE initialization options:**
   - Single-step approach [@lawder_extending_2015]
@@ -62,21 +62,21 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 - **Parameter identifiability analysis:**
   - Local sensitivity analysis (LSA): Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
   - Correlation analysis: Calculates linear correlation between two parameters
-  - Given sensitivity and correlation index threshold, determines the set of identifiable parameters
+  - Utilizes given sensitivity and correlation index thresholds to determine the set of identifiable parameters
 
 # Example: Case Study on LG 21700-M50T Cells
 
-As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing a fresh LG 21700-M50T cell using the C/20 capacity test, HPPC, and driving cycle data [@pozzato_data_2022]. In this example, we break down the identification problem by systematically grouping parameters for each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach aims to improve the identifiability of parameters instead of identifying all the unknown parameters simulataneously [@arunachalam_full_2019]. 
+As a demonstration of COBRAPRO, we conducted a case study aimed at parameterizing a fresh LG 21700-M50T cell using the C/20 capacity test, HPPC, and driving cycle data [@pozzato_data_2022]. In this example, we break down the identification problem by systematically grouping parameters for each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach aims to improve the identifiability of parameters instead of identifying all the unknown parameters simultaneously [@arunachalam_full_2019]. 
 
 ![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
 
-First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. Then, a parameter identifiability study is conducted comprising of LSA and correlation analysis to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in the `Examples/Parameter_Identification_Results` directory.
+First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. We then conduct a parameter identifiability study, comprising of LSA and correlation analysis, to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in the `Examples/Parameter_Identification_Results` directory.
 
 ## C/20 Capacity Test Identification
 
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, the upper and lower parameter bounds for the PSO, experimental data, etc. A preview of the `User Input` section is provided here.
 
-First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell [@chen_development_2020] and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, and so forth:
+First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal DFN parameters for a LG INR21700-M50 cell [@chen_development_2020] and the DFN simulation settings, e.g., discretization method, DAE initialization method, constant or variable current type, and etc.:
 ```MATLAB
 %% User Input  
 % Load nominal parameters 
@@ -157,9 +157,9 @@ The code also plots the simulation results generated from the identified paramet
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
-![C/20 discharge voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
+![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
 
-![C/20 discharge positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
+![C/20 capacity test positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
 ## HPPC Identification
 The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
@@ -180,22 +180,22 @@ In Option 1, all the unknown transport and kinetic parameters are identified, co
 %--------------------------------------------------------------------------
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
-Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that exceed a user-defined sensitivity threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain a low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, pso results for the `LSA_identifiable` parameter set is shown:
+Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain a low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, pso results for the `LSA_identifiable` parameter set is shown:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
 % conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
 %--------------------------------------------------------------------------
 % 'LSA_identifiable' -> parameters with sensitivity higher than beta_LSA
-% 'corr_identifiable' -> parameters defined with corr. analysis and
-%                        corr. threshold of beta_corr
+% 'corr_identifiable' -> parameters determined through corr. analysis with
+%                        a corr. threshold of beta_corr
 %--------------------------------------------------------------------------
 load('DFN_identification_results/HPPC_identifiable_params.mat',...
     'LSA_identifiable','corr_identifiable')
 param_HPPC = LSA_identifiable;
 ```
 
-Enter the mat file name to save an updated `param` structure, containing the PSO results:
+Enter the MAT file name to save an updated param structure containing the PSO results:
 ```MATLAB
 % Enter mat file name where your PSO results will be stored
 file_name = 'identified_parameters_HPPC_noCorr';
@@ -216,7 +216,7 @@ Load the time, current, and voltage vectors generated from the HPPC data:
 % HPPC test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')    
 ```
-Once all user inputs has been defined, run the code to start the PSO. Once the PSO is finished, the identified parameter and objective function values are printed to the Command Window:
+Once all user inputs has been defined, run the code to start the PSO. Once the PSO is completed, the identified parameter and objective function values are printed to the Command Window:
 ```
 Displaying identified values...
 ------------------------
@@ -286,18 +286,18 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 
 Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
 
-- `Examples/Parameter_Identification_Routines`: parameter identification examples
-  - `DFN_pso_0_05C.m`: parameter identification using C/20 discharge data
-  - `DFN_pso_HPPC.m`: parameter identification using HPPC data
-- `Examples/Parameter_Identification_Results`: load parameter identification results
+- `Examples/Parameter_Identification_Routines`: Parameter identification examples
+  - `DFN_pso_0_05C.m`: Pparameter identification using C/20 discharge data
+  - `DFN_pso_HPPC.m`: Parameter identification using HPPC data
+- `Examples/Parameter_Identification_Results`: Load parameter identification results
   - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
   - `DFN_pso_HPPC_identification.m`: HPPC identification results
-  - `DFN_pso_UDDS_validation.m`: driving cycle validation results
-- `Examples/Cycling`: simulating battery cycling examples
+  - `DFN_pso_UDDS_validation.m`: Driving cycle validation results
+- `Examples/Cycling`: Simulating battery cycling examples
   - `cycle_CC.m`: CC cycling experiments and model output visualization 
   - `cycle_HPPC.m`: HPPC profile and model output visualization 
-  - `cycle_UDDS.m`: driving cycle profile and model output visualization 
-- `Examples/Local_Sensitivity_Analysis`: LSA example codes
+  - `cycle_UDDS.m`: UDDS profile and model output visualization 
+- `Examples/Local_Sensitivity_Analysis`: LSA and correlation analysis examples
   - `DFN_LSA_Corr_CC.m`: LSA and correlation analysis on CC profile
   - `DFN_LSA_Corr_HPPC.m`: LSA and correlation analysis on HPPC profile
 
