@@ -62,15 +62,15 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 - **Parameter identifiability analysis:**
   - Local sensitivity analysis (LSA): Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
   - Correlation analysis: Calculates linear correlation between two parameters
-  - Utilizes given sensitivity and correlation index thresholds to determine the set of identifiable parameters
+  - Utilizes user defined sensitivity and correlation index thresholds to determine the set of identifiable parameters
 
 # Example: Case Study on LG 21700-M50T Cells
 
-As a demonstration of COBRAPRO, we conducted a case study aimed at parameterizing a fresh LG 21700-M50T cell using the C/20 capacity test, HPPC, and driving cycle data [@pozzato_data_2022]. In this example, we break down the identification problem by systematically grouping parameters for each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach aims to improve the identifiability of parameters instead of identifying all the unknown parameters simultaneously [@arunachalam_full_2019]. 
+As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing a fresh LG 21700-M50T cell using the C/20 capacity test, HPPC, and driving cycle data [@pozzato_data_2022]. In this example, we break down the identification problem by systematically grouping parameters in each identification step, as shown in \autoref{fig:flowchart}. This multi-step approach is proposed to improve the identifiability of parameters instead of identifying all the unknown parameters simultaneously [@arunachalam_full_2019]. 
 
 ![Case study: Parameter identification procedure on LG 21700-M50T cells.\label{fig:flowchart}](example_flowchart.pdf){ width=100% }
 
-First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. We then conduct a parameter identifiability study, comprising of LSA and correlation analysis, to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in the `Examples/Parameter_Identification_Results` directory.
+First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. We then conduct a parameter identifiability study, comprising of LSA and correlation analysis, to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in `Examples/Parameter_Identification_Results`.
 
 ## C/20 Capacity Test Identification
 
@@ -170,9 +170,9 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 % from C/20 discharge data
 load('identified_parameters_0_05C.mat','param')
 ```
-When defining the names of the parameters to identify, users can manually write the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
+When defining the names of the HPPC parameters to identify, users can manually type the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
 
-In Option 1, all the unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in the electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), transference number $t_+$ (`t1_constant`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
+In Option 1, all the unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in the electrodes $k_p$ (`kp`) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), electrolyte conductivity $\kappa$ (`Kappa`), transference number $t_+$ (`t1_constant`), initial electrolyte concentration (`c0`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 1: Enter names of parameters to identify (make sure names match the
@@ -180,7 +180,9 @@ In Option 1, all the unknown transport and kinetic parameters are identified, co
 %--------------------------------------------------------------------------
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
-Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, identification of the `LSA_identifiable` parameter set is shown:
+Option 2 uses results from the identifiability analysis from `DFN_LSA_Corr_HPPC.m`, which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters with high sensitivity and correlation coefficients lower than the specified correlation threshold (`beta_corr`). Refer to [@ha_cobrapro_2024] for more information on LSA and correlation analysis.
+
+In this example, identification of the `LSA_identifiable` parameter set is investigated:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
@@ -253,7 +255,7 @@ Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to
 ![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
 
 ## UDDS Driving Cycle Validation
-In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from the C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
 In the `User Input` section, load the parameter values identified from C/20 and HPPC data:
 ```MATLAB
@@ -266,7 +268,6 @@ and load the experimental UDDS data:
 % Load Experimental Data 
 % HPPC test conducted on LG INR21700 M50T cells
 load('data_INR21700_M50T/UDDS_W8_cyc1.mat')
-...
 ```
 The objective function is printed to the Command Window:
 ```
@@ -287,16 +288,16 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
 
 - `Examples/Parameter_Identification_Routines`: Parameter identification examples
-  - `DFN_pso_0_05C.m`: Pparameter identification using C/20 discharge data
+  - `DFN_pso_0_05C.m`: Parameter identification using C/20 capacity test data
   - `DFN_pso_HPPC.m`: Parameter identification using HPPC data
 - `Examples/Parameter_Identification_Results`: Load parameter identification results
   - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
   - `DFN_pso_HPPC_identification.m`: HPPC identification results
-  - `DFN_pso_UDDS_validation.m`: Driving cycle validation results
+  - `DFN_pso_UDDS_validation.m`: UDDS validation results
 - `Examples/Cycling`: Simulating battery cycling examples
-  - `cycle_CC.m`: CC cycling experiments and model output visualization 
-  - `cycle_HPPC.m`: HPPC profile and model output visualization 
-  - `cycle_UDDS.m`: UDDS profile and model output visualization 
+  - `cycle_CC.m`: CC cycling and model output visualization 
+  - `cycle_HPPC.m`: HPPC simulation and model output visualization 
+  - `cycle_UDDS.m`: UDDS simulation and model output visualization 
 - `Examples/Local_Sensitivity_Analysis`: LSA and correlation analysis examples
   - `DFN_LSA_Corr_CC.m`: LSA and correlation analysis on CC profile
   - `DFN_LSA_Corr_HPPC.m`: LSA and correlation analysis on HPPC profile
