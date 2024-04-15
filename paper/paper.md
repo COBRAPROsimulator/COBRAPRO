@@ -109,13 +109,13 @@ upper_bounds.theta0_p = 1;
 lower_bounds.theta0_n = 0.015; 
 upper_bounds.theta0_n = 0.04;
 ```
-Load your time, current, and voltage experimental data. In this example, load the C/20 discharge data:
+Load your time, current, and voltage experimental data. In this example, load the C/20 capacity test data:
 ```MATLAB
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
 %   I: Should be a vector consisting of your current experiment data   [A] (Mx1) 
-%   V: Should be a vector consisting of your volatge experiemntal data [V] (Mx1)
+%   V: Should be a vector consisting of your voltage experiemntal data [V] (Mx1)
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
@@ -167,7 +167,7 @@ First, load your `param` structure, which contains the nominal DFN parameters an
 ```MATLAB
 %% User Input
 % Load nominal parameters and identified stoichiometric parameters
-% from C/20 discharge data
+% from C/20 capacity test data
 load('identified_parameters_0_05C.mat','param')
 ```
 When defining the names of the HPPC parameters to identify, users can manually type the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
@@ -180,7 +180,7 @@ In Option 1, all the unknown transport and kinetic parameters are identified, co
 %--------------------------------------------------------------------------
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
-Option 2 uses results from the identifiability analysis from `DFN_LSA_Corr_HPPC.m`, which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters with high sensitivity and correlation coefficients lower than the specified correlation threshold (`beta_corr`). 
+Option 2 uses identifiability analysis results from `DFN_LSA_Corr_HPPC.m`, which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`). The latter consists of parameters with high sensivity and correlation coefficients lower than the specified correlation threshold (`beta_corr`). 
 
 In this example, identification of the `LSA_identifiable` parameter set is investigated:
 ```MATLAB
@@ -291,7 +291,7 @@ Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view
   - `DFN_pso_0_05C.m`: Parameter identification using C/20 capacity test data
   - `DFN_pso_HPPC.m`: Parameter identification using HPPC data
 - `Examples/Parameter_Identification_Results`: Load parameter identification results
-  - `DFN_pso_0_05C_identification.m`: C/20 discharge identification results
+  - `DFN_pso_0_05C_identification.m`: C/20 capacity test identification results
   - `DFN_pso_HPPC_identification.m`: HPPC identification results
   - `DFN_pso_UDDS_validation.m`: UDDS validation results
 - `Examples/Cycling`: Simulating battery cycling examples
