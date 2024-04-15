@@ -180,7 +180,7 @@ In Option 1, all the unknown transport and kinetic parameters are identified, co
 %--------------------------------------------------------------------------
 param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
 ```
-Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain a low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, pso results for the `LSA_identifiable` parameter set is shown:
+Option 2 uses results from the identifiability analysis (`DFN_LSA_Corr_HPPC.m`), which produces two sets of parameters: `LSA_identifiable` and `corr_identifiable`. The former includes parameters that have sensitivities higher than the user-defined threshold (`beta_LSA`) and are thereby deemed identifiable. The latter consists of parameters that not only show high sensitivity but also maintain low correlation with other parameters, as dictated by a specified correlation threshold (`beta_corr`). In this example, identification of the `LSA_identifiable` parameter set is shown:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
