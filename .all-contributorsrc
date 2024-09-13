@@ -1,0 +1,20 @@
+{
+  "projectName": "COBRAPRO",
+  "projectOwner": "COBRAPROsimulator",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "contributors": [
+    {
+      "login": "COBRAPROsimulator",
+      "name": "Sara Ha",
+      "avatar_url": "",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+      ]
+    },
+  ]
+}
