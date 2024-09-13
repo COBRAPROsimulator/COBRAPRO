@@ -158,3 +158,14 @@ This seems to occur when MATLAB is trying to compile the mex files and mexLock i
 [^1]: Note that Xcode requires ~3.4 GB of storage space. 
 [^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
 [^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
