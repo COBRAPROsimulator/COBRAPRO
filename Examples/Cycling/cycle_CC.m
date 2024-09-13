@@ -99,6 +99,7 @@ etan = [];
 Up = [];
 Un = [];
 curr_dens = [];
+DAE_solve_time = zeros(1,cycle_num);
 
 % For an empty x_init vector, runModel.m will calculate the initial guess
 % based on OCV conditions and the initializer will find the correct
@@ -109,6 +110,7 @@ x_init = [];
 for i = 1:cycle_num
     % Run model for each cyle
     [output,param] = runModel(x_init,param,t0,tf,SOC_init,currentDensity);
+    DAE_solve_time(i) = output.DAE_solve_time;
     % Switch current density sign for next cycle
     currentDensity = -currentDensity;
     % Store initial conditions for next cycle
@@ -134,6 +136,15 @@ for i = 1:cycle_num
     Un(1+size(Un,1):size(output.Un,1)+size(Un,1),:) = output.Un;
     curr_dens(1+size(curr_dens,1):size(output.curr_dens,1)+size(curr_dens,1),1) = output.curr_dens;
 end
+
+% Print performance metrics
+fprintf('\nSummary of DAE solver times:\n')
+fprintf('----------------------------\n')
+for i = 1:cycle_num
+    fprintf(['Cycle #' num2str(i) ': ' num2str(DAE_solve_time(i)) ' s\n'])
+end
+fprintf(['Total cycles: ' num2str(sum(DAE_solve_time)) 's\n'])
+fprintf('----------------------------\n')
 
 %% Visualizing results 
 close all
