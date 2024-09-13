@@ -339,6 +339,7 @@ while(time < tf)
     % Stop simulation since an exit condition has been reached
     if ~isempty(exit_indicator)
         if param.sim_print == 1
+            fprintf(['(DAE solver time: ' num2str(DAE_solve_time) ' s)\n']);
             fprintf('Simulation ending due to:\n');
             for i=1:length(exit_indicator)
                 fprintf(exit_message{i});
