@@ -23,7 +23,7 @@ try
     x = SX.sym('x',1,3);
     fprintf('\ntest_1 successful: CasADi is working properly!\n\n');
 catch error
-    fprintf('\ntest_2 unsuccesful.\n')
+    fprintf('\ntest_1 unsuccesful.\n')
     fprintf(['\nThere was an error:\n' error.message '\n\n']);
     fprintf(['The error identifier is:\n' error.identifier '\n\n']);
 end
