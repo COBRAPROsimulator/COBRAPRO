@@ -161,6 +161,8 @@ This seems to occur when MATLAB is trying to compile the mex files and mexLock i
 
 ## Contributors
 
+[![All Contributors](https://img.shields.io/github/all-contributors/COBRAPROsimulator/COBRAPRO?color=ee8449&style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
