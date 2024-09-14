@@ -34,8 +34,8 @@ Compared to currently available DFN open-source packages such as PyBaMM, DEARLIB
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
- *	MATLAB Global Optimization Toolbox
- *	MATLAB Parallel Computing Toolbox
+* MATLAB Global Optimization Toolbox
+*	MATLAB Parallel Computing Toolbox
 *	SUNDIALS 2.6.2
 *	CasADi (MATLAB version)
 *	Xcode (for macOS users only)
@@ -115,7 +115,7 @@ test_1 successful: CasADi is working properly!
 ```
 test_2 successful: COBRAPRO is working as expected! Results validated against COMSOL.
 ```
-- `test_3_psoCheck.m` ensures that MATLAB's Global Optimization Toolbox and Parallel Computing Toolbox are installed, and makes sure that the PSO required for parameter identification is working correctly. Successful run will output to Command Window:
+- `test_3_psoCheck.m` ensures that MATLAB's Global Optimization Toolbox and Parallel Computing Toolbox are installed, and makes sure that the PSO in parallel (required for parameter identification) is working correctly. Successful run will output to Command Window:
 ```
 test_3 successful: PSO in parallel is working as expected!
 ```
@@ -127,10 +127,11 @@ In the ```Examples``` folder, you will find example codes that will help you get
   * ```Examples/Cycling/cycle_HPPC.m```: simulating hybrid pulse power characterization (HPPC) profile and result visualization (voltage, state-of-charge, internal variable curves)
   * ```Examples/Cycling/cycle_UDDS.m```: simulating driving cycle profile and result visualization (voltage, state-of-charge, internal variable curves)
 * ```Examples/Parameter_Identification_Routines```: examples showing how to perform parameter identification using PSO
+&rarr; NOTE: In general, these scripts take a while to run. Using a processor with multiple cores, e.g., 12 or 24 cores, will significantly speed up the PSO. Also, PSO particle size and PSO exit conditions affect the PSO convergence accuracy and time.)
   * ```Examples/Parameter_Identification_Routines/DFN_pso_0_05C.m```: parameter identification using C/20 discharge data
-  * ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC data
+  * ```Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m```: parameter identification using HPPC data (given same number of PSO particles and PSO exit conditions, takes longer to run than ```DFN_pso_0_05C.m``` since HPPC takes much longer to run than C/20 discharge)
 * ```Examples/Parameter_Identification_Results```: examples showing parameter identification results
-  * ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data
+  * ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data 
   * ```Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m```: parameter identification results using HPPC data
   * ```Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m```: parameter identification validation using UDDS data
 * ```Examples/Local_Sensitivity_Analysis```: examples showing how to perform local sensitivity analysis (LSA)
