@@ -37,7 +37,7 @@ Compared to currently available DFN open-source packages such as PyBaMM, DEARLIB
 *	MATLAB Global Optimization Toolbox
 *	MATLAB Parallel Computing Toolbox
 *	SUNDIALS 2.6.2
-*	CasADi
+*	CasADi (MATLAB version)
 *	Xcode (for macOS users only)
 *	MinGW (for Window users only)
 
@@ -51,7 +51,7 @@ Installation section below shows how to install the required software.
    ```
 2. Download [SUNDIALS 2.6.2](https://computing.llnl.gov/sites/default/files/inline-files/sundials-2.6.2.tar.gz) and unzip the folder. Relocate the sundials-2.6.2 folder inside the COBRAPRO folder.
 
-3. Download the latest version of [CasADi](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. Your COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
+3. Download the latest version of [CasADi (MATLAB version)](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. Your COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
 
 4. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
    - __Mac users__: Download [Xcode](https://developer.apple.com/xcode/) application (can be downloaded from Apple’s App Store). Once Xcode[^1] is installed, proceed to accept the license agreement. This can be done by opening the Xcode application, which will launch a license agreement window and click the “Agree” icon, or type
