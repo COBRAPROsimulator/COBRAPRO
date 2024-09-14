@@ -72,6 +72,8 @@ As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing 
 
 First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. We then conduct a parameter identifiability study, comprising of LSA and correlation analysis, to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in `Examples/Parameter_Identification_Results`.
 
+View COBRAPRO's [README on Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view a list of all available example codes.
+
 ## C/20 Capacity Test Identification
 
 In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, the upper and lower parameter bounds for the PSO, experimental data, etc. A preview of the `User Input` section is provided here.
@@ -284,23 +286,6 @@ The simulation results and experimental data are plotted as shown in \autoref{fi
 ![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
 
 ![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
-
-Visit COBRAPRO's [Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view all example codes:
-
-- `Examples/Parameter_Identification_Routines`: Parameter identification examples
-  - `DFN_pso_0_05C.m`: Parameter identification using C/20 capacity test data
-  - `DFN_pso_HPPC.m`: Parameter identification using HPPC data
-- `Examples/Parameter_Identification_Results`: Load parameter identification results
-  - `DFN_pso_0_05C_identification.m`: C/20 capacity test identification results
-  - `DFN_pso_HPPC_identification.m`: HPPC identification results
-  - `DFN_pso_UDDS_validation.m`: UDDS validation results
-- `Examples/Cycling`: Simulating battery cycling examples
-  - `cycle_CC.m`: CC cycling and model output visualization 
-  - `cycle_HPPC.m`: HPPC simulation and model output visualization 
-  - `cycle_UDDS.m`: UDDS simulation and model output visualization 
-- `Examples/Local_Sensitivity_Analysis`: LSA and correlation analysis examples
-  - `DFN_LSA_Corr_CC.m`: LSA and correlation analysis on CC profile
-  - `DFN_LSA_Corr_HPPC.m`: LSA and correlation analysis on HPPC profile
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
