@@ -121,7 +121,7 @@ parfor (i = 1:size(x,1), param.pso_workers)
         message = 'PSO caught unfeasible solution';
     end
     if temp_params.J_print == 1
-        fprintf(['J_tot ',num2str(J_tot(i)), ' (' message ')\n']);     
+        fprintf(['J_tot ', num2str(J_tot(i)), ' (' message ')\n']);     
     end
 end
 end
