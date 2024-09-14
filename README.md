@@ -115,6 +115,10 @@ test_1 successful: CasADi is working properly!
 ```
 test_2 successful: COBRAPRO is working as expected! Results validated against COMSOL.
 ```
+- `test_3_psoCheck.m` ensures that MATLAB's Global Optimization Toolbox and Parallel Computing Toolbox are installed, and makes sure that the PSO required for parameter identification is working correctly. Successful run will output to Command Window:
+```
+test_3 successful: PSO in parallel is working as expected!
+```
 
 ## Examples <a name="toc6"></a> ##
 In the ```Examples``` folder, you will find example codes that will help you get started.
