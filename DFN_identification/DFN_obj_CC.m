@@ -73,6 +73,7 @@ parfor (i = 1:size(x,1), param.pso_workers)
         % This means that the model failed to initialize algebraic variables
         if isnan(output.t)
             J_tot(i) = 40;
+            message = 'Model failed to initialize algebraic variables for given PSO parameter set';
         else
             % Simulated output
             t_sim = output.t;
@@ -84,6 +85,7 @@ parfor (i = 1:size(x,1), param.pso_workers)
             % Check constraint on discharge capacity
             if abs((Q_dis_sim-Q_dis_exp))/Q_dis_exp > 0.01
                 J_tot(i) = 10;
+                message = 'Objective function constraint triggered: Discharged capacities of experiment and simulation do not match';
             else
                 % Interpolate sim output to match the timestep of voltage experiment
                 V_sim_obj = interp1(t_sim, V_sim, t_exp);
@@ -105,13 +107,15 @@ parfor (i = 1:size(x,1), param.pso_workers)
                 J2 = rms(SOCp_exp(1:len_SOCp)-SOCp_sim_obj(1:len_SOCp));
                 J3 = rms(SOCn_exp(1:len_SOCn)-SOCn_sim_obj(1:len_SOCn));
                 J_tot(i)=J1+J2+J3;
+                message = 'Objective function calculated from PSO';
             end
         end
     catch 
         J_tot(i)=50;  
+        message = 'PSO caught unfeasible solution';
     end
     if temp_params.J_print == 1
-        fprintf(['J_tot ',num2str(J_tot(i)),'\n']);   
+        fprintf(['J_tot ',num2str(J_tot(i)), ' (' message ')\n']);     
     end
 end
 end
