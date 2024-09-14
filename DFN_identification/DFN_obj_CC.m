@@ -35,6 +35,9 @@ function J_tot = DFN_obj_CC(x,param,param_0_05C,t_exp,I_exp,V_exp,SOCp_exp,SOCn_
 % Experimental/simulation current (only valued for CC)
 current = mean(I_exp);
 
+% Extract maximum experimental voltage
+V_exp_max = V_exp(1);
+
 % Preallocate param_copies for memory efficiency
 param_copies(size(x,1)) = param;
 
@@ -86,6 +89,9 @@ parfor (i = 1:size(x,1), param.pso_workers)
             if abs((Q_dis_sim-Q_dis_exp))/Q_dis_exp > 0.01
                 J_tot(i) = 10;
                 message = 'Objective function constraint triggered: Discharged capacities of experiment and simulation do not match';
+            elseif V_sim(1) - V_exp_max > 0.02
+                J_tot(i) = 30;
+                message = 'Objective function constraint triggered: Maximum voltages in experiment and simulation do not match';
             else
                 % Interpolate sim output to match the timestep of voltage experiment
                 V_sim_obj = interp1(t_sim, V_sim, t_exp);
