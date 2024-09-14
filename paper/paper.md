@@ -72,7 +72,7 @@ As a demonstration of COBRAPRO, we conduct a case study aimed at parameterizing 
 
 First, the geometric parameters and open-circuit potential functions are extracted from measurements conducted in cell tear-down and half-cell experiments on LG 21700-M50 cells, as reported by [@chen_development_2020]. Next, the C/20 capacity test data is used to identify the stoichiometric parameters in the example code `DFN_pso_0_05C.m`. We then conduct a parameter identifiability study, comprising of LSA and correlation analysis, to pinpoint parameters with high sensitivity to HPPC voltage and SOC while maintaining low correlation with other parameters (`DFN_LSA_Corr_HPPC.mat`). Next, we calibrate the identifiable electrolyte transport and kinetic parameters using HPPC data in the example code `DFN_pso_HPPC.m`. Finally, validation of the identified parameters is carried out on the urban dynamometer driving schedule (UDDS) data in the `DFN_UDDS_validation.m` code. The `DFN_pso_0_05C.m` and `DFN_pso_HPPC.m` files are located in the `Examples/Parameter_Identification_Routines` directory and `DFN_UDDS_validation.m` is located in `Examples/Parameter_Identification_Results`.
 
-View COBRAPRO's [README on Github](https://github.com/COBRAPROsimulator/COBRAPRO) to view a list of all available example codes.
+View COBRAPRO's [README on Github](https://github.com/COBRAPROsimulator/COBRAPRO/blob/main/README.md#toc6) to view a list of all available example codes.
 
 ## C/20 Capacity Test Identification
 
