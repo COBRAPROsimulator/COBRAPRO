@@ -76,7 +76,7 @@ parfor (i = 1:size(x,1),param.pso_workers)
         %----------------------------------------------------------------------
         if init_fail ~= 0
             J_tot(i) = 40;
-            message = 'Simulation could not complete due to initialization issues during HPPC';
+            message = 'Model failed to initialize algebraic variables for given PSO parameter set';
         %----------------------------------------------------------------------
         % If HPPC simulation did not exit due to CC segment initialization issues
         %----------------------------------------------------------------------
@@ -90,14 +90,14 @@ parfor (i = 1:size(x,1),param.pso_workers)
                 % If simulation ended preemptively due to exit conditions being
                 % triggered, then the discharge capacity of the simulated HPPC
                 % will be less than that of the experimental HPPC
-                J_tot(i) = 30;
-                message = 'Simulation could not complete since simulation and experiment discharge capacities do not match.';
+                J_tot(i) = 10;
+                message = 'Objective function constraint triggered: Discharged capacities of experiment and simulation do not match';
             %----------------------------------------------------------------------
             % If there was an error in calculating the Q_dis_sim_HPPC
             %----------------------------------------------------------------------
             elseif isnan(Q_dis_sim_HPPC)
-                J_tot(i) = 30;
-                message = 'Simulation capacity is NaN.';
+                J_tot(i) = 10;
+                message = 'PSO caught unfeasible value for simulation discharged capacity';
             %----------------------------------------------------------------------
             % If all CC segments successfully simulated without triggering any exit conditions
             %----------------------------------------------------------------------
@@ -123,15 +123,15 @@ parfor (i = 1:size(x,1),param.pso_workers)
                 J2 = rms(SOCp_sim_obj(1:len_SOCp)-SOCp_exp(1:len_SOCp));
                 J3 = rms(SOCn_sim_obj(1:len_SOCn)-SOCn_exp(1:len_SOCn));
                 J_tot(i) = J1+J2+J3;
-                message = 'No error.';
+                message = 'Objective function calculated from PSO';
             end
         end
     catch 
         J_tot(i)=50;  
-        message = 'Parameters resulted in simulation error.';
+        message = 'PSO caught unfeasible solution';
     end
     if temp_params.J_print == 1
-        fprintf(['J_tot ',num2str(J_tot(i)), '. Error: ' message '\n']);     
+        fprintf(['J_tot ' ,num2str(J_tot(i)), ' (' message ')\n']);        
     end
 end
 
