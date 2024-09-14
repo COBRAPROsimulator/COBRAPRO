@@ -245,7 +245,9 @@ if strcmp(param.init_Method,'IDACalcIC')
         [~, x0_initalized, ~] = IDACalcIC(t0+1e-3,'FindAlgebraic');
         x0 = x0_initalized';
     catch
-        fprintf('Unsuccessful initialization: initialized algebraic states are NaN.\n')
+        if param.sim_print == 1
+            fprintf('Unsuccessful initialization: initialized algebraic states are NaN.\n')
+        end
         output.t = NaN;
         return
     end
@@ -439,7 +441,9 @@ if strcmp(param.init_Method,'SS')
         output_sim.etan = output_sim.etan(pos_ind,:);
     % If the initialization could not start at all, then set output to NaN
     elseif length(output_sim.t) == 1
-        fprintf('Unsuccessful initialization: initialized algebraic states are NaN.\n')
+        if param.sim_print == 1
+            fprintf('Unsuccessful initialization: initialized algebraic states are NaN.\n')
+        end
         output.t = NaN;
         return
     % If the initialization did not finish (exit conditions triggered during initialization)
