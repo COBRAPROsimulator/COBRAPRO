@@ -172,7 +172,7 @@ load('identified_parameters_0_05C.mat','param')
 ```
 When defining the names of the HPPC parameters to identify, users can manually type the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
 
-In Option 1, all the unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in the electrodes $k_p$ (```kp```) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), electrolyte conductivity $\kappa$ (`Kappa`), transference number $t_+$ (`t1_constant`), initial electrolyte concentration (`c0`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
+In Option 1, all the unknown transport and kinetic parameters are identified, consisting of the reaction rate constants in the electrodes $k_p$ (`` `kp` ``) and $k_n$ (`kn`), electrolyte diffusitivity $D_e$ (`De`), electrolyte conductivity $\kappa$ (`Kappa`), transference number $t_+$ (`t1_constant`), initial electrolyte concentration (`c0`), and solid phase diffusitivities $D_{s,p}$ (`Dsp`) and $D_{s,n}$ (`Dsn`):
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 1: Enter names of parameters to identify (make sure names match the
