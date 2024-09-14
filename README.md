@@ -63,7 +63,7 @@ Installation section below shows how to install the required software.
      in Terminal. If the license is not accepted, MATLAB may give an error such as “Xcode is installed, but its license has not been accepted”.
    - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler)
      
-6. Now you are ready to run `install_COBRAPRO.m`[^2] located inside the COBRAPRO folder. Run `install_COBRAPRO.m` in MATLAB and respond to the prompts displayed in the Command Window in the following manner:
+6. Now you are ready to run `install_COBRAPRO.m`, which is located in the main COBRAPRO folder. `install_COBRAPRO.m` will install SUNDIALS by calling the `sundials-2.6.2/sundialsTB/install_STB.m` file and automatically add the required folders to your MATLAB path. Run `install_COBRAPRO.m` and respond to the prompts displayed in the Command Window in the following manner:
 
 ```
 MEX files will be compiled and built using the above options
@@ -84,6 +84,13 @@ Compile KINSOL  interface? (y/n)
 ```
 &rarr; Type `n` and hit enter
 ```
+MEX files were successfully created.
+    Install toolbox? (y/n) 
+```
+&rarr; Type `y` and hit enter
+```
+Specify the location where you wish to install the toolbox.
+The toolbox will be installed in a subdirectory "sundialsTB".
 Enter return to cancel the installation.
 Installation directory:
 ```
@@ -104,7 +111,7 @@ Automated test codes are provided in `test` folder:
 ```
 test_1 successful: CasADi is working properly!
 ```
-- `test_2_comsolValidation.m` validates COBRAPRO against results generated from COMSOL Multiphysics[^3] as a benchmark. This ensures that COBRAPRO is installed properly and that the SUNDIALS IDA solver is working as expected. Successful validation will output to Command Window:
+- `test_2_comsolValidation.m` validates COBRAPRO against results generated from COMSOL Multiphysics[^2] as a benchmark. This ensures that COBRAPRO is installed properly and that the SUNDIALS IDA solver is working as expected. Successful validation will output to Command Window:
 ```
 test_2 successful: COBRAPRO is working as expected! Results validated against COMSOL.
 ```
@@ -150,16 +157,15 @@ and modify line 815 to
 ```
 return NULL;
 ```
-2. If you happen to run into the following error when running COBRAPRO:
+2. If you happen to run into the following error when installing/running COBRAPRO:
 ```
 Error using mex
 'idm.mexmaca64' locked by mexLock API.
 ``` 
 This seems to occur when MATLAB is trying to compile the mex files and mexLock is triggered. To resolve the issue, please restart MATLAB. 
 
-[^1]: Note that Xcode requires ~3.4 GB of storage space. 
-[^2]: This function will install SUNDIALS by calling the `sundials-2.6.2/ sundialsTB/install_STB.m` file and automatically adds the required folders to your MATLAB path. 
-[^3]: COMSOL Multiphsyics is a commerically available finite element analysis software.
+[^1]: Note that Xcode requires ~3.4 GB of storage space.  
+[^2]: COMSOL Multiphsyics is a commerically available finite element analysis software.
 
 ## Contributors
 
