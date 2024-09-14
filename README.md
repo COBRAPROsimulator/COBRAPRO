@@ -34,8 +34,8 @@ Compared to currently available DFN open-source packages such as PyBaMM, DEARLIB
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
-*	MATLAB Global Optimization Toolbox
-*	MATLAB Parallel Computing Toolbox
+ *	MATLAB Global Optimization Toolbox
+ *	MATLAB Parallel Computing Toolbox
 *	SUNDIALS 2.6.2
 *	CasADi (MATLAB version)
 *	Xcode (for macOS users only)
