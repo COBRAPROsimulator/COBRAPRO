@@ -41,8 +41,8 @@ param.T=296.15; % 23 Celsius
 %--------------------------------------------------------------------------
 % Open-circuit voltage function: U(cs_surf/cs_max) [V] [Chen 2020]
 %--------------------------------------------------------------------------
-param.Up = @Up_NMC811; 
-param.Un = @Un_Graphite_Si; 
+param.Up = @Up_NMC811_Chen2020; 
+param.Un = @Un_Graphite_Si_Chen2020; 
 
 %--------------------------------------------------------------------------
 % Cut-off voltage [V] [Chen 2020]
