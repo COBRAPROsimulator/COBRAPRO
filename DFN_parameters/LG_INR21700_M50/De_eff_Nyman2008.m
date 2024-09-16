@@ -1,9 +1,10 @@
-function Deff = De_eff_Chen2020(ce, param, domain)
-% De_eff_Chen2020 evaluates the effective electrolyte diffusivity as a
-% function of electrolyte concentration (ce). Function from [1].
+function Deff = De_eff_Nyman2008(ce, param, domain)
+% De_eff_Nyman2008 evaluates the effective electrolyte diffusivity as a
+% function of electrolyte concentration (ce). Function from [1] and used in [2].
 %
 % Reference:
-% [1] C.-H. Chen, F. Brosa Planella, K. O’Regan, D. Gastol, W. D. Widanage, and E. Kendrick, “Development of Experimental Techniques for Parameterization of Multi-scale Lithium-ion Battery Models,” J. Electrochem. Soc., vol. 167, no. 8, p. 080534, Jan. 2020, doi: 10.1149/1945-7111/ab9050.
+% [1] A. Nyman, M. Behm, and G. Lindbergh, "Electrochemical characterisation and modelling of the mass transport phenomena in LiPF6–EC–EMC electrolyte,” Electrochimica Acta, vol. 53, no. 22, pp. 6356–6365, Sep. 2008, doi: 10.1016/j.electacta.2008.04.023.
+% [2] C.-H. Chen, F. Brosa Planella, K. O’Regan, D. Gastol, W. D. Widanage, and E. Kendrick, “Development of Experimental Techniques for Parameterization of Multi-scale Lithium-ion Battery Models,” J. Electrochem. Soc., vol. 167, no. 8, p. 080534, Jan. 2020, doi: 10.1149/1945-7111/ab9050.
 %
 %   Inputs:
 %       ce: normalized electrolyte concentration [-]
