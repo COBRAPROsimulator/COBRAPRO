@@ -12,7 +12,8 @@
 COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization) is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation results for predicting real-world battery responses under various operating conditions. 
 
 Please refer to the following publication for more details on the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO:
-[1] S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
+
+S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
 
 ## Table of contents ##
 
@@ -174,6 +175,27 @@ This seems to occur when MATLAB is trying to compile the mex files and mexLock i
 
 [^1]: Note that Xcode requires ~3.4 GB of storage space.  
 [^2]: COMSOL Multiphsyics is a commerically available finite element analysis software.
+
+## How to cite this code
+If you use this code in your research, please cite our JOSS paper and the accompanying JES paper:
+```
+@article{cobrapro_joss_2024,
+   author = {Ha, Sara and Onori, Simona},
+   doi = {arXiv:2404.10022},
+   journal = {Journal of Open Source Software},
+   year = {2024}
+   title = {{COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization}},
+}
+```
+```
+@article{cobrapro_jes_2024,
+   author = {Ha, Sara and Onori, Simona},
+   doi = {10.1149/1945-7111/ad7292},
+   journal = {Journal of The Electrochemical Society},
+   year = 2024,
+   title = {{COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework}},
+} 
+```
 
 ## Contributors
 
