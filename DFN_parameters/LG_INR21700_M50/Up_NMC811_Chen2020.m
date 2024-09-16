@@ -1,5 +1,5 @@
-function Up = Up_NMC811(theta)
-% Up_NMC811 is the experimentally determined open-circuit potential (OCP)
+function Up = Up_NMC811_Chen2020(theta)
+% Up_NMC811_Chen2020 is the experimentally determined open-circuit potential (OCP)
 % of the NMC811 cathode from [1]. OCP was determined from half-cell GITT
 % tests in [1].
 %
