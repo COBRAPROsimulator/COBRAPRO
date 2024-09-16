@@ -1,5 +1,5 @@
 function t1 = t1_Kremer2020(ce, param)
-% t1_Kremer evaluates the transference number as a function of electrolyte
+% t1_Kremer2020 evaluates the transference number as a function of electrolyte
 % concentration (ce). Function from [1].
 %
 % Reference:
