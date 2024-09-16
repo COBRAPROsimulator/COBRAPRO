@@ -15,12 +15,15 @@ COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization)
 
   * [What is COBRAPRO?](#toc1)
   * [Why COBRAPRO?](#toc2)
+  * [Accompanying papers](#toc9)
   * [System requirements](#toc3)
   * [Installation](#toc4)
   * [Testing](#toc5)
   * [Examples](#toc6)
   * [Contributing](#toc7)
   * [Known issues](#toc8)
+  * [How to cite this code](#toc10)
+  * [Contributors](#toc11)
 
 ## What is COBRAPRO? <a name="toc1"></a> ##
 
@@ -32,10 +35,14 @@ In response to this challenge, COBRAPRO allows users to identify parameters of a
 
 Compared to existing open-source DFN packages like PyBaMM, LIONSIMBA, PETION, fastDFN, and MPET, only COBRAPRO and DEARLIBS include an integrated identification routine. COBRAPRO further distinguishes itself by enabling parameter identifiability analysis, allowing users to identify which parameters can be optimized based on the given data. Efficient computation is critical for parameter optimization, which requires numerous model simulations. COBRAPRO addresses this challenge with a fast solver and PSO parallel computing, offering model simulations up to three orders of magnitude faster than DEARLIBS and enhanced PSO performance through multicore processing.
 
-## Accompanying paper 
-For more details on the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO, users are encouraged to check out our JES paper:
+## Accompanying papers <a name="toc9"></a> ##
+For a comprehensive dive into the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO, users are encouraged to check out our JES paper:
 
-S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
+[1] S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
+
+Our JOSS paper can also be viewed for additional information:
+
+[2] S. Ha and S. Onori, “COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization,” Apr. 16, 2024, arXiv: arXiv:2404.10022. Accessed: Jul. 30, 2024. [Online]. Available: http://arxiv.org/abs/2404.10022
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
@@ -174,20 +181,8 @@ Error using mex
 ``` 
 This seems to occur when MATLAB is trying to compile the mex files and mexLock is triggered. To resolve the issue, please restart MATLAB. 
 
-[^1]: Note that Xcode requires ~3.4 GB of storage space.  
-[^2]: COMSOL Multiphsyics is a commerically available finite element analysis software.
-
-## How to cite this code
-If you use this code in your research, please cite our JOSS paper and the accompanying JES paper:
-```
-@article{cobrapro_joss_2024,
-   author = {Ha, Sara and Onori, Simona},
-   doi = {arXiv:2404.10022},
-   journal = {Journal of Open Source Software},
-   year = {2024}
-   title = {{COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization}},
-}
-```
+## How to cite this code <a name="toc10"></a> ##
+If you use this code in your research, please cite our accompanying JES and JOSS papers:
 ```
 @article{cobrapro_jes_2024,
    author = {Ha, Sara and Onori, Simona},
@@ -197,8 +192,17 @@ If you use this code in your research, please cite our JOSS paper and the accomp
    title = {{COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework}},
 } 
 ```
+```
+@article{cobrapro_joss_2024,
+   author = {Ha, Sara and Onori, Simona},
+   doi = {arXiv:2404.10022},
+   journal = {Journal of Open Source Software},
+   year = {2024}
+   title = {{COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization}},
+}
+```
 
-## Contributors
+## Contributors <a name="toc11"></a> ##
 
 [![All Contributors](https://img.shields.io/github/all-contributors/COBRAPROsimulator/COBRAPRO?color=ee8449&style=flat-square)](#contributors)
 
@@ -210,3 +214,6 @@ If you use this code in your research, please cite our JOSS paper and the accomp
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+[^1]: Note that Xcode requires ~3.4 GB of storage space.  
+[^2]: COMSOL Multiphsyics is a commerically available finite element analysis software.
