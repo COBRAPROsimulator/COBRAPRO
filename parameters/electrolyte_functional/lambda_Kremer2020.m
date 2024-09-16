@@ -1,5 +1,5 @@
-function lambda = lambda_Kremer(ce, param)
-% lambda_Kremer evaluates the activity coefficient as a function of electrolyte
+function lambda = lambda_Kremer2020(ce, param)
+% lambda_Kremer2020 evaluates the activity coefficient as a function of electrolyte
 % concentration (ce). Function from [1].
 %
 % Reference:
