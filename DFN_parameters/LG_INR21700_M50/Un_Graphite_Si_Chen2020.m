@@ -1,5 +1,5 @@
 function Un = Un_Graphite_Si_Chen2020(theta)
-% Un_Graphite_Si is the experimentally determined open-circuit potential (OCP)
+% Un_Graphite_Si_Chen2020 is the experimentally determined open-circuit potential (OCP)
 % of the Graphite-Silicon anode from [1]. OCP was determined from half-cell GITT
 % tests in [1].
 %
