@@ -188,7 +188,7 @@ If you use this code in your research, please cite our accompanying JES and JOSS
    author = {Ha, Sara and Onori, Simona},
    doi = {10.1149/1945-7111/ad7292},
    journal = {Journal of The Electrochemical Society},
-   year = 2024,
+   year = {2024},
    title = {{COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework}},
 } 
 ```
@@ -197,7 +197,7 @@ If you use this code in your research, please cite our accompanying JES and JOSS
    author = {Ha, Sara and Onori, Simona},
    doi = {arXiv:2404.10022},
    journal = {Journal of Open Source Software},
-   year = {2024}
+   year = {2024},
    title = {{COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization}},
 }
 ```
