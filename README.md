@@ -42,7 +42,7 @@ For a comprehensive dive into the numerical methods, determination of consistent
 
 Our JOSS paper can also be viewed for additional information:
 
-[2] S. Ha and S. Onori, “COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization,” Apr. 16, 2024, arXiv: arXiv:2404.10022. Accessed: Jul. 30, 2024. [Online]. Available: http://arxiv.org/abs/2404.10022
+[2] S. Ha and S. Onori, “COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization,” Apr. 16, 2024, arXiv: arXiv:2404.10022. 
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
