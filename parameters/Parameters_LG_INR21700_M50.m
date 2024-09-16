@@ -148,7 +148,7 @@ param.Dsn = 3.3e-14;
 %--------------------------------------------------------------------------
 % Option 1: Functional electrolyte diffusion coefficient: De_eff(ce) [m2/s]
 %--------------------------------------------------------------------------
-% param.De_eff = @De_eff_Chen2020; 
+% param.De_eff = @De_eff_Nyman2008; 
 %--------------------------------------------------------------------------
 % Option 2: Constant electrolyte diffusion coefficient: De_eff [m2/s]
 %--------------------------------------------------------------------------
@@ -158,7 +158,7 @@ param.De_eff = @De_eff_constant;
 %--------------------------------------------------------------------------
 % Option 1: Functional electrolyte conductivity coefficient: kappa_eff(ce) [S/m] [Chen 2020]
 %--------------------------------------------------------------------------
-% param.Kappa_eff = @Kappa_eff_Chen2020;
+% param.Kappa_eff = @Kappa_eff_Nyman2008;
 %--------------------------------------------------------------------------
 % Option 2: Constant electrolyte conductivity coefficient: kappa_eff [S/m] [Chen 2020]
 %--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ param.Kappa_eff = @Kappa_eff_constant;
 %--------------------------------------------------------------------------
 % Option 1: Functional transference number function: t1(ce) [-] [Chen 2020]
 %--------------------------------------------------------------------------
-% param.t1 = @t1_Kremer;
+% param.t1 = @t1_Kremer2020;
 %--------------------------------------------------------------------------
 % Option 2: Constant functional transference number: t1 [-] [Chen 2020]
 %--------------------------------------------------------------------------
@@ -178,7 +178,7 @@ param.t1= @t1_constant;
 %--------------------------------------------------------------------------
 % Option 1: Functional activity term: lambda(ce) [-] [Chen 2020]
 %--------------------------------------------------------------------------
-% param.lambda = @lambda_Kremer; 
+% param.lambda = @lambda_Kremer2020; 
 %--------------------------------------------------------------------------
 % Option 2: Scalar activity term: lambda [-] [Chen 2020]
 %--------------------------------------------------------------------------
