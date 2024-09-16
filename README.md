@@ -11,11 +11,6 @@
 
 COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization) is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation results for predicting real-world battery responses under various operating conditions. 
 
-Please refer to the following publication for more details on the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO:
-```
-S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
-```
-
 ## Table of contents ##
 
   * [What is COBRAPRO?](#toc1)
@@ -36,6 +31,11 @@ In response to this challenge, COBRAPRO allows users to identify parameters of a
 ## Why COBRAPRO? <a name="toc2"></a> ##
 
 Compared to existing open-source DFN packages like PyBaMM, LIONSIMBA, PETION, fastDFN, and MPET, only COBRAPRO and DEARLIBS include an integrated identification routine. COBRAPRO further distinguishes itself by enabling parameter identifiability analysis, allowing users to identify which parameters can be optimized based on the given data. Efficient computation is critical for parameter optimization, which requires numerous model simulations. COBRAPRO addresses this challenge with a fast solver and PSO parallel computing, offering model simulations up to three orders of magnitude faster than DEARLIBS and enhanced PSO performance through multicore processing.
+
+## Accompanying paper 
+For more details on the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO, users are encouraged to check out our JES paper:
+
+S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
 
 ## Software dependencies <a name="toc3"></a> ##
 * MATLAB 2018b and later
