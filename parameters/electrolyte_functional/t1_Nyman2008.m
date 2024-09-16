@@ -1,5 +1,5 @@
-function t1 = t1_Nyman(ce, param)
-% t1_Nyman evaluates the transference number as a function of electrolyte
+function t1 = t1_Nyman2008(ce, param)
+% t1_Nyman2008 evaluates the transference number as a function of electrolyte
 % concentration (ce). Function from [1].
 %
 % Reference:
