@@ -159,7 +159,7 @@ The code also plots the simulation results generated from the identified paramet
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
-![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](voltage_0_05C_identification.png){ width=65% }
+![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](capTest_Voltage_M1_corr99_r1.png){ width=65% }
 
 ![C/20 capacity test positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
 
