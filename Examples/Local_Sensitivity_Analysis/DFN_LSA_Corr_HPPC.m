@@ -37,10 +37,10 @@ param.upperCutoffVoltage = 4.3;
 % Enter names of parameters to conduct LSA (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 %--------------------------------------------------------------------------
-param_LSA_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
+param_LSA_HPPC = {'Rc' 'Dsp' 'Dsn' 'kp' 'kn' 'De' 'Kappa' 'sigmap' 'sigman'};
 
 % Type in latex version of param_LSA_HPPC for nice plots
-theta_names = {'$D_{s,p}$' '$D_{s,n}$' '$t_{+}$' '$k_p$' '$k_n$' '$c_0$' '$D_e$' '$\kappa$'};
+theta_names = {'$R_c$' '$D_{s,p}$' '$D_{s,n}$' '$k_p$' '$k_n$' '$D$' '$\kappa$' '$\sigma_p$' '$\sigma_n$'};
 
 %--------------------------------------------------------------------------
 % Perturbation coefficient for LSA [-]
@@ -48,20 +48,13 @@ theta_names = {'$D_{s,p}$' '$D_{s,n}$' '$t_{+}$' '$k_p$' '$k_n$' '$c_0$' '$D_e$'
 pct=0.05;
 
 %--------------------------------------------------------------------------
-% Define sensitivity index threshold
-%--------------------------------------------------------------------------
-% Parameters with sensitivity index higher than beta_LSA will be considered
-% the "identifiable" parameters for the HPPC profile
-%--------------------------------------------------------------------------
-beta_LSA = 0.5;
-
-%--------------------------------------------------------------------------
 % Define correlation coefficient threshold
 %--------------------------------------------------------------------------
 % Correlation coefficient threshold used to determine the uncorrelated parameter  
-% vector, which will be considered the "identifiable" parameters for the HPPC profile
+% vector prioritized by sensitivity, which will be considered the "identifiable" parameters for the HPPC profile
+% Input vector to yield multiple identifiable parameter sets for each correlation threshold
 %--------------------------------------------------------------------------
-beta_corr = 0.99;
+beta_corr = [0.8 0.9 0.95 0.98 0.99];
 
 %--------------------------------------------------------------------------
 % Load HPPC profile input current vector [A] and simulation time [s] 
@@ -218,7 +211,6 @@ plot(S_2norm_V_SOC_all_sort,'o','MarkerSize',12,'linewidth',2,'DisplayName','$S^
 plot(S_2norm_V_all_sort,'^','MarkerSize',12,'linewidth',2,'DisplayName','$S^{V}$')
 xticks(1:length(theta_names));xticklabels(theta_names(ind));
 ylabel('Sensitivity [-]')
-set(gca, 'YScale', 'log'); 
 title('HPPC Sensitivity');%title('2-norm of Normalized Sensitivity Vector')
 set(gcf,'color','w');legend('location','best')
 set(findall(gcf,'-property','interpreter'),'interpreter','latex')
@@ -227,12 +219,22 @@ set(gcf, 'Units','inches','Position', [1 1 14 8]);set(gca,'Fontsize',32);
 
 %% Correlation matrix calculation
 
- min_length_V_SOC_vec = min(length_V_SOC_vec);
+% Find indices with non-zero sensitivity 
+nonzero_S_2norm_V_SOC_ind = S_2norm_V_SOC_all~=0;
+% Remove parameters with zero sensitivity for correlation matrix calculation
+length_V_SOC_vec_new = length_V_SOC_vec(nonzero_S_2norm_V_SOC_ind);
+param_LSA_HPPC_new = param_LSA_HPPC(nonzero_S_2norm_V_SOC_ind);
+theta_names_new = theta_names(nonzero_S_2norm_V_SOC_ind);
+S_norm_V_SOC_new = S_norm_V_SOC(nonzero_S_2norm_V_SOC_ind);
+S_2norm_V_SOC_all_new = S_2norm_V_SOC_all(nonzero_S_2norm_V_SOC_ind);
 
- S_2norm_V_SOC_matrix = zeros(min_length_V_SOC_vec,length(theta_names));
- for i=1:length(theta_names)
-     S_2norm_V_SOC_matrix(:,i) = S_norm_V_SOC{i}(1:min_length_V_SOC_vec);
+min_length_V_SOC_vec = min(length_V_SOC_vec_new);
+
+ S_2norm_V_SOC_matrix = zeros(min_length_V_SOC_vec,length(theta_names_new));
+ for i=1:length(theta_names_new)
+     S_2norm_V_SOC_matrix(:,i) = S_norm_V_SOC_new{i}(1:min_length_V_SOC_vec);
  end
+ % Calculate correlation matrix
 corr_V_SOC_matrix = corrcoef(S_2norm_V_SOC_matrix);
 
 %% Correlation matrix plot
@@ -243,8 +245,8 @@ figure;
 h = heatmap(plot_matrix, 'colormap',flipud(parula), 'MissingDataColor', 'w', 'GridVisible', 'off', 'MissingDataLabel', " ");
 h.NodeChildren(3).XAxis.TickLabelInterpreter = 'latex';
 h.NodeChildren(3).YAxis.TickLabelInterpreter = 'latex';
-h.XDisplayLabels = (theta_names);
-h.YDisplayLabels = (theta_names);
+h.XDisplayLabels = (theta_names_new);
+h.YDisplayLabels = (theta_names_new);
 set(gcf,'color','w');
 title('$S_{V,SOC}$ Correlation Matrix')
 set(findall(gcf,'-property','FontSize'),'FontSize',20);
@@ -254,25 +256,21 @@ set(findall(gcf,'-property','ticklabelinterpreter'),'ticklabelinterpreter','late
 
 %% Output and save the identifiable parameters
 
-% When using just LSA to determine identifiable parameters:
-param_LSA_HPPC_sorted = param_LSA_HPPC(ind);
-LSA_identifiable = param_LSA_HPPC_sorted(S_2norm_V_SOC_all_sort>beta_LSA);
+% LSA and correlation anlaysis to determine identifiable parameters:
+corr_identifiable_vec = cell(1,length(beta_corr));
+for i = 1:length(beta_corr)
+    corr_identifiable = unCorr_parameters(param_LSA_HPPC_new, S_2norm_V_SOC_all_new, corr_V_SOC_matrix, beta_corr(i));
+    corr_identifiable_vec{i} = corr_identifiable;
+end
 
-% When using also correlation anlaysis to determine identifiable parameters:
-corr_identifiable = unCorr_parameters(param_LSA_HPPC, S_2norm_V_SOC_all, corr_V_SOC_matrix, beta_corr);
-
-% Print results
-fprintf('------------------------------------------------\n')
-fprintf('Identifiable parameters from LSA analysis:\n')
-fprintf(['(sensitivity threshold = ' num2str(beta_LSA) ')\n'])
-fprintf('------------------------------------------------\n')
-fprintf('%s ',LSA_identifiable{:})
-fprintf('\n\n------------------------------------------------\n')
+fprintf('\n------------------------------------------------\n')
 fprintf('Identifiable parameters from LSA and correlation analysis:\n')
-fprintf(['(correlation coefficient threshold = ' num2str(beta_corr) ')\n'])
 fprintf('------------------------------------------------\n')
-fprintf('%s ',corr_identifiable{:})
-fprintf('\n')
+for i = 1:length(beta_corr)
+    corr_print = corr_identifiable_vec{i};
+    fprintf('%s ',corr_print{:})
+    fprintf(['(threshold = ' num2str(beta_corr(i)) ')\n'])
+end
 
-% Save results
-save('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable','beta_LSA','beta_corr')
+% Save list of identifiable parameters
+save('DFN_identification_results/HPPC_identifiable_params.mat','corr_identifiable_vec','beta_corr')
