@@ -159,9 +159,9 @@ The code also plots the simulation results generated from the identified paramet
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m` to view the C/20 identification results shown here.
 
-![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](capTest_Voltage_M1_corr99_r1.png){ width=65% }
+![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](0_05C_Voltage.png){ width=65% }
 
-![C/20 capacity test positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](SOC_0_05C_identification.png){ width=65% }
+![C/20 capacity test positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](0_05C_SOC.png){ width=65% }
 
 ## HPPC Identification
 The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
@@ -252,9 +252,9 @@ Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identifi
 
 Run `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` to view the HPPC identification results shown here.
 
-![HPPC voltage identification results.\label{fig:V_HPPC}](voltage_HPPC_identification.png){ width=65% }
+![HPPC voltage identification results.\label{fig:V_HPPC}](HPPC_Voltage_corr95.png){ width=65% }
 
-![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](SOC_HPPC_identification.png){ width=65% }
+![HPPC positive and negative electrode SOC identification results.\label{fig:SOC_HPPC}](HPPC_SOC_corr95.png){ width=65% }
 
 ## UDDS Driving Cycle Validation
 In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from the C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
@@ -283,9 +283,9 @@ J_tot =0.0043941 [-]
 ```
 The simulation results and experimental data are plotted as shown in \autoref{fig:V_UDDS} and \autoref{fig:SOC_UDDS}. 
 
-![UDDS voltage identification results.\label{fig:V_UDDS}](voltage_UDDS_identification.png){ width=65% }
+![UDDS voltage identification results.\label{fig:V_UDDS}](UDDS_Voltage_corr95.png){ width=65% }
 
-![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](SOC_UDDS_identification.png){ width=65% }
+![UDDS positive and negative electrode SOC identification results.\label{fig:SOC_UDDS}](UDDS_SOC_corr95.png){ width=65% }
 
 # Acknowledgements
 The authors thank the Bits and Watts Initiative within the Precourt Institute for Energy at Stanford University for its partial financial support. We thank Dr. Le Xu for all the insightful discussions that greatly contributed to the enhancement of COBRAPRO. We extend our thanks to Alexis Geslin, Joseph Lucero, and Maitri Uppaluri for testing COBRAPRO and providing valuable feedback.
