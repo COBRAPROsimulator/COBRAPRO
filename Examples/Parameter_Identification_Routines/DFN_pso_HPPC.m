@@ -259,7 +259,7 @@ fcn = @(x)DFN_obj_HPPC(x,param,param_HPPC,SOC_init,t0,tf_vec,curr_segments,t_exp
 % output: information about optimization
 [x_opt_HPPC,fval,exitflag,output] = particleswarm(fcn,length(init_pos),lb,ub,options);
 
-save(['DFN_identification_results/' file_name '.mat'],'x_opt_HPPC','lb','ub','init_pos','param_HPPC','param','Q_dis_exp_HPPC','options','fval','exitflag','output')
+save(['Examples/Parameter_Identification_Results/' file_name '.mat'],'x_opt_HPPC','lb','ub','init_pos','param_HPPC','param','Q_dis_exp_HPPC')
 
 %% Print identified values
 fprintf('\nDisplaying identified values...\n')
@@ -287,7 +287,7 @@ param.curr_dens_vec = curr_vec/param.Acell;
 %-----------------------------------------------------------------------
 
 % Save updated parameters based on identified parameters in mat file
-save(['DFN_identification_results/' file_name '.mat'],'param','t_exp','V_exp','I_exp','SOCp_exp','SOCn_exp','SOC_init','t0','tf_vec','currentDensity_vec','curr_segments','-append')
+save(['Examples/Parameter_Identification_Results/' file_name '.mat'],'param','t_exp','V_exp','I_exp','SOCp_exp','SOCn_exp','SOC_init','t0','tf_vec','currentDensity_vec','curr_segments','-append')
 
 fprintf('\nSimulating model using identified parameters...\n')
 [t_sim,V_sim,SOCp_sim,SOCn_sim,curr_dens_sim,...
