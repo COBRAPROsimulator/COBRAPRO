@@ -27,7 +27,7 @@ clc;clear;close all
 %--------------------------------------------------------------------------
 % Enter your identified parameters 
 %--------------------------------------------------------------------------
-load('identified_parameters_HPPC_noCorr.mat')
+load('identified_parameters_HPPC_0_99Corr.mat')
 
 %--------------------------------------------------------------------------
 % Print simulation time 
