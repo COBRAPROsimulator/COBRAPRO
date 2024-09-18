@@ -268,4 +268,4 @@ for i = 1:length(beta_corr)
 end
 
 % Save results
-save('Examples/Parameter_Identification_Results/0_05C_identifiable_params.mat','corr_identifiable','beta_corr')
+save('Examples/Parameter_Identification_Results/0_05C_identifiable_params.mat','corr_identifiable_vec','beta_corr')
