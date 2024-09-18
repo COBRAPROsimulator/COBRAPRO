@@ -273,4 +273,4 @@ for i = 1:length(beta_corr)
 end
 
 % Save list of identifiable parameters
-save('DFN_identification_results/HPPC_identifiable_params.mat','corr_identifiable_vec','beta_corr')
+save('Examples/Parameter_Identification_Results/HPPC_identifiable_params.mat','corr_identifiable_vec','beta_corr')
