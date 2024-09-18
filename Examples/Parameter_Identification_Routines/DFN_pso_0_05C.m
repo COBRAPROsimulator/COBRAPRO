@@ -246,7 +246,7 @@ fcn = @(x)DFN_obj_CC(x,param,param_CC,t_exp,I_exp,V_exp,SOCp_exp,SOCn_exp,Q_dis_
 % output: information about optimization
 [x_opt_CC,fval,exitflag,output] = particleswarm(fcn,length(init_pos),lb,ub,options);
 
-save(['DFN_identification_results/' file_name '.mat'],'x_opt_CC','lb','ub','init_pos','param_CC','Q_dis_exp','options','fval','exitflag','output')
+save(['Examples/Parameter_Identification_Results/' file_name '.mat'],'x_opt_CC','lb','ub','init_pos','param_CC','Q_dis_exp')
 
 %% Print identified values
 fprintf('Displaying identified values...\n')
@@ -281,7 +281,7 @@ param.currentDensity = current/param.Acell;
 %-----------------------------------------------------------------------
 
 % Save updated parameters based on identified parameters in mat file
-save(['DFN_identification_results/' file_name '.mat'],'param','t_exp','V_exp','I_exp','SOCp_exp','SOCn_exp','SOC_init','t0','tf','-append')
+save(['Examples/Parameter_Identification_Results/' file_name '.mat'],'param','t_exp','V_exp','I_exp','SOCp_exp','SOCn_exp','SOC_init','t0','tf','-append')
 
 x_init = [];
 results = runModel(x_init,param,t0,tf,SOC_init,param.currentDensity);
