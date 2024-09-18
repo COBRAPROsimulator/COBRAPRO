@@ -43,17 +43,22 @@ file_name = 'pso_HPPC';
 % Option 1: Enter names of parameters to identify (make sure names match the
 % parameter names in "param" structure containing nominal parameters)
 %--------------------------------------------------------------------------
-% param_HPPC = {'Dsp' 'Dsn' 't1_constant' 'kp' 'kn' 'c0' 'De' 'Kappa'};
+% param_HPPC = {'Dsp' 'Dsn' 'kp' 'kn' 'De' 'Kappa'};
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
-% conducted in "Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m"
+% conducted in "Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_HPPC.m"
 %--------------------------------------------------------------------------
-% 'LSA_identifiable' -> parameters with sensitivity higher than beta_LSA
-% 'corr_identifiable' -> parameters determined through corr. analysis with
-%                        a corr. threshold of beta_corr
-%--------------------------------------------------------------------------
-load('DFN_identification_results/HPPC_identifiable_params.mat','LSA_identifiable','corr_identifiable')
-param_HPPC = LSA_identifiable;
+load('HPPC_identifiable_params.mat')
+% Enter desired beta value
+beta_value = 0.95;
+% Load results from LSA and correlation analysis 
+if ismember(beta_value,beta_corr)
+    corr_ind = beta_value == beta_corr;
+else
+    fprintf('Invalid correlation coefficient threshold.\nPlease choose a correlation threshold that was tested in your parameter identifiability analysis.\n')
+    return
+end
+param_HPPC = corr_identifiable_vec{corr_ind};
 
 %--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
