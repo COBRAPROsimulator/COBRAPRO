@@ -67,21 +67,25 @@ param_HPPC = corr_identifiable_vec{corr_ind};
 %   lower_bounds.xxx = ...
 %   upper_bounds.xxx = ...
 %--------------------------------------------------------------------------
+% Rc
+lower_bounds.Rc = 0.001;
+upper_bounds.Rc = 0.0234;
 % Dsp
 pct = 0.2; % perturbation coeff
 lower_bounds.Dsp = 10^(log10(param.Dsp)*(1+pct));
 upper_bounds.Dsp = 10^(log10(param.Dsp)*(1-pct));
-% kn
-pct = 0.3; % perturbation coeff
-lower_bounds.kn = 10^(log10(param.kn)*(1+pct));
-upper_bounds.kn = 10^(log10(param.kn)*(1-pct));
-% c0
-lower_bounds.c0 = 500;
-upper_bounds.c0 = 1500;
 % Dsn
 pct = 0.2; % perturbation coeff
 lower_bounds.Dsn = 10^(log10(param.Dsn)*(1+pct));
 upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
+% De 
+pct = 0.2; % perturbation coeff
+lower_bounds.De = 10^(log10(param.De)*(1+pct));
+upper_bounds.De = 10^(log10(param.De)*(1-pct));
+% kp 
+% pct = 0.3; % perturbation coeff
+% lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
+% upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
 
 %--------------------------------------------------------------------------
 % PSO Settings: Enter number of particles for PSO
