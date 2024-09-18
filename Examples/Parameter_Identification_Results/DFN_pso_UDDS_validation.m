@@ -26,7 +26,7 @@ clear;clc;close all
 %--------------------------------------------------------------------------
 % Load identification results 
 %--------------------------------------------------------------------------
-load('identified_parameters_HPPC_noCorr.mat')
+load('identified_parameters_HPPC_0_95Corr.mat')
 
 %--------------------------------------------------------------------------
 % Load Experimental Data 
@@ -125,7 +125,7 @@ x_init = [];
 %--------------------------------------------------------------------------
 % Option 2: To save time, load pregenerated UDDS simulation results (will yield same results as Option 1)
 %--------------------------------------------------------------------------
-load('UDDS_validation_results_noCorr.mat')
+load('identified_parameters_validationUDDS_0_95Corr.mat')
 
 %% Visualizing results 
 
