@@ -146,9 +146,9 @@ In the ```Examples``` folder, you will find example codes that will help you get
   * ```Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m```: parameter identification results using C/20 discharge data 
   * ```Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m```: parameter identification results using HPPC data
   * ```Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m```: parameter identification validation using UDDS data
-* ```Examples/Local_Sensitivity_Analysis```: examples showing how to perform local sensitivity analysis (LSA)
-  * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_CC.m```: LSA and correlation analysis on CC profile
-  * ```Examples/Local_Sensitivity_Analysis/DFN_LSA_Corr_HPPC.m```: LSA and correlation analysis on HPPC profile
+* ```Examples/Parameter_Identifiability_Analysis```: examples showing how to perform LSA and correlation analysis to determine a subset of identifiable parameters for the given data
+  * ```Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_CC.m```: LSA and correlation analysis on CC profile
+  * ```Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_HPPC.m```: LSA and correlation analysis on HPPC profile
 
 ## Contributing <a name="toc7"></a> ##
 We welcome contributions from the community to improve COBRAPRO!
