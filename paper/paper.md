@@ -77,7 +77,7 @@ View COBRAPRO's [README on Github](https://github.com/COBRAPROsimulator/COBRAPRO
 
 ## C/20 Capacity Test Identification
 
-In `DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, PSO settings, experimental data, etc. A preview of the `User Input` section is provided here.
+In `Examples/Parameter_Identification_Routines/DFN_pso_0_05C.m`, the `User Input` section is used to define the parameter names, PSO settings, experimental data, etc. A preview of the `User Input` section is provided here.
 
 First, load the `Parameters_LG_INR21700_M50.m` function, which outputs a `param` structure containing the nominal (experimentally measured) parameters of a LG INR21700-M50 cell [@chen_development_2020], as well as the DFN simulation settings, e.g., discretization method, method to determine consistent initial condition, constant or variable current type, etc.:
 ```MATLAB
@@ -158,14 +158,14 @@ J_tot =0.003833 [-]
 ```
 The code also plots the simulation results generated from the identified parameters and the experimental data, as shown in \autoref{fig:V_0_05C} and \autoref{fig:SOC_0_05C}. 
 
-To replicate the results, run the code `Examples/Parameter_Identification_Results/DFN_pso_0_05C_identification.m`, which loads the identified parameters determined from this case study. 
+Run `Examples/Parameter_Identification_Routines/DFN_pso_0_05C_identification.m` to replicate the results shown here (code will load the identified parameters shown in this case study). 
 
 ![C/20 capacity test voltage identification results.\label{fig:V_0_05C}](0_05C_Voltage.png){ width=65% }
 
 ![C/20 capacity test positive and negative electrode SOC identification results.\label{fig:SOC_0_05C}](0_05C_SOC.png){ width=65% }
 
 ## Parameter Identifiability Analysis
-In this step, parameter identifiability analysis is conducted to determine a subset of identifiable parameters given the HPPC profile in `DFN_LSA_Corr_HPPC.m`. In the `User Input` section, load the `param` structure that contains the identified stoichiometric parameter values from `DFN_pso_0_05C.m`:
+In `Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_HPPC.m`, parameter identifiability analysis is conducted to determine a subset of identifiable parameters given the HPPC profile. In the `User Input` section, load the `param` structure that contains the identified stoichiometric parameter values from `DFN_pso_0_05C.m`:
 ```MATLAB
 %% User Input
 % Load nominal parameters and identified stoichiometric parameters
@@ -200,8 +200,9 @@ pct=0.05;
 % Define correlation coefficient threshold
 %--------------------------------------------------------------------------
 % Correlation coefficient threshold used to determine the uncorrelated parameter  
-% vector prioritized by sensitivity, which will be considered the "identifiable" parameters for the HPPC profile
-% Input vector to yield multiple identifiable parameter sets for each correlation threshold
+% vector prioritized by sensitivity, which will be considered the "identifiable"
+% parameters for the HPPC profile (input vector to yield multiple identifiable
+% parameter sets for each correlation threshold)
 %--------------------------------------------------------------------------
 beta_corr = [0.8 0.9 0.95 0.98 0.99];
 ```
@@ -227,8 +228,8 @@ Rc Dsp Dsn kp De (threshold = 0.99)
 ```
 
 ## HPPC Identification
-The `DFN_pso_HPPC.m` file's `User Input` section is similar to the one described in `DFN_pso_0_05C.m`.
-First, load your `param` structure, which contains the identified stoichiometric parameter values from . In this example, we load the `identified_parameters_0_05C.mat` file, which contains a `param` structure with the identified stoichiometric parameter values from `DFN_pso_0_05C.m`:
+In `Examples/Parameter_Identification_Routines/DFN_pso_HPPC.m`, the identifiable parameters determined from `DFN_LSA_Corr_HPPC.m` are identified using PSO.
+First, load your `param` structure, which contains the identified stoichiometric parameter values from `DFN_pso_0_05C.m`. In this example, we load the `identified_parameters_0_05C.mat` file, which contains a `param` structure with the identified stoichiometric parameter values from `DFN_pso_0_05C.m`:
 ```MATLAB
 %% User Input
 % Load nominal parameters and identified stoichiometric parameters
@@ -237,7 +238,7 @@ load('identified_parameters_0_05C.mat','param')
 ```
 When defining the names of the HPPC parameters to identify, users can manually type the parameters (Option 1) or load the parameter identifiability results generated from `DFN_LSA_Corr_HPPC.m` (Option 2). 
 
-Here, Option 2 is demonstrated by loading `HPPC_identifiable_params.mat`, which was determined from `DFN_LSA_Corr_HPPC.m` and contains five identifiable parameter sets for $\beta = 0.8, 0.9, 0.95, 0.98, 0.99$. In this example, the parameter set corresponding to $\beta=0.95$ is selected for PSO, by defining `beta_value = 0.95`:
+Here, Option 2 is demonstrated by loading `HPPC_identifiable_params.mat`, which is generated from `DFN_LSA_Corr_HPPC.m` and contains five identifiable parameter sets for $\beta = 0.8, 0.9, 0.95, 0.98, 0.99$. In this example, the parameter set corresponding to $\beta=0.95$ is selected for PSO, by defining `beta_value = 0.95`:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Option 2: Load identifiable parameters from identifiability analysis
@@ -308,21 +309,21 @@ J_tot =0.0081113 [-]
 ```
 Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
-To replicate the results shown here, run the code `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m` and load the mat file containing the identified HPPC values using $\beta=0.95$ in the `User Input` section:
+In `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m`, replicate the results shown here by defining the following in the `User Input` section:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Enter your identified parameters 
 %--------------------------------------------------------------------------
 load('identified_parameters_HPPC_0_95Corr.mat')
 ```
-Note that the identified HPPC values for $\beta=0.90$ or $\beta=0.99$ can also be viewed by loading `identified_parameters_HPPC_0_90Corr.mat` or `identified_parameters_HPPC_0_99Corr.mat` instead.
+This loads the mat file containing the identified HPPC values using $\beta=0.95$. Note that the identified HPPC values for $\beta=0.90$ or $\beta=0.99$ can also be viewed by loading `identified_parameters_HPPC_0_90Corr.mat` or `identified_parameters_HPPC_0_99Corr.mat` instead.
 
 ![HPPC voltage identification results using $\beta=0.95$.\label{fig:V_HPPC}](HPPC_Voltage_corr95.png){ width=65% }
 
 ![HPPC positive and negative electrode SOC identification results using $\beta=0.95$.\label{fig:SOC_HPPC}](HPPC_SOC_corr95.png){ width=65% }
 
 ## UDDS Driving Cycle Validation
-In the code `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from the C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
+In `Examples/Parameter_Identification_Results/DFN_pso_UDDS_validation.m`, the identified parameters from the C/20 capacity test and HPPC data are validated using the UDDS driving cycle. The model is simulated under the UDDS profile and compared against the experimental UDDS data. 
 
 In the `User Input` section, load the parameter values identified from C/20 and HPPC data:
 ```MATLAB
