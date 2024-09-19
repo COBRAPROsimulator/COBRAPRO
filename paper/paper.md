@@ -309,7 +309,7 @@ J_tot =0.0081113 [-]
 ```
 Similar to `DFN_pso_0_05C.m`, the simulation results generated from the identified parameters are plotted against the experimental data, as shown in \autoref{fig:V_HPPC} and \autoref{fig:SOC_HPPC}. 
 
-In `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m`, replicate the results shown here by defining the following in the `User Input` section:
+In `Examples/Parameter_Identification_Results/DFN_pso_HPPC_identification.m`, the results shown here can be replicated by defining the following in the `User Input` section:
 ```MATLAB
 %--------------------------------------------------------------------------
 % Enter your identified parameters 
