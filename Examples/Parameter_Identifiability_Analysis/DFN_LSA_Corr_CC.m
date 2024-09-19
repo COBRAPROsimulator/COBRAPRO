@@ -43,6 +43,11 @@ param_LSA_CC = {'ep' 'en' 'Rpp' 'Rpn'};
 theta_names = {'$\varepsilon_p$' '$\varepsilon_n$' '$R_p$' '$R_n$'};
 
 %--------------------------------------------------------------------------
+% Enter mat file name where the identifiable parameters will be stored
+%--------------------------------------------------------------------------
+file_name = 'CC_identifiable_params';
+
+%--------------------------------------------------------------------------
 % Perturbation coefficient for LSA [-]
 %--------------------------------------------------------------------------
 pct=0.05;
@@ -267,5 +272,5 @@ for i = 1:length(beta_corr)
     fprintf(['(threshold = ' num2str(beta_corr(i)) ')\n'])
 end
 
-% Save results
-save('Examples/Parameter_Identification_Results/0_05C_identifiable_params.mat','corr_identifiable_vec','beta_corr')
+% Save list of identifiable parameters
+save(['DFN_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
