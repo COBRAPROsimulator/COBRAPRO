@@ -43,6 +43,11 @@ param_LSA_HPPC = {'Rc' 'Dsp' 'Dsn' 'kp' 'kn' 'De' 'Kappa' 'sigmap' 'sigman'};
 theta_names = {'$R_c$' '$D_{s,p}$' '$D_{s,n}$' '$k_p$' '$k_n$' '$D$' '$\kappa$' '$\sigma_p$' '$\sigma_n$'};
 
 %--------------------------------------------------------------------------
+% Enter mat file name where the identifiable parameters will be stored
+%--------------------------------------------------------------------------
+file_name = 'HPPC_identifiable_params';
+
+%--------------------------------------------------------------------------
 % Perturbation coefficient for LSA [-]
 %--------------------------------------------------------------------------
 pct=0.05;
@@ -273,4 +278,4 @@ for i = 1:length(beta_corr)
 end
 
 % Save list of identifiable parameters
-save('Examples/Parameter_Identification_Results/HPPC_identifiable_params.mat','corr_identifiable_vec','beta_corr')
+save(['DFN_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
