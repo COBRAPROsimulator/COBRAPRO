@@ -44,14 +44,19 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
 
 ## Challenge 3. Parameter identifiability and identification 
 - **Issue:** Extensive cell teardown experiments [@ecker_parameterization_2015a],[@schmalstieg_full_2018a],[@chen_development_2020] have measured properties such as cell geometry, open-circuit potentials (OCPs), electrolyte characteristics, and solid diffusion coefficients. However, directly using these parameters in the DFN model often leads to inaccurate simulation results. Systematic parameter optimization routines are necessary to develop a well-calibrated model that accurately predicts real battery dynamics. Furthermore, not all parameters in the DFN model are identifiable due to overparametrization [@forman_genetic_2012] and identifiability challenges [@goshtasbi_effective_2020], with identifiability depending on the type of data available.
-- **Solution:** COBRAPRO features a co-simulation parameter optimization framework that utilizes particle swarm optimization (PSO) to minimize a multi-objective function [@allam_online_2021],[@xu_comparative_2023], defined as the error between the experimental and simulated voltage and state of charge (SOC) in the electrodes. PSO, a derivative-free, population-based method, is particularly effective in finding the global optimum of a high-dimensional nonlinear optimization problem. COBRAPRO leverages MATLAB’s Parallel Computing Toolbox to accelerate PSO convergence through multicore processing. Additionally, COBRAPRO supports parameter identifiability analysis, allowing users to conduct local sensitivity analysis (LSA) and correlation analysis to identify a subset of parameters that can be reliably optimized using PSO.
-
+- **Solution:** COBRAPRO features a co-simulation parameter optimization framework that utilizes particle swarm optimization (PSO) to minimize the multi-objective function [@allam_online_2021],[@xu_comparative_2023], defined as the error between the experimental and simulated voltage and state of charge (SOC) in the electrodes [@ha_cobrapro_2024]. COBRAPRO leverages MATLAB’s Parallel Computing Toolbox to accelerate PSO convergence through multicore processing. Additionally, COBRAPRO supports parameter identifiability analysis, allowing users to conduct local sensitivity analysis (LSA) and correlation analysis to identify a subset of parameters that can be reliably optimized using PSO.
+  
 # Core Capabilities
 - **Parameter identification routine:** PSO optimizes parameters using experimental current-voltage data
-- **DFN model implementation:** PDEs are discretized with finite volume method (FVM), and the DAE system is solved with SUNDIALS IDA 
-- **Solid particle radial discretization options:**
-  - FVM and 3rd order Hermite interpolation used to calculate particle surface concentration, accounting for sharp concentration gradients near the particle surface [@xu_comparative_2023] 
-  - Finite difference method (FDM)
+- **Parameter identifiability analysis:**
+  - LSA: Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
+  - Correlation analysis: Calculates linear correlation between two parameters
+  - User-defined sensitivity and correlation index thresholds utilized to determine a set of identifiable parameters
+- **DFN model implementation:**
+  - PDEs along the x-direction spatially discretized with finite volume method (FVM)
+  - PDE along the r-direction spatially discretized with FVM and finite difference method (FDM)
+    - To estimate particle surface concentration using FVM, 3rd order Hermite interpolation implemented to account for sharp concentration gradients near the particle surface [@xu_comparative_2023] 
+  - SUNDIALS IDA solver used to solve spatially discretized DFN equations
 - **Determining consistent initial conditions:**
   - Single-step approach [@lawder_extending_2015]
   - SUNDIALS IDACalcIC [@hindmarsh2005sundials], [@gardner2022sundials]
@@ -59,10 +64,6 @@ In contrast, several open-source DFN model simulation tools have emerged, such a
   - Constant current (CC) profiles
   - Hybrid pulse power characterization (HPPC) profiles
   - Dynamic current profiles
-- **Parameter identifiability analysis:**
-  - Local sensitivity analysis (LSA): Perturbs parameters around their nominal values and evaluates their sensitivity with respect to voltage and SOC
-  - Correlation analysis: Calculates linear correlation between two parameters
-  - User-defined sensitivity and correlation index thresholds utilized to determine a set of identifiable parameters
 
 # Example: Case Study on LG 21700-M50T Cells
 
