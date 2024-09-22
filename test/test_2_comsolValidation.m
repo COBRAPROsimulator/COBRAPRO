@@ -1,10 +1,18 @@
 % -------------------------------------------------------------------------
 % test_2_comsolValidation.m
 % -------------------------------------------------------------------------
-%   test_2_comsolValidation checks COBRAPRO's output against COMSOL for 1C
-%   discharge. This script automatically checks the RMSE voltage against COMSOL and 
-%   tells the user if the test was successful. A figure comparing 
-%   COBRAPRO and COMSOL is provided as an additional reference.
+%   test_2_comsolValidation simulates COBRAPRO's DFN model using parameters 
+%   from [1] at 1C discharge. The model output generated from COBRAPRO is
+%   compared against results generated from COMSOL, which are exported from 
+%   COMSOL and using the same parameters from [1] at 1C discharge. 
+%   The COMSOL results, saved in COMSOL_test_data/COMSOL_1C.mat, are called
+%   in this test to compute the RMSE voltage bewteen COMSOL and COBRAPRO to
+%   check if the results from COBRAPRO match well with COMSOL's results.
+%   A figure is also generated comparing COBRAPRO and COMSOL's output
+%   voltage.
+%
+%   Reference:
+%   [1] C.-H. Chen, F. Brosa Planella, K. O Regan, D. Gastol, W. D. Widanage, and E. Kendrick, "Development of Experimental Techniques for Parameterization of Multi-scale Lithium-ion Battery Models,” J. Electrochem. Soc., vol. 167, no. 8, p. 080534, Jan. 2020, doi: 10.1149/1945-7111/ab9050.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COBRAPRO: Co-simulation Battery Modeling for Accelerated Parameter Optimization
