@@ -58,14 +58,8 @@ else
 end
 
 % All necessary folders to path
-addpath(genpath('Local_Sensitivity_Analysis'))
-addpath(genpath('Examples'))
-addpath(genpath('DFN_parameters'))
-addpath(genpath('DFN_model'))
-addpath(genpath('DFN_identification_results'))
-addpath(genpath('DFN_identification'))
-addpath(genpath('data_INR21700_M50T'))
-addpath(genpath('test'))
+folder = fileparts(which('install_COBRAPRO.m'));
+addpath(genpath(folder));
 % Save path
 savepath
 
