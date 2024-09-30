@@ -38,7 +38,7 @@ Compared to existing open-source DFN packages like PyBaMM, LIONSIMBA, PETION, fa
 ## Accompanying papers <a name="toc9"></a> ##
 For a comprehensive dive into the numerical methods, determination of consistent initial condition, and parameter optimization pipeline proposed in CORBAPRO, users are encouraged to check out our JES paper:
 
-[1] S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., Aug. 2024, doi: 10.1149/1945-7111/ad7292.
+[1] S. Ha and S. Onori, “COBRAPRO: An Open-Source Software for the Doyle-Fuller-Newman Model with Co-Simulation Parameter Optimization Framework,” J. Electrochem. Soc., vol. 171, no. 9, p. 090522, Sep. 2024, doi: 10.1149/1945-7111/ad7292.
 
 Our JOSS paper can also be viewed for additional information:
 
