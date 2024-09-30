@@ -45,7 +45,7 @@ Our JOSS paper can also be viewed for additional information:
 [2] S. Ha and S. Onori, “COBRAPRO: A MATLAB toolbox for Physics-based Battery Modeling and Co-simulation Parameter Optimization,” Apr. 16, 2024, arXiv: arXiv:2404.10022. 
 
 ## Software dependencies <a name="toc3"></a> ##
-* MATLAB 2018b and later
+* MATLAB 2016a and later
 * MATLAB Global Optimization Toolbox
 *	MATLAB Parallel Computing Toolbox
 *	SUNDIALS 2.6.2
@@ -66,8 +66,9 @@ Installation section below shows how to install the required software.
 3. Download [SUNDIALS 2.6.2](https://computing.llnl.gov/sites/default/files/inline-files/sundials-2.6.2.tar.gz) and unzip the folder. Relocate the sundials-2.6.2 folder inside the COBRAPRO folder.
 
 4. Download the latest version of [CasADi (MATLAB version)](https://web.casadi.org/get/) corresponding to your operating system. Unzip and move your CasADi folder inside the COBRAPRO folder. Your COBRAPRO folder should now contain the sundials-2.6.2 and CasADi folders.
+- __IMPORTANT NOTE__: For Mac Apple Silicon users, please read the following if you are using the Apple Silicon version of MATLAB. In [CasADi (MATLAB version)](https://web.casadi.org/get/), you will need to download the Mac M1 version. For Mac M1 versions, please download the "R2018b or later", _NOT_ the the "R2020b or later" version. We have noticed that "R2018b or later" is not compatible with Apple Silicon version of MATLAB. This comment is valid as of CasADi v3.6.6.
 
-5. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
+6. Before we can install SUNDIALS, the following software are required to compile the mex files that will interface with the SUNDIALS IDA solver:
    - __Mac users__: Download [Xcode](https://developer.apple.com/xcode/) application (can be downloaded from Apple’s App Store). Once Xcode[^1] is installed, proceed to accept the license agreement. This can be done by opening the Xcode application, which will launch a license agreement window and click the “Agree” icon, or type
      ```
      sudo xcodebuild -license accept
@@ -75,7 +76,7 @@ Installation section below shows how to install the required software.
      in Terminal. If the license is not accepted, MATLAB may give an error such as “Xcode is installed, but its license has not been accepted”.
    - __Window users__: Download [MinGW](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler)
      
-6. Now you are ready to run `install_COBRAPRO.m`, which is located in the main COBRAPRO folder. `install_COBRAPRO.m` will install SUNDIALS by calling the `sundials-2.6.2/sundialsTB/install_STB.m` file and automatically add the required folders to your MATLAB path. Run `install_COBRAPRO.m` and respond to the prompts displayed in the Command Window in the following manner:
+7. Now you are ready to run `install_COBRAPRO.m`, which is located in the main COBRAPRO folder. `install_COBRAPRO.m` will install SUNDIALS by calling the `sundials-2.6.2/sundialsTB/install_STB.m` file and automatically add the required folders to your MATLAB path. Run `install_COBRAPRO.m` and respond to the prompts displayed in the Command Window in the following manner:
 
 ```
 MEX files will be compiled and built using the above options
