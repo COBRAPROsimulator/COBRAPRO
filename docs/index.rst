@@ -26,7 +26,7 @@ Here is some new content from VS code.
    :hidden:
    :caption: Contents:
 
-   Contents/API Documentation
+   Contents/APIdocumentation
 
 .. toctree::
    :maxdepth: 2
