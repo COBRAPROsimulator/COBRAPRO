@@ -3,15 +3,13 @@ API Documentation
 
 Functions
 ---------
-.. py:function:: check(molecule, isotope='', linelist='')
+.. py:function:: alg_res(x, param)
 
-   Checks if the parameters passed into the summon() function by the user are valid to use with the ExoMol database.
+   Calculates the algebriac residual equations given as g(t,x) = 0, where x includes algebraic and differential variables. The algebraic equations consists of equations for the algebraic variables phis_p, phis_n, phie, jp, and jn.
 
-   :param molecule: Molecule name (e.g. H2O).
-   :type molecule: String
-   :param isotope: Isotopologue of the molecule (e.g. 1H-16O). The default is ''.
-   :type isotope: String, optional
-   :param linelist: Line list to be downloaded. The default is ''.
-   :type linelist: String, optional
+   :param x: A vector containing the values of algebraic and differential variables.
+   :type x: casadi.SX or double
+   :param param: A structure containing the model parameters.
+   :type param: struct
 
-   :rtype: None.
+   :returns: * **x_tot** (*casadi.SX or double*) -- A vector where each element corresponds to the solution of the algebraic residual equations g(t,x)=0.
