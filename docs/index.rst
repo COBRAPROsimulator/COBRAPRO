@@ -8,6 +8,8 @@ COBRAPRO documentation
 This is the documentation for CORBAPRO. this is a link :doc:`/Options/justcode`
 this is a link to a particular section :ref:`Options section for justcode <codeOptions>`
 
+Here is some new content from VS code.
+
 .. caution:: 
    note aution
 
