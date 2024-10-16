@@ -24,9 +24,23 @@ Here is some new content from VS code.
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: Guidelines:
+
+   Guidelines/justlogic
+   Guidelines/justcode
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
    :caption: Options:
 
    Options/justlogic
    Options/justcode
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Contents:
+
+   Contents/APIdocumentation
 
