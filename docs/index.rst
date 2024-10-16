@@ -36,10 +36,4 @@ Here is some new content from VS code.
    Options/justlogic
    Options/justcode
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Guidelines:
 
-   Guidelines/justlogic
-   Guidelines/justcode
