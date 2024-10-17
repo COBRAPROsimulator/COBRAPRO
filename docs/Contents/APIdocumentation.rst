@@ -49,3 +49,14 @@ Functions
    :returns: * **dx_tot** (*casadi.SX or double*) -- Vector comuting F(t, x, x_p) = 0 for the SUNDIALS IDACalcIC method or M(t, x, x_p) = 0 for the single-step approach.
              * **flag** (*double*) -- Required by IDA solver but not used in the code.
              * **new_data** (*double*) -- Required by IDA solver but not used in the code.
+
+.. py:function:: getCurrentDensity(t, param)
+
+   Takes the variable input current profile defined in param.I and calculates the current density at time t.
+
+   :param t: Time instance [s].
+   :type t: double
+   :param param: A structure containing the model parameters.
+   :type param: struct
+
+   :returns: **I** (*double*) -- Current density [A.m-2] at time t.
