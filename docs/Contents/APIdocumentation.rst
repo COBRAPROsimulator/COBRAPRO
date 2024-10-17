@@ -60,3 +60,22 @@ Functions
    :type param: struct
 
    :returns: **I** (*double*) -- Current density [A.m-2] at time t.
+
+.. py:function:: jacobianFn(t, x, xp, ~, cj, data)
+
+   Calculates the Jacobian matrix for the discretized DFN model.
+
+   :param t: A structure containing the model parameters.
+   :type t: double
+   :param x: A vector containing the values of algebraic and differential variables.
+   :type x: double
+   :param xp: A vector containing the values of derivative of the algebraic and differential variables.
+   :type xp: double
+   :param cj: Required by IDA to compute Jacobian matrix.
+   :type cj: double
+   :param data: Structure containing information required to compute Jacobian matrix.
+   :type data: struct
+
+   :returns: * **J** (*double*) -- Numerically calculated Jacobian matrix.
+             * **flag** (*double*) -- Required by IDA solver but not used in the code.
+             * **new_data** (*double*) -- Required by IDA solver but not used in the code.
