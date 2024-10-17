@@ -27,9 +27,9 @@ Functions
 
    This function calculates the differential-algebraic equations (DAEs) in implicit form, depending on the method chosen for determining consistent initial conditions:
 
-   * If using the SUNDIALS IDACalcIC method (`param.init_Method = 'IDACalcIC'`), it computes the DAE system \( F(t, x, x_p) = 0 \), which includes both the ODE and algebraic equation residuals.
+   * If using the SUNDIALS IDACalcIC method (`param.init_Method = 'IDACalcIC'`), it computes the DAE system F(t, x, x_p) = 0, which includes both the ordinary differential equation (ODE) and algebraic equation (AE) residuals.
 
-   * If using the single-step approach [1] (`param.init_Method = 'SS'`), it calculates the implicit ODE system \( M(t, x, x_p) = 0 \) [2], consisting of the perturbed algebraic equations and original ODEs, with the switch function applied.
+   * If using the single-step approach [1] (`param.init_Method = 'SS'`), it calculates the implicit ODE system M(t, x, x_p) = 0 [2], consisting of the perturbed AE and original ODEs with the switch function applied.
 
    **References**:
 
@@ -46,6 +46,6 @@ Functions
    :param ida_user_data: Structure containing additional functions or parameters for the IDA solver.
    :type ida_user_data: struct
 
-   :returns: * **dx_tot** (*struct*) -- Structure containing model parameters, now updated with variable lengths and indices.
+   :returns: * **dx_tot** (*casadi.SX or double*) -- Vector comuting F(t, x, x_p) = 0 for the SUNDIALS IDACalcIC method or M(t, x, x_p) = 0 for the single-step approach.
              * **flag** (*double*) -- Required by IDA solver but not used in the code.
              * **new_data** (*double*) -- Required by IDA solver but not used in the code.
