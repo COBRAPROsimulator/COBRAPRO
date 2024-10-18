@@ -1,6 +1,0 @@
-justcode
-========
-
-Key Goals
----------
-
