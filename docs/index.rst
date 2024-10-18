@@ -3,13 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-COBRAPRO documentation
+COBRAPRO Documentation
 ======================
-This is the documentation for CORBAPRO. this is a link :doc:`/Options/justcode`
-this is a link to a particular section :ref:`Options section for justcode <codeOptions>`
-This is the API documentation link :doc:`/Contents/APIdocumentation`
 
-Here is some new content from VS code.
+Welcome to COBRARPO's documentation! Please view the :doc:`/Content/APIdocumentation` to view all functions and scripts in COBRAPRO.
+
+.. This is the documentation for CORBAPRO. this is a link :doc:`/Options/justcode` this is a link to a particular section :ref:`Options section for justcode <codeOptions>`. This is the API documentation link :doc:`/Contents/APIdocumentation`
+
+
 
 .. caution:: 
    note aution
