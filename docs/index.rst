@@ -8,10 +8,6 @@ COBRAPRO Documentation
 
 Welcome to COBRARPO's documentation! Please view the :doc:`/Content/APIdocumentation` to view all functions and scripts in COBRAPRO.
 
-.. This is the documentation for CORBAPRO. this is a link :doc:`/Options/justcode` this is a link to a particular section :ref:`Options section for justcode <codeOptions>`. This is the API documentation link :doc:`/Contents/APIdocumentation`
-
-
-
 .. caution:: 
    note aution
 
@@ -22,22 +18,6 @@ Welcome to COBRARPO's documentation! Please view the :doc:`/Content/APIdocumenta
    these are notes
 
 .. image:: /images/flowchart_v2.jpg
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Guidelines:
-
-   Guidelines/justlogic
-   Guidelines/justcode
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Options:
-
-   Options/justlogic
-   Options/justcode
 
 .. toctree::
    :maxdepth: 2
