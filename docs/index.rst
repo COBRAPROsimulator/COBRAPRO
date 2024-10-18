@@ -6,7 +6,7 @@
 COBRAPRO Documentation
 ======================
 
-Welcome to COBRARPO's documentation! Please view the :doc:`/Content/APIdocumentation` to view all functions and scripts in COBRAPRO.
+Welcome to COBRARPO's documentation! Please view the :doc:`/Contents/APIdocumentation` to view all functions and scripts in COBRAPRO.
 
 .. caution:: 
    note aution
