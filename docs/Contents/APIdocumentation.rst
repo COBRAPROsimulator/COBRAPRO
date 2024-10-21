@@ -1,8 +1,8 @@
 API Documentation
 =================
 
-Functions
----------
+DAE Functions
+-------------
 .. py:function:: alg_res(x, param)
 
    Calculates the algebriac residual equations given as g(t,x) = 0, where x includes algebraic and differential variables. The algebraic equations consists of equations for the algebraic variables phis_p, phis_n, phie, jp, and jn.
@@ -79,3 +79,52 @@ Functions
    :returns: * **J** (*double*) -- Numerically calculated Jacobian matrix.
              * **flag** (*double*) -- Required by IDA solver but not used in the code.
              * **new_data** (*double*) -- Required by IDA solver but not used in the code.
+
+FVM_interpolation
+-----------------
+
+.. py:function:: De_eff_constant(ce, param, domain)
+
+   Calculates the effective electrolyte diffusivity pertaining to the domain of interest when the electrolyte diffusion coefficient is constant. The domain refers to the positive electrode, separator, or negative electrode. 
+
+   :param ce: Normalized electrolyte concentration vector in domain (unitless). 
+   :type ce: casadi.SX or double
+   :param param: A structure containing the model parameters.
+   :type param: struct
+   :param domain: Letter indicating battery domain ('p' for positive electrode, 's' for separator, 'n' for negative electrode)
+   :type domain: string
+
+   :returns: **Deff** (*casadi.SX or double*) -- Effective electrolyte diffusivity in the domain of interest.
+
+.. py:function:: Kappa_eff_constant(ce, param, domain)
+
+   Calculates the effective electrolyte conductivity pertaining to the domain of interest when the electrolyte conductivity is constant. The domain refers to the positive electrode, separator, or negative electrode. 
+
+   :param ce: Normalized electrolyte concentration vector in domain (unitless). 
+   :type ce: casadi.SX or double
+   :param param: A structure containing the model parameters.
+   :type param: struct
+   :param domain: Letter indicating battery domain ('p' for positive electrode, 's' for separator, 'n' for negative electrode)
+   :type domain: string
+
+   :returns: **Kappa_eff** (*casadi.SX or double*) -- Effective electrolyte conductivitiy in the domain of interest.
+
+.. py:function:: cs_surf_hermite_interp(cs, r_index_Nr, cs_outer_ghost, param, domain)
+
+   Estimates the surface particle concentration using 3rd order hermite interpolation [1] when using FVM for the radial discretization of the solid particles.
+
+   **References**:
+
+   [1] L. Xu, J. Cooper, A. Allam, and S. Onori, “Comparative Analysis of Numerical Methods for Lithium-Ion Battery Electrochemical Modeling,” J. Electrochem. Soc., vol. 170, no. 12, p. 120525, Dec. 2023, doi: 10.1149/1945-7111/ad1293.
+
+   :param cs: Concatenated normalized solid concentration vector along the particle radius direction for all particles in domain (unitless). 
+   :type cs: casadi.SX or double
+   :param r_index_Nr: Index of the outer most control volume (closest to particle surface) for the particle of interest.
+   :type r_index_Nr: double
+   :param cs_outer_ghost: Normalized solid concentration value at the outer ghost node (Nrp+1). 
+   :param param: A structure containing the model parameters.
+   :type param: struct
+   :param domain: Letter indicating battery domain ('p' for positive electrode, 'n' for negative electrode)
+   :type domain: string
+
+   :returns: **cs_surf** (*casadi.SX or double*) -- Normalized surface particle concentration.
