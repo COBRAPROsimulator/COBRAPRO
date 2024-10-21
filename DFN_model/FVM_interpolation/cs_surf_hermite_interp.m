@@ -1,5 +1,5 @@
 function cs_surf = cs_surf_hermite_interp(cs,r_index_Nr,cs_outer_ghost,param,domain)
-%   cs_surf_hermite_interp compuates the surface particle concentration
+%   cs_surf_hermite_interp computes the surface particle concentration
 %   using 3rd order hermite interpolation.
 %
 %   Inputs:
