@@ -5,7 +5,7 @@ function cs_surf = cs_surf_hermite_interp(cs,r_index_Nr,cs_outer_ghost,param,dom
 %   Inputs:
 %       cs: noramlized concentration along particle radius direction [-]
 %       r_index_Nr: r index at r = Nrp
-%       cs_outer_ghost: noramlized particle concentration at surface outer ghost node [-]
+%       cs_outer_ghost: normalized particle concentration at surface outer ghost node [-]
 %       param: Parameter structure
 %       domain: string letter indicating electrode domain
 %           -> 'p': positive electrode
