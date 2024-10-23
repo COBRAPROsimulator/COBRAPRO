@@ -8,17 +8,6 @@ COBRAPRO Documentation
 
 Welcome to COBRARPO's documentation! Please view the :doc:`/Contents/APIdocumentation` to view all functions and scripts in COBRAPRO.
 
-.. caution:: 
-   note aution
-
-.. tip:: 
-   these are tips
-
-.. note:: 
-   these are notes
-
-.. image:: /images/flowchart_v2.jpg
-
 .. toctree::
    :maxdepth: 2
    :hidden:
