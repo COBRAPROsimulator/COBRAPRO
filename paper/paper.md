@@ -28,7 +28,7 @@ COBRAPRO (**Co**-simulation **B**atte**r**y Modeling for **A**ccelerated **P**a*
 
 # Statement of need
 
-Even though parameter calibration is required to accurately predict the dynamical behavior of real batteries, current DFN modeling tools lack the capability to perform parameter identification. 
+Although parameter calibration is required to accurately predict the dynamical behavior of real batteries, current DFN modeling tools lack the capability to perform parameter identification. 
 
 COMSOL Multiphysics&copy; [@comsol] is a commercially available finite element modeling software commonly used to simulate the DFN model. Although COMSOL lacks a built-in parameter identification feature, it was demonstrated that COMSOL's *LiveLink&trade; for MATLAB*&copy; can be used to establish communication between COMSOL and MATLAB for parameter optimization  [@pozzato_general_2023]. This framework allows users to leverage the versatile suite of optimizers in MATLAB while running COMSOL to generate the model output. However, the expensive licensing fee and proprietary nature of COMSOL create barriers to public access, limiting collaboration and code reproducibility.
 
