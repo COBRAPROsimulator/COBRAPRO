@@ -9,7 +9,7 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]-->
 
-COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization) is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation results for predicting real-world battery responses under various operating conditions. 
+COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization) is a MATLAB software for physics-based modeling of lithium-ion batteries (LIB) with an embedded parameter identification routine. We aim to provide the battery modeling community with a versatile toolbox for calibrating battery models, a crucial process to achieve accurate simulation results for predicting real-world battery responses under various operating conditions.  
 
 ## Table of contents ##
 
@@ -20,6 +20,7 @@ COBRAPRO (Co-simulation Battery Modeling for Accelerated Parameter Optimization)
   * [Installation](#toc4)
   * [Testing](#toc5)
   * [Examples](#toc6)
+  * [API Documentation](#toc12)
   * [Contributing](#toc7)
   * [Known issues](#toc8)
   * [How to cite this code](#toc10)
@@ -150,6 +151,10 @@ In the ```Examples``` folder, you will find example codes that will help you get
 * ```Examples/Parameter_Identifiability_Analysis```: examples showing how to perform LSA and correlation analysis to determine a subset of identifiable parameters for the given data
   * ```Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_CC.m```: LSA and correlation analysis on CC profile
   * ```Examples/Parameter_Identifiability_Analysis/DFN_LSA_Corr_HPPC.m```: LSA and correlation analysis on HPPC profile
+ 
+## Examples <a name="toc12"></a> ##
+
+Refer to our [API documentation](https://cobrapro.readthedocs.io/en/latest/index.html) page for a list of all the functions as scripts in CORBAPRO. 
 
 ## Contributing <a name="toc7"></a> ##
 We welcome contributions from the community to improve COBRAPRO!
