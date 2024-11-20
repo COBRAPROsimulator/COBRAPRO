@@ -9,7 +9,7 @@
 project = 'COBRAPRO'
 copyright = '2024, Sara Ha'
 author = 'Sara Ha'
-release = 'v1.0.0'
+release = 'v2.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
