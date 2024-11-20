@@ -1,5 +1,0 @@
-site_name: COBRAPRO
-site_url:  https://cobraprosimulator.github.io/COBRAPRO/
-nav:
-    - Home: index.md
-theme: readthedocs
