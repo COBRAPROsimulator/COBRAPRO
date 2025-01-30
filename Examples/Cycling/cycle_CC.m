@@ -22,7 +22,7 @@ clc;clear;close all
 %--------------------------------------------------------------------------
 % Option 1: Enter identified parameters
 %--------------------------------------------------------------------------
-load('identified_parameters_HPPC.mat','param')
+load('identified_parameters_HPPC_0_99Corr.mat','param')
 %--------------------------------------------------------------------------
 % Option 2: If you don't have identified parameters, then load parameters from literature [Chen 2020]
 %--------------------------------------------------------------------------
@@ -172,7 +172,7 @@ plot(time,SOCp*100,'linewidth',2)
 plot(time,SOCn*100,'linewidth',2)
 xlabel('Time [s]'); ylabel('State-of-charge, $SOC$ [\%]')
 title('CC Cycling at 1C');legend({'$SOC_p$' '$SOC_n$'}) 
-set(gca,'Fontsize',24);;xlim([0 inf])
+set(gca,'Fontsize',24);xlim([0 inf])
 set(findall(gcf,'-property','interpreter'),'interpreter','latex')
 set(findall(gcf,'-property','ticklabelinterpreter'),'ticklabelinterpreter','latex')
 set(gcf,'color','w');
