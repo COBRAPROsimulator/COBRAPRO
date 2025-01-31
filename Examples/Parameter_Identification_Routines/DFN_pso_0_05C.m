@@ -89,15 +89,18 @@ particle_num = 100;
 %--------------------------------------------------------------------------
 % PSO Settings: Enter PSO exit condition 
 % (https://www.mathworks.com/help/gads/particleswarm.html#budidgf-options)
-%--------------------------------------------------------------------------
-% ----------------------------------
+% -------------------------------------------------------------------------
 % Option 1: Maximum iterations
-% ----------------------------------
+% -------------------------------------------------------------------------
 % exit_type = 'MaxIterations' -> PSO exits after maximum number of PSO iterations reached
 % max_iterations = ... -> Maximum number of PSO iterations
-% ----------------------------------
+% -------------------------------------------------------------------------
 % Option 2: Maximum stall iterations
-% ----------------------------------
+% -------------------------------------------------------------------------
+% exit_type = 'MaxStallIterations' -> PSO iterations end when the relative change in best objective function value over the last MaxStallIterations iterations is less than FunctionTolerance
+% max_iterations = ... -> Number of MaxStallIterations
+% max_stall_tolerance = ... -> FunctionTolerance value
+%--------------------------------------------------------------------------
 % exit_type = 'MaxStallIterations' -> PSO iterations end when the relative change in best objective function value over the last MaxStallIterations iterations is less than FunctionTolerance
 % max_iterations = ... -> Number of MaxStallIterations
 % max_stall_tolerance = ... -> FunctionTolerance value
