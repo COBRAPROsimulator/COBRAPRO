@@ -23,7 +23,7 @@ clear;clc;close all
 %--------------------------------------------------------------------------
 % Option 1: Enter identified parameters
 %--------------------------------------------------------------------------
-load('identified_parameters_HPPC.mat','param')
+load('identified_parameters_HPPC_0_90Corr.mat','param')
 %--------------------------------------------------------------------------
 % Option 2: If you don't have identified parameters, then load parameters from literature [Chen 2020]
 %--------------------------------------------------------------------------
