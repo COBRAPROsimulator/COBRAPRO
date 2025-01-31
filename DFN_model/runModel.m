@@ -360,6 +360,7 @@ while(time < tf)
             catch
                 exit_indicator = {'IDASolve_error'};
                 if param.sim_print == 1
+                    fprintf('Simulation ending due to:\n');
                     fprintf('Simulation could not complete due to error in IDA solver\n');
                 end
                 break
@@ -371,6 +372,7 @@ while(time < tf)
             catch
                 exit_indicator = {'IDASolve_error'};
                 if param.sim_print == 1
+                    fprintf('Simulation ending due to:\n');
                     fprintf('Simulation could not complete due to error in IDA solver\n');
                 end
                 break
