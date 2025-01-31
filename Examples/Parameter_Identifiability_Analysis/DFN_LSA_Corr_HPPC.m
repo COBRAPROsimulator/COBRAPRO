@@ -156,10 +156,10 @@ for i = 1:length(theta_names)
 end
 
 %% Sensitivity plots as a function of time
-colorful = brewermap([],'Paired');
+
 figure; hold on
 for i = 1:length(theta_names)
-    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_V{i},'color',colorful(i,:),'LineWidth',2,'DisplayName',theta_names{i})
+    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_V{i},'LineWidth',2,'DisplayName',theta_names{i})
 end
 xlabel('Time [h]');ylabel('$S_V$ [-]');xlim([0 inf])
 title('Normalized Voltage Sensitivity Vector as a function of time')
@@ -171,9 +171,9 @@ set(gcf, 'Units','inches','Position', [1 1 15 8]);
 figure; hold on
 for i = 1:length(theta_names)
     subplot(2,1,1); hold on
-    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_SOCp{i},'LineWidth',2,'color',colorful(i,:),'DisplayName',theta_names{i})
+    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_SOCp{i},'LineWidth',2,'DisplayName',theta_names{i})
     subplot(2,1,2); hold on
-    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_SOCn{i},'LineWidth',2,'color',colorful(i,:),'DisplayName',theta_names{i})
+    plot(t_l_all{i}(1:length(S_norm_V{i}))/3600,S_norm_SOCn{i},'LineWidth',2,'DisplayName',theta_names{i})
 end
 
 subplot(2,1,1)
@@ -278,4 +278,4 @@ for i = 1:length(beta_corr)
 end
 
 % Save list of identifiable parameters
-save(['DFN_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
+save(['Examples/Parameter_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
