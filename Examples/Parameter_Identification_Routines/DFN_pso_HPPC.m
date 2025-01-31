@@ -50,7 +50,8 @@ file_name = 'pso_HPPC';
 %--------------------------------------------------------------------------
 load('HPPC_identifiable_params.mat')
 % Enter desired beta value
-beta_value = 0.95;
+beta_value = 0.9;
+
 % Load results from LSA and correlation analysis 
 if ismember(beta_value,beta_corr)
     corr_ind = beta_value == beta_corr;
@@ -59,6 +60,9 @@ else
     return
 end
 param_HPPC = corr_identifiable_vec{corr_ind};
+fprintf(['Parameters to identify (correlation threshold = ' num2str(beta_value) '): '])
+fprintf('%s ',param_HPPC{:})
+fprintf('\n')
 
 %--------------------------------------------------------------------------
 % Enter lower and upper bounds of parameters to identify 
@@ -82,10 +86,6 @@ upper_bounds.Dsn = 10^(log10(param.Dsn)*(1-pct));
 pct = 0.2; % perturbation coeff
 lower_bounds.De = 10^(log10(param.De)*(1+pct));
 upper_bounds.De = 10^(log10(param.De)*(1-pct));
-% kp 
-% pct = 0.3; % perturbation coeff
-% lower_bounds.kp = 10^(log10(param.kp)*(1+pct));
-% upper_bounds.kp = 10^(log10(param.kp)*(1-pct));
 
 %--------------------------------------------------------------------------
 % PSO Settings: Enter number of particles for PSO
@@ -131,7 +131,7 @@ self_adjustment = 0.3;
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % HPPC test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/HPPC_data_W8_Diag1.mat')
+load('data/LG_INR21700_M50T/HPPC_data_W8_Diag1.mat')
 
 t = t_data;
 I = I_data;
