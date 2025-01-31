@@ -5,7 +5,7 @@
 % by perturbing each parameter one at a time. Also, correlation analysis is conducted
 % to quantify parameter correlation. Script will output identifiable
 % parameters using just LSA and using LSA correlation analysis. 
-% The sensitive/uncorrelated parameters can be identified using HPPC
+% The sensitive/uncorrelated parameters can be identified using CC
 % experimental data in the "DFN_pso_CC.m" script.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,7 +27,6 @@ clc;clear;close all
 % Option 1: Enter identified parameters
 %--------------------------------------------------------------------------
 load('identified_parameters_0_05C.mat','param')
-param.upperCutoffVoltage = 4.3; 
 %--------------------------------------------------------------------------
 % Option 2: If you don't have identified parameters, then load parameters from literature [Chen 2020]
 %--------------------------------------------------------------------------
@@ -223,7 +222,7 @@ set(gcf, 'Units','inches','Position', [1 1 15 8]);set(gca,'Fontsize',32);
 nonzero_S_2norm_V_SOC_ind = S_2norm_V_SOC_all~=0;
 % Remove parameters with zero sensitivity for correlation matrix calculation
 length_V_SOC_vec_new = length_V_SOC_vec(nonzero_S_2norm_V_SOC_ind);
-param_LSA_HPPC_new = param_LSA_HPPC(nonzero_S_2norm_V_SOC_ind);
+param_LSA_CC_new = param_LSA_CC(nonzero_S_2norm_V_SOC_ind);
 theta_names_new = theta_names(nonzero_S_2norm_V_SOC_ind);
 S_norm_V_SOC_new = S_norm_V_SOC(nonzero_S_2norm_V_SOC_ind);
 S_2norm_V_SOC_all_new = S_2norm_V_SOC_all(nonzero_S_2norm_V_SOC_ind);
@@ -259,7 +258,7 @@ set(findall(gcf,'-property','ticklabelinterpreter'),'ticklabelinterpreter','late
 % LSA and correlation anlaysis to determine identifiable parameters:
 corr_identifiable_vec = cell(1,length(beta_corr));
 for i = 1:length(beta_corr)
-    corr_identifiable = unCorr_parameters(param_LSA_HPPC_new, S_2norm_V_SOC_all_new, corr_V_SOC_matrix, beta_corr(i));
+    corr_identifiable = unCorr_parameters(param_LSA_CC_new, S_2norm_V_SOC_all_new, corr_V_SOC_matrix, beta_corr(i));
     corr_identifiable_vec{i} = corr_identifiable;
 end
 
@@ -273,4 +272,4 @@ for i = 1:length(beta_corr)
 end
 
 % Save list of identifiable parameters
-save(['DFN_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
+save(['Examples/Parameter_identification_results/' file_name '.mat'],'corr_identifiable_vec','beta_corr')
