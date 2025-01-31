@@ -185,6 +185,14 @@ Error using mex
 'idm.mexmaca64' locked by mexLock API.
 ``` 
 This seems to occur when MATLAB is trying to compile the mex files and mexLock is triggered. To resolve the issue, please restart MATLAB. 
+3. For Mac users, when running `install_COBRAPRO.m` to install COBRAPRO, if you run into the following error:
+```
+Error using mex. Supported compiler not detected.
+```
+try running the following command in Terminal:
+```
+sudo xcodebuild -license accept
+```
 
 ## How to cite this code <a name="toc10"></a> ##
 If you use this code in your research, please cite our accompanying JES and JOSS papers:
