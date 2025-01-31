@@ -127,7 +127,7 @@ self_adjustment = 0.3;
 %   -> where M is the total number of data points in your experiment
 %--------------------------------------------------------------------------
 % C/20 capacity test conducted on LG INR21700 M50T cells
-load('data_INR21700_M50T/capacity_test_data_W8_Diag1.mat')
+load('data/LG_INR21700_M50T/capacity_test_data_W8_Diag1.mat')
 
 t = t_data;
 I = I_data;
