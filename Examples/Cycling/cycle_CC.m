@@ -22,11 +22,11 @@ clc;clear;close all
 %--------------------------------------------------------------------------
 % Option 1: Enter identified parameters
 %--------------------------------------------------------------------------
-load('identified_parameters_HPPC_0_99Corr.mat','param')
+% load('identified_parameters_HPPC_0_90Corr.mat','param')
 %--------------------------------------------------------------------------
 % Option 2: If you don't have identified parameters, then load parameters from literature [Chen 2020]
 %--------------------------------------------------------------------------
-% param = Parameters_LG_INR21700_M50;
+param = Parameters_LG_INR21700_M50;
 
 %--------------------------------------------------------------------------
 % Number of cycles (one full cycle, e.g. discharging and charging, is equal to two cycles)
@@ -113,6 +113,10 @@ for i = 1:cycle_num
     DAE_solve_time(i) = output.DAE_solve_time;
     % Switch current density sign for next cycle
     currentDensity = -currentDensity;
+    % Break from for loop if current simulation step produces an error
+    if isnan(output.t)
+        break
+    end
     % Store initial conditions for next cycle
     x_init = output.x_initials;
     % Concatenate output results
