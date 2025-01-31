@@ -119,6 +119,12 @@ social_adjustment = 3.6;
 self_adjustment = 0.3;  
 
 %--------------------------------------------------------------------------
+% Enter number of desired workers in a parallel pool
+% (Determined by maximum number of CPU cores available in your system)
+%--------------------------------------------------------------------------
+param.pso_workers = 24;
+
+%--------------------------------------------------------------------------
 % Load Experimental Data 
 %--------------------------------------------------------------------------
 %   t: Should be a vector consisting of your time experiment data      [s] (Mx1)
